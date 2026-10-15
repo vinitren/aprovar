@@ -2,7 +2,7 @@
 //
 // Uso:  node scripts/montar.js <cliente> <pasta-da-rodada> [--refazer]
 //   <cliente>          pasta em clientes/ (cliente.json + logo.png)
-//   <pasta-da-rodada>  ex.: Desktop\Clientes\Excellence-Eventos\aprovacao\2026-10-14
+//   <pasta-da-rodada>  ex.: Desktop\Clientes\Excellence-Eventos\criativos\2026-10-14
 // Sai em public/<cliente>/<nome-da-pasta>/ e o endereço fica
 // aprovar.tdigital.tech/<cliente>/<nome-da-pasta>/
 //

@@ -14,8 +14,13 @@ motor/                  a página genérica (index.html, app.js, style.css)
 clientes/<cliente>/     cliente.json (nome, cores, fontes) + logo.png
 config.json             o WhatsApp que recebe as respostas e o domínio
 scripts/montar.js       pasta de peças → public/<cliente>/<rodada>/
+scripts/entregar.js     rodada aprovada → Drive do cliente, em "Passo 1, 2, 3..."
 public/                 o que vai pro ar (a Vercel publica esta pasta)
 ```
+
+É a etapa 4 (e o script da 5) do processo de criativos do trentini:
+`/criativos-1-fotos` → `2-anuncios` → `3-instagram` → `4-aprovacao` → `5-drive`.
+Todas gravam na mesma pasta da rodada, neste formato.
 
 Cada rodada recebe uma **cópia** do motor. Mexer no motor depois não muda
 página que já foi pro cliente; pra atualizar uma rodada antiga, montar de novo
@@ -24,7 +29,7 @@ com `--refazer`.
 ## Montar uma rodada
 
 1. Organizar a pasta das peças (formato abaixo), de preferência em
-   `Desktop\Clientes\<Nome>\aprovacao\AAAA-MM-DD\`
+   `Desktop\Clientes\<Nome>\criativos\AAAA-MM-DD\`
 2. Cliente novo: criar `clientes/<cliente>/cliente.json` e `logo.png`
    (copiar o da Excellence e trocar)
 3. `node scripts/montar.js <cliente> "<pasta-da-rodada>"`
@@ -86,7 +91,32 @@ as linhas tracejadas, `TÍTULO:`, `BOTÃO:`); `legenda.txt` como está;
 perfil); qualquer outro `.txt` vira "Ver <nome do arquivo>", e se tiver links,
 uma lista com um link por linha.
 
-Exemplo completo: `Desktop\Clientes\Excellence-Eventos\aprovacao\2026-10-14\`.
+Exemplo completo: `Desktop\Clientes\Excellence-Eventos\criativos\2026-10-14\`.
+
+**A ordem padrão das seções** (é a ordem em que o cliente publica, e vira
+"Passo 1, 2, 3..." no Drive):
+
+```
+01 Anúncios          feed + stories + anuncio.txt (não vai pro Drive: quem sobe somos nós)
+02 Perfil            01 O perfil: campos.txt (nome, categoria, bio, link) + simulação, formato: livre
+03 Posts             na ordem de publicar, legenda.txt em cada um
+04 Destaques         01 Capa.png + os stories
+05 Posts antigos     lista com link do que arquiva + escolha nos duvidosos
+06 Reserva           posts pra depois, com legenda
+```
+Seção sem peça não entra. Rodada só de anúncios tem só a 01.
+
+## Entregar no Drive (depois da aprovação)
+
+```
+node scripts/entregar.js "<pasta-da-rodada>" "G:\Meu Drive\<pasta do cliente>\<nome>" --secoes 2,3,4,5,6 --pular "03 Posts/04 Algo"
+```
+
+Copia as imagens **originais** (não as reduzidas da página) numa pasta
+`Passo N - <seção>` por seção e `NN - <peça>` por peça, com o `legenda.txt`, e
+escreve o `LEIA-ME.txt`. Fica de fora o `info.txt` e o `anuncio.txt` (ficha
+interna); `campos.txt` vira `texto.txt`. O Google Drive para computador (`G:`)
+sincroniza sozinho. Não sobrescreve: se o destino existe, para.
 
 ## Publicação (uma vez só)
 
