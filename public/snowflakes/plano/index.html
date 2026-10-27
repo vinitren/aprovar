@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Planejamento Snowflakes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: relatório da T Digital. Trilho de 186px com a etiqueta mono à esquerda, conteúdo à direita; vira coluna única abaixo de 880px. Linhas finas, sem sombra, raio 2px. */
+:root {
+  --bg: #E6EEF4;
+  --card: #FFFFFF;
+  --ink: #091E2D;
+  --text: #3C4C57;
+  --muted: #5A6A75;
+  --line: #DCE6EE;
+  --line-strong: #C8D5DF;
+  --accent: #035897;
+  --accent-bar: #2C82B5;
+  --accent-soft: #F1F6FA;
+  --pend: #8A4A12;
+  --pend-soft: #FBF3EA;
+  --phone-bg: #0E1A22;
+  --phone-ink: #F2F5F7;
+  --phone-muted: #A9B6BF;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #08161F; --card: #10232F; --ink: #E6EEF4; --text: #BFD0DB; --muted: #8FA6B5;
+    --line: #172C3A; --line-strong: #1D3646; --accent: #56A8D8; --accent-bar: #56A8D8; --accent-soft: #04222F;
+    --pend: #F0A56A; --pend-soft: #2A1C10;
+    --phone-bg: #050E14; --phone-ink: #E6EEF4; --phone-muted: #8FA6B5;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08161F; --card: #10232F; --ink: #E6EEF4; --text: #BFD0DB; --muted: #8FA6B5;
+  --line: #172C3A; --line-strong: #1D3646; --accent: #56A8D8; --accent-bar: #56A8D8; --accent-soft: #04222F;
+  --pend: #F0A56A; --pend-soft: #2A1C10;
+  --phone-bg: #050E14; --phone-ink: #E6EEF4; --phone-muted: #8FA6B5;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-block: 0 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); letter-spacing: -0.018em; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(32px, 5.4vw, 52px); font-weight: 800; }
+h2 { font-size: clamp(23px, 3vw, 30px); font-weight: 700; }
+h3 { font-size: 18px; font-weight: 700; }
+p { margin: 0; }
+strong { color: var(--ink); font-weight: 600; }
+.mono { font-family: var(--mono); font-weight: 600; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
+.lead { font-size: 18px; max-width: 64ch; }
+.small { font-size: 14px; color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* cabeçalho */
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 28px 20px; border-bottom: 1px solid var(--line-strong); }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand svg { width: 34px; height: 30px; }
+.brand span { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -0.03em; }
+.top .mono { color: var(--muted); }
+
+.hero { padding-block: 48px 40px; display: grid; gap: 20px; border-bottom: 1px solid var(--line-strong); }
+.hero .mono { color: var(--accent); }
+.status { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 2px; background: var(--card); font-size: 13.5px; color: var(--text); }
+.chip.ok::before { content: ""; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+.chip.pend { border-style: dashed; border-color: var(--pend); background: var(--pend-soft); color: var(--pend); }
+
+/* seções com trilho */
+.sec { display: grid; grid-template-columns: 186px minmax(0, 1fr); gap: 32px; padding-block: 48px; border-bottom: 1px solid var(--line-strong); }
+.sec > .rail { padding-top: 6px; color: var(--accent); }
+.sec > .rail .mono { display: block; }
+.sec > .rail .n { font-family: var(--mono); color: var(--muted); font-size: 12px; margin-top: 6px; display: block; }
+.body { display: grid; gap: 22px; min-width: 0; }
+@media (max-width: 880px) {
+  .sec { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-block: 36px; }
+}
+
+/* blocos */
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--card); border-radius: 2px; }
+.trio > div { padding: 20px; display: grid; gap: 6px; align-content: start; }
+.trio > div + div { border-left: 1px solid var(--line); }
+.trio .big { font-family: var(--display); font-weight: 800; font-size: 26px; color: var(--ink); line-height: 1.1; }
+@media (max-width: 720px) { .trio { grid-template-columns: minmax(0, 1fr); } .trio > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+.quote { border-left: 2px solid var(--accent-bar); padding: 2px 0 2px 16px; font-size: 18px; color: var(--ink); max-width: 60ch; }
+.quote cite { display: block; font-style: normal; font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+
+.list { display: grid; border-top: 1px solid var(--line); }
+.list > div { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 20px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.list > div > :first-child { color: var(--ink); font-weight: 600; }
+@media (max-width: 640px) { .list > div { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+.fact { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.fact:first-child { border-top: 1px solid var(--line); }
+.fact .val { font-family: var(--display); font-weight: 800; font-size: 26px; color: var(--ink); line-height: 1.05; font-variant-numeric: tabular-nums; }
+.src { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
+.src::before { content: "Fonte: "; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+.fact .src::before { content: none; }
+.src a { color: inherit; }
+@media (max-width: 520px) { .fact { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+
+.note { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 2px; padding: 16px 18px; }
+.note.pend { background: var(--pend-soft); border: 1px dashed var(--pend); }
+.note.pend .mono { color: var(--pend); }
+
+/* tabelas */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 2px; background: var(--card); }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font-family: var(--mono); font-weight: 600; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); background: var(--accent-soft); }
+td:first-child { color: var(--ink); font-weight: 600; }
+td.now { color: var(--muted); }
+td.new { color: var(--ink); }
+td code, .code { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.tbl.wide table { min-width: 620px; }
+
+/* funil */
+.funnel { display: grid; border: 1px solid var(--line); border-radius: 2px; background: var(--card); }
+.funnel .row { display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 1fr); border-bottom: 1px solid var(--line); }
+.funnel .row:last-child { border-bottom: 0; }
+.funnel .row > div { padding: 14px 16px; min-width: 0; }
+.funnel .row > div + div { border-left: 1px solid var(--line); }
+.funnel .head > div { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); background: var(--accent-soft); font-weight: 600; }
+.funnel .step { color: var(--ink); font-weight: 600; }
+.funnel .step small { display: block; font-weight: 400; color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) {
+  .funnel .head { display: none; }
+  .funnel .row { grid-template-columns: minmax(0, 1fr); }
+  .funnel .row > div + div { border-left: 0; border-top: 1px dashed var(--line); }
+  .funnel .org::before { content: "Sem verba · "; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+  .funnel .paid::before { content: "Com verba · "; font-family: var(--mono); font-size: 11px; color: var(--muted); }
+}
+
+/* prévia da página e dos anúncios */
+.preview-grid { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 820px) { .preview-grid { grid-template-columns: minmax(0, 1fr); } }
+.lp-link { display: grid; gap: 10px; max-width: 360px; width: 100%; text-decoration: none; color: var(--accent); }
+.lp-tela { display: block; border: 1px solid var(--line-strong); border-radius: 18px; background: var(--card); padding: 10px; transition: border-color .2s ease, transform .2s ease; }
+.lp-tela img { display: block; width: 100%; height: auto; max-height: 640px; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); }
+.lp-abrir { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 15px; }
+.lp-abrir svg { width: 18px; height: 18px; }
+.lp-link:hover .lp-tela { border-color: var(--accent); transform: translateY(-2px); }
+.lp-link:hover .lp-abrir { text-decoration: underline; }
+.parts { counter-reset: part; display: grid; border-top: 1px solid var(--line); }
+.parts > div { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.parts > div::before { counter-increment: part; content: counter(part, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--accent); padding-top: 3px; }
+
+.ads { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 820px) { .ads { grid-template-columns: minmax(0, 1fr); max-width: 380px; } }
+.ad { border: 1px solid var(--line-strong); border-radius: 2px; background: var(--card); display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; padding: 16px; aspect-ratio: 4 / 5; max-width: 100%; }
+.ad .mono { color: var(--accent); font-size: 10.5px; }
+.ad .ad-h { font-family: var(--display); font-weight: 800; font-size: 20px; line-height: 1.1; color: var(--ink); letter-spacing: -0.01em; }
+.ad .ph { border: 1px dashed var(--line-strong); border-radius: 2px; display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 13px; padding: 10px; min-height: 80px; }
+.ad .cta { justify-self: start; background: var(--accent); color: #FFFFFF; font-weight: 600; font-size: 13px; padding: 7px 12px; border-radius: 2px; }
+:root[data-theme="dark"] .ad .cta { color: #04222F; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .ad .cta { color: #04222F; } }
+.ad .why { font-size: 12.5px; color: var(--muted); }
+.ad-img { margin: 0; border: 1px solid var(--line-strong); border-radius: 2px; background: var(--card); overflow: hidden; display: grid; align-content: start; }
+.ad-img img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; }
+.ad-img figcaption { padding: 10px 12px; color: var(--accent); font-size: 10.5px; }
+
+/* deixas no vídeo */
+.cues { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 2px; background: var(--card); }
+.cues > div { padding: 16px; display: grid; gap: 6px; align-content: start; }
+.cues > div + div { border-left: 1px solid var(--line); }
+.cues .say { color: var(--ink); font-style: italic; }
+@media (max-width: 820px) { .cues { grid-template-columns: minmax(0, 1fr); } .cues > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+/* linha do tempo */
+.timeline { display: grid; border-top: 1px solid var(--line); }
+.timeline > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.timeline .when { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; padding-top: 2px; }
+@media (max-width: 560px) { .timeline > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.checks li { padding: 11px 0 11px 28px; border-bottom: 1px solid var(--line); position: relative; }
+.checks li::before { content: ""; position: absolute; left: 2px; top: 16px; width: 12px; height: 12px; border: 1.5px solid var(--line-strong); border-radius: 2px; }
+.checks li.urgent::before { border-color: var(--pend); background: var(--pend-soft); }
+.checks li small { display: block; color: var(--muted); font-size: 13.5px; }
+
+.sign { padding-block: 40px 0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: end; }
+.sign .who { display: grid; gap: 2px; }
+.sign .who b { font-family: var(--display); font-size: 20px; color: var(--ink); }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand" aria-label="T Digital">
+      <svg viewBox="155 389 286 246" aria-hidden="true"><path fill="var(--accent-bar)" d="M255.60 552.17 l0 -82.55 -50.14 0 -50.14 0 0 -40.36 0 -40.36 143.09 0 143.09 0 0 40.36 0 40.36 -50.75 0 -50.75 0 0 82.55 0 82.55 -42.19 0 -42.19 0 0 -82.55z"/></svg>
+      <span>Digital</span>
+    </div>
+    <span class="mono">Snowflakes · prévia para ajustar · 26/10/2026</span>
+  </header>
+
+  <section class="hero">
+    <span class="mono">Planejamento · curso online de polimento</span>
+    <h1>Mais gente nova vendo o Snow, e um caminho curto do vídeo até o curso</h1>
+    <p class="lead">Esta é a primeira versão do plano, feita pra vocês lerem com calma e ajustarmos juntos. Já dá pra ver o que muda, em que ordem e como medimos. Onde ainda falta uma informação de vocês, está marcado assim:</p>
+    <div class="status">
+      <span class="chip ok">Estudo do canal, do perfil e do mercado</span>
+      <span class="chip ok">Plano e comunicação</span>
+      <span class="chip ok">Prévia da página e dos anúncios</span>
+      <span class="chip ok">Vendas da Hotmart e meta da Gisele</span>
+      <span class="chip pend">Com o Snow: o que entra em cada nível do curso</span>    </div>
+  </section>
+
+  <!-- 1. o pedido -->
+  <section class="sec">
+    <div class="rail"><span class="mono">O pedido</span></div>
+    <div class="body">
+      <h2>O que vocês nos pediram</h2>
+      <blockquote class="quote">"O foco principal é se manter em evidência." Ser visto por quem está entrando agora no mercado e ainda não conhece o Snow.
+        <cite>Gisele, áudio de 23/10</cite></blockquote>
+      <div class="trio">
+        <div><span class="mono small">Objetivo</span><span class="big">Evidência</span><p>Gente nova conhecendo o Snow, todo mês.</p></div>
+        <div><span class="mono small">Pra quê</span><span class="big">Vender o online</span><p>O curso de polimento na Hotmart, sem perder a essência do conteúdo.</p></div>
+        <div><span class="mono small">Prazo</span><span class="big">6 a 8 meses</span><p>Do fim de 2026 ao 1º semestre de 2027, pra ter um gráfico com antes e depois.</p></div>
+      </div>
+      <p>E os limites que vocês colocaram, que o plano respeita do começo ao fim: conteúdo sério e educativo, o Snow gravando do jeito dele (sem roteiro na mão), resposta pessoal no comentário (nada de robô frio) e nenhuma promessa de dinheiro fácil.</p>
+    </div>
+  </section>
+
+  <!-- 2. o que olhamos -->
+  <section class="sec">
+    <div class="rail"><span class="mono">O que olhamos</span><span class="n">22 a 24/10</span></div>
+    <div class="body">
+      <h2>Onde o Snow está hoje</h2>
+      <p>O que vimos e medimos nos canais públicos, e os totais da Hotmart que vocês mandaram em 26/10.</p>
+      <div>
+        <div class="fact"><span class="val num">19</span><p>registros de venda do online de janeiro a outubro de 2026, com <strong>R$ 5.989 de receita líquida</strong>. Uma venda a cada duas ou três semanas desde agosto.<span class="src">Hotmart, relatório de vendas de 01/01 a 26/10/2026</span></p></div>
+        <div class="fact"><span class="val num">35</span><p>registros só em novembro e dezembro de 2025, com <strong>R$ 7.312 de receita líquida</strong>: mais do que os dez meses de 2026 juntos.<span class="src">Hotmart, relatório de 01/11 a 31/12/2025</span></p></div>
+        <div class="fact"><span class="val">1º</span><p>no YouTube pra quem já procura <strong>"curso de polimento automotivo"</strong> e "polimento para iniciantes". O Snow já é a referência pra quem decidiu aprender.<span class="src">Busca no YouTube, 22/10</span></p></div>
+        <div class="fact"><span class="val">fora</span><p>dos 20 primeiros nas buscas de quem ainda não pensa em profissão: <strong>"farol amarelado", "como tirar arranhão do carro", "pintura queimada"</strong>. É por onde a maioria entra no assunto.<span class="src">Busca no YouTube, 22/10</span></p></div>
+        <div class="fact"><span class="val num">19%</span><p>das visualizações do canal vêm de Shorts. No maior canal do nicho, são 74%. O vídeo curto é a porta de quem nunca ouviu falar do Snow.<span class="src">Contagem dos canais @SnowFlakesTv e @VenetoStudio, 22/10</span></p></div>
+        <div class="fact"><span class="val num">61,9 mil</span><p>visualizações no vídeo com outro canal ("1 produto 1 boina", 29/09). A mediana dos vídeos longos recentes é de 1.850. Colaboração traz público novo de uma vez.<span class="src">YouTube, 100 vídeos longos mais recentes, 23/10</span></p></div>
+        <div class="fact"><span class="val num">2.000+</span><p>caracteres até o link do curso nas descrições dos vídeos de setembro e outubro. O comentário fixado e o primeiro link da bio levam pra Shopee.<span class="src">Vídeos de 19/09, 08/10 e 17/10; bios do Instagram e do TikTok, 22/10</span></p></div>
+        <div class="fact"><span class="val num">2020</span><p>é o vídeo da página de vendas do curso, com o preço antigo. A página ainda tem um texto de exemplo do modelo da Hotmart no lugar da resposta, e não mostra o nome do Snow, a lista de aulas, depoimento nem o grupo do WhatsApp.<span class="src">Página do curso na Hotmart, 22/10</span></p></div>
+      </div>
+      <div class="note"><p><strong>Em uma frase:</strong> quem procura curso já acha o Snow. O que falta é ser visto por quem ainda não procura, um caminho mais curto pra quem já quer comprar e uma opção pra quem ainda não tem R$ 650.</p></div>
+    </div>
+  </section>
+
+  <!-- 3. o plano em uma frase -->
+  <section class="sec">
+    <div class="rail"><span class="mono">A ideia</span></div>
+    <div class="body">
+      <h2>Dois motores levando gente pro mesmo lugar</h2>
+      <p class="lead">O <strong>orgânico</strong> usa o que o Snow já grava, sem verba, apontado pro curso. O <strong>pago</strong> pega o que já funciona e leva pra mais gente. Os dois terminam numa página nova, com o checkout da Hotmart.</p>
+      <div class="note"><span class="mono" style="color:var(--accent)">A ordem importa</span><p style="margin-top:6px">Primeiro arrumamos a oferta e o caminho até o curso, depois a página, e só depois entra o anúncio. Pagar pra trazer gente a uma página que não convence é dinheiro que não volta.</p></div>
+    </div>
+  </section>
+
+  <!-- 3b. a oferta em 3 niveis -->
+  <section class="sec">
+    <div class="rail"><span class="mono">A oferta</span><span class="n">pra revisar com o Snow</span></div>
+    <div class="body">
+      <h2>O curso em três níveis, com o que já está gravado</h2>
+      <p>Hoje o curso de polimento tem um preço só. Quem não tem R$ 650 agora assiste o grátis e vai embora. Nos comentários do canal aparece gente dizendo que está sem dinheiro pro curso agora e segue aprendendo pelos vídeos. Com três níveis, cada um começa pelo que pode e sobe depois, e o completo fica como referência de valor. Por isso montamos o plano inteiro em cima dos três: a página, os anúncios e a meta.<span class="src">comentários na aula grátis do Snow de 2023 (o de dinheiro tem 33 curtidas), lidos em 22/10</span></p>
+      <div class="note"><span class="mono" style="color:var(--accent)">Uma proposta pra o Snow ajustar</span><p style="margin-top:6px">Dividimos pelos títulos das aulas, sem gravar nada novo, pra dar tempo de estar pronto na Black Friday. Quem sabe o que o aluno precisa em cada etapa é o Snow: ele pode mudar aula de nível, juntar, tirar ou sugerir gravar algo. O que ele decidir é o que vale.<span class="src">grade do curso no Hotmart Marketplace (24 aulas + 15 de faróis), lida em 23/10</span></p></div>
+      <div class="tbl wide">
+        <table>
+          <thead><tr><th>Nível</th><th>O que entra</th><th>Pra quem</th><th>Preço sugerido</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Faróis</strong></td><td>As 15 aulas de polimento e restauração de faróis. Já existe na Hotmart</td><td>Quem quer começar com pouco equipamento</td><td class="num">R$ 97</td></tr>
+            <tr><td><strong>Polimento comercial</strong></td><td>Aulas 1 a 13: acessórios, iluminação, máquina, segurança, inspeção, micrômetro, tintas e vernizes, fases do polimento e polimento comercial</td><td>Quem quer atender carro de cliente comum</td><td class="num">R$ 347</td></tr>
+            <tr><td><strong>Completo</strong></td><td>Tudo: mais pequenas áreas, repintura, ceras, vitrificação, remoção de riscos, plásticos e faróis, com o grupo do WhatsApp e as aulas de atualização</td><td>Quem quer fazer o serviço completo, da correção à proteção</td><td class="num">R$ 650</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="list">
+        <div><span>Por que R$ 97</span><p>Fica abaixo da entrada dos outros cursos do nicho, que começam entre R$ 119,90 e R$ 197 (o de faróis do maior canal custa R$ 197). Cabe pra quem está com o dinheiro contado.<span class="src">páginas de venda do Veneto Studio e da Escola para Detailers, lidas em 22 e 24/10</span></p></div>
+        <div><span>Por que R$ 347</span><p>Pouco mais da metade do completo. Assim, subir pro completo custa R$ 303 e traz algo que se vê: correção, repintura, vitrificação, faróis e o grupo. Se o meio ficar perto demais do completo, ninguém compra o meio; longe demais, ninguém sobe.<span class="src">conta nossa, a partir dos outros dois preços</span></p></div>
+        <div><span>Por que R$ 650</span><p>É o preço de hoje, sem mexer, como conversamos em 21/10. O presencial fica acima dele na página, como comparação.<span class="src">conversa de 21/10; preço do presencial: áudio da Gisele, 23/10; checkout da Hotmart, 22/10</span></p></div>
+        <div><span>O grupo só no completo</span><p>É o motivo mais forte pra subir de nível. Se o Snow preferir o grupo em todos, o preço do meio desce.</p></div>
+        <div><span>Quem quiser subir</span><p>Paga só a diferença. Como fazer isso na Hotmart confirmamos com vocês.</p></div>
+      </div>
+      <p class="small">Os preços são sugestão nossa, com o motivo de cada um, e estão abertos: quem decide são vocês. O preço da Black Friday definimos junto. Micro pintura, vidros e captação de clientes estão na descrição do curso e não na grade; se existirem, entram no completo.</p>
+    </div>
+  </section>
+
+  <!-- 3c. a meta -->
+  <section class="sec">
+    <div class="rail"><span class="mono">A meta</span><span class="n">até junho de 2027</span></div>
+    <div class="body">
+      <h2>25 alunos por mês, com prazo pra chegar lá</h2>
+      <p>A Gisele sugeriu um curso por semana pra começar. É um bom primeiro degrau. Com os três níveis, propomos ir além, com mais tempo pra chegar: o prazo de 6 a 8 meses que vocês mesmos deram.<span class="src">áudios da Gisele de 23/10 (prazo) e 26/10 (um por semana); "hoje": relatório da Hotmart de 01/01 a 26/10/2026</span></p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Quando</th><th>Alunos por mês</th><th>Receita líquida do online por mês</th></tr></thead>
+          <tbody class="num">
+            <tr><td>Hoje</td><td>uns 2</td><td>uns R$ 600</td></tr>
+            <tr><td>Até a Black Friday</td><td colspan="2">Tudo no ar: oferta, caminho, página e anúncios. O que a Black vender, mostramos ao lado da de 2025</td></tr>
+            <tr><td>Fevereiro de 2027</td><td>10</td><td>R$ 2.500</td></tr>
+            <tr><td>Abril de 2027</td><td>18</td><td>R$ 4.000</td></tr>
+            <tr><td><strong>Junho de 2027</strong></td><td><strong>25</strong></td><td><strong>R$ 6.000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="list">
+        <div><span>Por que dois números</span><p>Com três preços, contar só curso engana: dez Faróis valem menos que dois Completos. Os alunos mostram o alcance; a receita mostra o que fica no bolso.</p></div>
+        <div><span>De onde vem o 25</span><p>Em novembro e dezembro de 2025 foram uns 17 registros por mês, sem nenhum anúncio. Com uma porta de R$ 97 e anúncio, 25 é um passo a partir do que o público já fez.<span class="src">relatório da Hotmart de 01/11 a 31/12/2025: 35 registros</span></p></div>
+        <div><span>Cada degrau é uma leitura</span><p>Se um mês ficar abaixo, mostramos com os números onde parou (anúncio, página ou oferta) e ajustamos antes de subir a verba.</p></div>
+      </div>
+      <p class="small">A conta de junho supõe 12 Faróis, 8 Polimento comercial e 5 Completo por mês, aos preços sugeridos. Se os preços mudarem, a meta em receita fica e a de alunos se ajusta.</p>
+    </div>
+  </section>
+
+  <!-- 4. como vira aluno -->
+  <section class="sec">
+    <div class="rail"><span class="mono">O caminho do aluno</span></div>
+    <div class="body">
+      <h2>Como uma pessoa vira aluno</h2>
+      <p>Cada etapa tem o seu jeito sem verba e o seu jeito com verba. A pessoa pode entrar por qualquer uma, mas todas levam pra de baixo.</p>
+      <div class="funnel" role="table" aria-label="Etapas do aluno, orgânico e pago">
+        <div class="row head" role="row"><div role="columnheader">Etapa</div><div role="columnheader">Sem verba (orgânico)</div><div role="columnheader">Com verba (anúncio)</div></div>
+        <div class="row" role="row"><div class="step" role="cell">1. Conhece o Snow<small>nunca ouviu falar</small></div><div class="org" role="cell">Vídeo de problema de dono de carro (farol, arranhão), Shorts, Reels e TikTok, colaboração, QR code nos eventos</div><div class="paid" role="cell">Anúncios de porta: aula grátis, farol, "quanto verniz tem nesse carro?"</div></div>
+        <div class="row" role="row"><div class="step" role="cell">2. Confia e aprende<small>já viu, ainda não pensa em curso</small></div><div class="org" role="cell">Aula grátis, "Erro da semana", teste "funciona?", caixinha de dúvidas nos stories</div><div class="paid" role="cell">Aparecer de novo pra quem assistiu e interagiu</div></div>
+        <div class="row" role="row"><div class="step" role="cell">3. Decide<small>conhece o curso, tem dúvida</small></div><div class="org" role="cell">Chamada no vídeo, fixado, 1ª linha da descrição, bio, destaque "Curso"</div><div class="paid" role="cell">Anúncios que respondem a dúvida: dinheiro, golpe, "dá pra aprender online?", "o grátis basta"</div></div>
+        <div class="row" role="row"><div class="step" role="cell">4. Compra<small>pronto</small></div><div class="org" role="cell">Página nova, com a grade, o Snow, a parcela escrita e o checkout da Hotmart</div><div class="paid" role="cell">O mesmo checkout, com a Hotmart contando qual anúncio vendeu</div></div>
+        <div class="row" role="row"><div class="step" role="cell">5. Vira aluno<small>e pode subir</small></div><div class="org" role="cell">Grupo do WhatsApp, resultado do aluno vira prova (com autorização), quem faz o online pode ir pro presencial</div><div class="paid" role="cell">Quem já comprou deixa de ver anúncio de venda</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. frente 1: caminho -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Frente 1</span><span class="n">sem verba · semana 1</span></div>
+    <div class="body">
+      <h2>Quem já assiste o Snow acha o curso em um toque</h2>
+      <p>É a mudança mais barata do plano e a primeira a sair. Não mexe no vídeo, só no que está em volta dele.</p>
+      <div class="tbl wide">
+        <table>
+          <thead><tr><th>Onde</th><th>Hoje (visto em 22/10)</th><th>Como fica</th></tr></thead>
+          <tbody>
+            <tr><td>Comentário fixado<br><span class="small">YouTube, todo vídeo novo</span></td><td class="now">Link de produto na Shopee</td><td class="new">"Quer aprender polimento do começo ao fim comigo? O curso completo está aqui: [link]. Os produtos deste vídeo estão na descrição."<br><code>…?src=yt-fixado</code></td></tr>
+            <tr><td>Descrição<br><span class="small">primeira linha</span></td><td class="now">Curso no fim, depois das hashtags, entre os caracteres 2.000 e 3.000</td><td class="new">"Curso online de polimento com o Snow: [link]". A loja desce pra 2ª linha.<br><code>…?src=yt-desc</code></td></tr>
+            <tr><td>Bio<br><span class="small">Instagram, TikTok, YouTube</span></td><td class="now">1º link vai pra Shopee; nenhum se chama "Curso"</td><td class="new">"Professor de polimento há 27 anos · Curso online". 1º link: o curso. 2º: a loja.<br><code>…?src=ig-bio · tt-bio · yt-bio</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">O <span class="code">src</span> no fim de cada link é o que faz a Hotmart mostrar de onde veio cada venda: do fixado, da bio, do anúncio. É assim que medimos sem achismo.</p>
+    </div>
+  </section>
+
+  <!-- 6. dentro do vídeo -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Frente 1</span><span class="n">dentro do vídeo</span></div>
+    <div class="body">
+      <h2>Onde o curso aparece no vídeo</h2>
+      <p>Não é roteiro. São quatro momentos, e o Snow fala com as palavras dele. O que importa é a hora certa.</p>
+      <div class="cues">
+        <div><span class="mono small">0 a 15 s · gancho</span><p>Entrega o que o título promete. Nada de curso aqui.</p></div>
+        <div><span class="mono small">Logo depois</span><p class="say">"Quer aprender isso do zero, na ordem certa? O curso tá no comentário fixado."</p></div>
+        <div><span class="mono small">No meio</span><p class="say">"Isso eu explico com calma na aula de micrômetro do curso."</p></div>
+        <div><span class="mono small">Fim · 15 a 20 s</span><p class="say">"Quem quer atender cliente sem medo de errar, tá tudo no curso. Link no fixado."</p></div>
+      </div>
+      <p>Nos Shorts e Reels, um texto na tela no fim: "curso completo, link no perfil". Entregamos pra equipe de vocês um guia de uma página com isso e com o jeito de escolher os cortes.</p>
+    </div>
+  </section>
+
+  <!-- 7. frente 2: página -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Frente 2</span><span class="n">semanas 1 e 2</span></div>
+    <div class="body">
+      <h2>Uma página nova pro curso, com o checkout da Hotmart</h2>
+      <p>Uma página com a marca SnowFlakes, feita pra quem chega pelo celular, com medo de errar e com o dinheiro contado. Os três níveis aparecem logo no começo, cada um com o preço e o botão do checkout. O pagamento continua pela Hotmart, com a garantia de 7 dias.</p>
+      <div class="preview-grid">
+        <a class="lp-link" href="https://snowflakes-curso.vercel.app/" target="_blank" rel="noopener" aria-label="Abrir a prévia da página no navegador">
+          <span class="lp-tela"><img src="pagina-previa.webp" width="720" height="2020" alt="Prévia da página no celular: marca SnowFlakes, título Polimento sem medo de errar, e a fileira dos três níveis com o Faróis na frente, R$ 97 e o botão Quero o Faróis"></span>
+          <span class="lp-abrir">Abrir a página <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <div class="body" style="gap:14px">
+          <h3>O que a página tem, de cima pra baixo</h3>
+          <div class="parts">
+            <div><p><strong>A promessa honesta.</strong> Polimento sem medo de errar, do seu carro ao carro do cliente. Nada de "fique rico".</p></div>
+            <div><p><strong>Os três níveis, logo no começo.</strong> Lado a lado, cada um com o que ensina, o preço e o botão do checkout dele. A barra de baixo vira a compra do nível que está na tela.</p></div>
+            <div><p><strong>Pra quem é, e pra quem não é.</strong> De quem só quer cuidar do próprio carro a quem vai atender cliente. Quem procura dinheiro rápido sem praticar não é o aluno, e dizer isso dá confiança pra quem é.</p></div>
+            <div><p><strong>Quem ensina.</strong> Os anos de bancada, o canal desde 2010 e os 114 mil inscritos. É a resposta pro medo de golpe.</p></div>
+            <div><p><strong>As aulas, na ordem do serviço.</strong> Equipamento, ler a pintura, polir, corrigir, proteger e faróis, cada etapa dizendo em que nível está.</p></div>
+            <div><p><strong>Os dois medos de quem começa.</strong> Estragar a pintura, e achar que o grátis do YouTube basta.</p></div>
+            <div><p><strong>Quem fez o curso.</strong> Antes e depois de aluno e print do grupo, sempre com autorização.</p></div>
+            <div><p><strong>O presencial como comparação.</strong> O mesmo conteúdo do curso de Curitiba, sem a viagem.</p></div>
+            <div><p><strong>As perguntas de verdade.</strong> Tiradas dos comentários do canal.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <p class="small">A página já está no ar como prévia, fora do Google. As fotos são ilustrativas, feitas só pra prévia: na versão final entram fotos reais de vocês. O que aparece entre [colchetes] na página é o que falta confirmar com vocês (preço dos níveis novos, link de checkout, os anos de ensino, fotos e depoimentos).</p>
+      <p class="small">Se a Hotmart demorar pra aprovar o nível do meio, a página sobe com Faróis e Completo, que já existem, e ganha o meio assim que ele sair.</p>
+    </div>
+  </section>
+
+  <!-- 8. frente 3: anúncios -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Frente 3</span><span class="n">depois da página</span></div>
+    <div class="body">
+      <h2>Anúncios cortados do que o Snow já gravou</h2>
+      <p>Dez anúncios diferentes, cada um falando de uma dor de quem está começando. Cinco de porta, pra quem nunca viu o Snow (aula grátis, farol, medo de errar, opinião técnica, quem já lava carro). Cinco de dúvida, pra quem está quase comprando (dinheiro, "o grátis basta", aprender online, golpe, quanto cobrar). Três deles, em prévia. As imagens são ilustrativas, só pra mostrar o formato: no anúncio de verdade entra o trecho do vídeo do Snow.<span class="src">cada dor e cada dúvida saiu de comentários reais no canal do Snow e em canais do mesmo público, lidos em 22/10</span></p>
+      <div class="ads">
+        <figure class="ad-img">
+          <img src="anuncios/anuncio-aula-gratis.jpg" width="720" height="900" loading="lazy" alt="Anúncio: Polimento do zero, com quem ensina há 27 anos. Mãos de luva com a politriz no capô preto. Botão: Assistir a aula">
+          <figcaption class="mono">Aula grátis · porta</figcaption>
+        </figure>
+        <figure class="ad-img">
+          <img src="anuncios/anuncio-medo-de-errar.jpg" width="720" height="900" loading="lazy" alt="Anúncio: Quanto verniz tem nesse carro? Sem saber, o corte pode atravessar. Mãos de luva medindo a pintura com o micrômetro. Botão: Ver as aulas do curso">
+          <figcaption class="mono">Medo de errar · porta</figcaption>
+        </figure>
+        <figure class="ad-img">
+          <img src="anuncios/anuncio-aprender-online.jpg" width="720" height="900" loading="lazy" alt="Anúncio: O mesmo curso do presencial, sem a viagem até Curitiba. Politriz no capô com o celular passando a aula ao lado. Botão: Ver o curso">
+          <figcaption class="mono">"Dá pra aprender online?" · dúvida</figcaption>
+        </figure>
+      </div>
+      <div class="list">
+        <div><span>Quem faz o quê</span><p>Nós escrevemos a ficha de cada anúncio (o trecho, o texto, o título). A equipe de vocês corta do material bruto, como já faz com os cortes. Nós subimos, acompanhamos e lemos o resultado.</p></div>
+        <div><span>Onde roda</span><p>Instagram e Facebook. A Hotmart avisa o Meta de cada venda, e ele aprende a achar mais gente parecida com quem comprou.</p></div>
+        <div><span>Como decidimos o que fica</span><p>Pela venda de cada anúncio, olhando a semana, nunca o dia. O que vende ganha versão nova; o que não vende sai.</p></div>
+        <div><span>Capas dos vídeos</span><p>Thumbnails novas, com fotos e frames reais do Snow, mesma identidade em todas. Começamos pelos vídeos que viram anúncio ou porta: aula grátis e farol.</p></div>
+        <div><span>Google</span><p>Fica pra depois do primeiro mês, e só se houver gente procurando curso online por lá.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. evidência -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Evidência</span></div>
+    <div class="body">
+      <h2>Como o Snow fica em evidência</h2>
+      <p>Evidência, em número, é gente que ainda não segue o Snow vendo o Snow. Seis alavancas, da mais barata pra mais cara:</p>
+      <div class="tbl wide">
+        <table>
+          <thead><tr><th>Alavanca</th><th>O que fazer</th><th>Por quê</th></tr></thead>
+          <tbody>
+            <tr><td>Mais cortes</td><td>Cada vídeo longo vira 2 cortes, e cada corte sai em Shorts, Reels e TikTok. 3 longos por semana viram 18 posts curtos, sem gravar nada a mais</td><td>Shorts são 19% das views do Snow e 74% no maior canal do nicho</td></tr>
+            <tr><td>Dono do carro</td><td>1 vídeo longo por mês nas buscas em que ele não aparece: farol amarelado, arranhão, pintura queimada</td><td>É por onde a maioria entra no assunto</td></tr>
+            <tr><td>Formatos fixos</td><td>"Funciona?" no sábado, "Erro da semana" na quarta, "A ou B?" nos curtos</td><td>Os três estão entre os mais vistos dos canais do nicho</td></tr>
+            <tr><td>Colaboração</td><td>Uma a cada dois meses, com canal de carro de fora da estética</td><td>O vídeo com outro canal fez 61,9 mil</td></tr>
+            <tr><td>Eventos</td><td>Conteúdo do evento e QR code do curso no stand e na palestra</td><td>Jaguaruna, Fortaleza, Salvador e São Paulo já estão na agenda</td></tr>
+            <tr><td>Impulsionar</td><td>Vídeo que passou de duas vezes a média ganha anúncio pra quem não segue</td><td>Só com verba</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><span class="mono" style="color:var(--accent)">O gráfico de todo mês</span><p style="margin-top:6px">Vídeos acima da média de antes, % de quem assiste e ainda não é inscrito, aparecer nas buscas de dono de carro, alcance de quem não segue nos Reels, inscritos e seguidores novos. E, do lado da venda: vendas por origem e custo por venda.</p></div>
+    </div>
+  </section>
+
+  <!-- 9b. grupo do whatsapp -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Uma ideia</span><span class="n">ofertas e produtos</span></div>
+    <div class="body">
+      <h2>Um grupo só de ofertas e produtos, separado do curso</h2>
+      <p>Hoje os produtos que o Snow indica ficam em links soltos: no comentário fixado, na descrição e no primeiro link da bio, no lugar onde deveria estar o curso. A ideia é juntar tudo isso num grupo de WhatsApp só de ofertas e produtos. Quem quer saber o que o Snow usa, e quando está em promoção, entra ali. Os links de produto saem do caminho do curso, e os produtos ganham um lugar próprio que cresce junto com o alcance.</p>
+      <div class="list">
+        <div><span>Primeiro, entender o que existe</span><p>Quais links e parcerias vocês têm hoje (Shopee comum ou acordo com marca, comissão, cupom), o que mais vende e quanto rende. O formato do grupo sai daí.</p></div>
+        <div><span>Separado do curso</span><p>O grupo dos alunos continua só de quem comprou. O de ofertas é aberto a quem quiser. Assim o curso não vira vitrine.</p></div>
+        <div><span>Como a pessoa entra</span><p>Pelo link no vídeo e na bio, e por anúncio. A Shopee não paga comissão de link divulgado em anúncio pago, então o anúncio leva pro grupo, nunca direto pro produto.<span class="src"><a href="https://shopee.com.br/blog/programa-de-afiliados-shopee/" target="_blank" rel="noopener">blog oficial da Shopee, programa de afiliados</a>, lido em 26/10</span></p></div>
+        <div><span>O que tem lá dentro</span><p>Só a equipe posta: o produto que o Snow usa, com o motivo técnico em uma linha, cupom e promoção quando houver, e o curso nas datas certas.</p></div>
+        <div><span>Como medimos</span><p>Quantos entraram e de onde, os cliques e as vendas dos links do grupo, e quantos compraram o curso por lá.</p></div>
+      </div>
+      <div class="note"><span class="mono" style="color:var(--accent)">O que segura a imagem de professor</span><p style="margin-top:6px">Só entra produto que o Snow usa de verdade, com o porquê técnico. É isso que separa o grupo dele de um grupo de promoção qualquer.</p></div>
+    </div>
+  </section>
+
+  <!-- 10. verba -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Verba</span></div>
+    <div class="body">
+      <h2>O que cada faixa de verba monta</h2>
+      <p>A verba de anúncio sai do cartão de vocês direto pro Meta. O nosso trabalho é à parte. Quanto mais verba, mais públicos diferentes rodam ao mesmo tempo, e mais rápido se descobre de onde vem o aluno que custa menos.</p>
+      <div class="tbl wide">
+        <table>
+          <thead><tr><th>Faixa</th><th>Por mês</th><th>Como fica montado</th><th>O que isso traz</th></tr></thead>
+          <tbody>
+            <tr><td>Sem verba</td><td class="num">R$ 0</td><td>Nenhum anúncio</td><td>O caminho, a página e o conteúdo levando pros três níveis. O alcance cresce no ritmo do canal</td></tr>
+            <tr><td>Começo<br><span class="small">R$ 30 a R$ 50 por dia</span></td><td class="num">R$ 900 a R$ 1.500</td><td>1 campanha de vendas, 1 público aberto, os 10 anúncios</td><td>Gente nova chegando todo dia, e a resposta de quais anúncios trazem aluno e por qual nível ele entra</td></tr>
+            <tr><td>Começo com retorno<br><span class="small">R$ 50 a R$ 100 por dia</span></td><td class="num">R$ 1.500 a R$ 3.000</td><td>A de cima, mais um público de retorno: quem visitou a página ou interagiu com o Snow e não comprou, com os anúncios de dúvida (preço, golpe, "dá pra aprender online?")</td><td>Volta em quem quase comprou com a resposta pra dúvida dele, em vez de deixar essa pessoa esfriar</td></tr>
+            <tr><td>Escala<br><span class="small">R$ 100 a R$ 200 por dia</span></td><td class="num">R$ 3.000 a R$ 6.000</td><td>Três públicos novos lado a lado (aberto, interesse em estética automotiva, parecido com quem segue o Snow), mais o de retorno</td><td>Compara de onde vem o aluno mais barato e põe a verba nele. Dá fôlego pra Black Friday</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note"><span class="mono" style="color:var(--accent)">A conta que decide</span><p style="margin-top:6px">Com os preços sugeridos e a mistura da meta, cada aluno novo deixa em média uns <strong>R$ 260 líquidos</strong>. A verba se paga quando cada R$ 260 investidos trazem pelo menos um aluno. Sugerimos começar numa faixa e subir só quando a de baixo se pagar; quem decide subir são vocês. A faixa sugerida vai junto com o investimento no nosso trabalho.<span class="src">preços sugeridos acima; taxa da Hotmart pelo print de 26/10 (R$ 583,16 recebidos numa venda de R$ 650)</span></p></div>
+    </div>
+  </section>
+
+  <!-- 11. ordem -->
+  <section class="sec">
+    <div class="rail"><span class="mono">A ordem</span></div>
+    <div class="body">
+      <h2>O que acontece primeiro</h2>
+      <div class="timeline">
+        <div><span class="when">Dia do sim</span><p>Foto do "antes" de tudo: página, fixado, bios, vendas da Hotmart. Sem ela não tem como mostrar o "depois". O Snow revisa os três níveis e os preços.</p></div>
+        <div><span class="when">Semana 1</span><p>Os níveis novos criados na Hotmart. Links com origem, pixel na Hotmart, fixado, 1ª linha e bio levando pro curso. Guia do vídeo pra equipe e as pautas do primeiro mês.</p></div>
+        <div><span class="when">Semanas 1 e 2</span><p>Página nova no ar, com os três níveis e o checkout da Hotmart.</p></div>
+        <div><span class="when">Depois da página</span><p>Os 10 anúncios no ar, todos no mesmo dia.</p></div>
+        <div><span class="when">Dia 30</span><p>Vendas por origem, custo por venda e gente nova vendo o Snow, lado a lado com o "antes".</p></div>
+        <div><span class="when">Meses 2 a 8</span><p>Mais anúncios no formato que vendeu, colaborações, Google se houver busca. Leitura da meta em fevereiro, abril e junho.</p></div>
+      </div>
+      <div class="note pend"><span class="mono">Black Friday · 27/11</span><p style="margin-top:6px">Novembro e dezembro de 2025 renderam mais que os dez meses de 2026, e os maiores do nicho já estão com a oferta deles no ar. Com os três níveis e anúncio, só dá tempo se começarmos até <strong>30/10</strong>, com o Snow revisando a divisão até lá: níveis na Hotmart até 04/11, página até 11/11, teste de 12 a 19/11, oferta de 20 a 30/11. Depois disso, novembro serve pra arrumar o caminho e a página, e os anúncios começam em janeiro.<span class="src">relatórios da Hotmart enviados em 26/10; ofertas dos concorrentes na Biblioteca de Anúncios do Meta e nas páginas deles, 23 e 24/10</span></p></div>
+    </div>
+  </section>
+
+  <!-- 12. quem faz o quê -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Quem faz o quê</span></div>
+    <div class="body">
+      <h2>O que é nosso e o que é de vocês</h2>
+      <div class="two">
+        <div class="body" style="gap:10px">
+          <span class="mono" style="color:var(--accent)">Nós</span>
+          <ul class="checks">
+            <li>Caminho até o curso: fixado, descrição, bios e links com origem</li>
+            <li>Página nova do curso, com o checkout da Hotmart</li>
+            <li>Guia do vídeo pra equipe e pautas do mês</li>
+            <li>Thumbnails com a mídia de vocês</li>
+            <li>Ficha dos 10 anúncios, campanha no ar e leitura toda semana</li>
+            <li>Relatório do dia 30 e o gráfico de todo mês</li>
+          </ul>
+        </div>
+        <div class="body" style="gap:10px">
+          <span class="mono" style="color:var(--accent)">Vocês</span>
+          <ul class="checks">
+            <li>O Snow segue gravando do jeito dele</li>
+            <li>Os cortes, pela nossa ficha</li>
+            <li>Postar e responder, como já fazem</li>
+            <li>Aprovar o que muda antes de ir pro ar</li>
+            <li>Os acessos e a verba no cartão de vocês</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. o que precisamos -->
+  <section class="sec">
+    <div class="rail"><span class="mono">O que precisamos</span></div>
+    <div class="body">
+      <h2>O que precisamos de vocês</h2>
+      <div class="two">
+        <div class="body" style="gap:10px">
+          <span class="mono" style="color:var(--pend)">Pra fechar o plano</span>
+          <ul class="checks">
+            <li class="urgent">O Snow revisar os três níveis e os preços<small>O que muda de nível, o que sai, se vale gravar algo. Até 30/10, pra estar na Black</small></li>            <li>A meta de 25 alunos e R$ 6.000 por mês até junho faz sentido pra vocês?</li>
+            <li>O acesso ao curso é vitalício?<small>Muda o gancho da Black</small></li>
+            <li>O presencial de polimento é R$ 2.500?<small>Entendemos "dois e meio" no áudio</small></li>
+            <li>Quem do online depois faz o presencial, e quantos</li>
+            <li>Micro pintura, vidros e captação de clientes ainda são bônus?<small>Estão na descrição e não aparecem na grade</small></li>
+            <li>Como funciona a parceria dos produtos da Shopee<small>É o afiliado comum ou tem acordo com alguma marca (comissão maior, cupom)? Quais produtos mais vendem?</small></li>
+            <li>Quanto a Shopee rende por mês<small>Pra decidir o lugar dela no fixado, na bio e no grupo</small></li>
+            <li>O anúncio de janeiro de 2026: quanto gastou e o que deu</li>
+          </ul>
+        </div>
+        <div class="body" style="gap:10px">
+          <span class="mono" style="color:var(--accent)">Depois do sim</span>
+          <ul class="checks">
+            <li>Acessos: Hotmart, Página do Facebook, conta de anúncios, YouTube Studio e insights do Instagram</li>
+            <li>Acesso ao painel de afiliado da Shopee<small>Pra conferir as regras do programa e ver o que vende</small></li>
+            <li>Logo, fotos do Snow, e antes e depois de aluno com autorização</li>
+            <li>Material bruto dos vídeos, pros cortes e as capas</li>
+            <li>Quem faz os cortes do lado de vocês</li>
+            <li>O ok pra mudar fixado, descrição e bio</li>
+            <li>O Snow topar as quatro deixas no vídeo</li>
+            <li>A agenda dos eventos com data, pra levar o QR code</li>
+            <li>O domínio da página nova</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14. próximo passo -->
+  <section class="sec" style="border-bottom:0">
+    <div class="rail"><span class="mono">Próximo passo</span></div>
+    <div class="body">
+      <h2>Vocês ajustam, a gente acerta</h2>
+      <p class="lead">Leiam com calma e mandem o que quiserem mudar, do jeito que for mais fácil, por mensagem ou áudio. Os três níveis, a meta e o formato do grupo vamos acertando por aqui, e com isso fechamos a faixa de verba e o investimento no nosso trabalho.</p>
+      <div class="sign">
+        <div class="who"><span class="mono small">Quem assina</span><b>Vinicius Trentini</b><span class="small">T Digital · tdigital.tech</span></div>
+        <span class="mono small">Prévia · 26/10/2026</span>
+      </div>
+    </div>
+  </section>
+
+</div>
