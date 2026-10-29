@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Novo Ambiente · três opções para a página principal</title>
+<meta name="theme-color" content="#071a2b">
+<link rel="icon" href="img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Sora:wght@600;700&display=swap">
+<link rel="stylesheet" href="estilo.css">
+<style>
+  body { background: var(--gelo); }
+  .capa { background: var(--marinho-900); color: #fff; padding: 2rem 0 2.6rem; }
+  .capa img { height: 4.6rem; width: auto; }
+  .capa h1 { font-size: clamp(1.8rem, 1.3rem + 2.4vw, 2.8rem); margin-top: 1.6rem; max-width: 20ch; }
+  .capa p { color: var(--claro-suave); margin-top: .9rem; max-width: 40rem; font-size: 1.0625rem; }
+  .opcoes { display: grid; gap: 1.4rem; padding: 2rem 0; }
+  .opcao {
+    display: grid; gap: 1.4rem; background: #fff; border-radius: 18px; padding: 1.2rem;
+    border: 1px solid var(--gelo-2);
+  }
+  @media (min-width: 52rem) { .opcao { grid-template-columns: 15rem 1fr; gap: 2.2rem; padding: 1.8rem; align-items: start; } }
+  .opcao .tela { display: block; border-radius: 16px; overflow: hidden; border: 6px solid var(--marinho-900); max-width: 15rem; margin: 0 auto; box-shadow: 0 20px 40px -24px rgba(10, 34, 54, .5); }
+  .opcao .tela img { width: 100%; height: auto; }
+  .opcao .num { font: 600 .8125rem/1.3 var(--fonte-texto); letter-spacing: .08em; text-transform: uppercase; color: var(--azul); }
+  .opcao h2 { font-size: clamp(1.4rem, 1.2rem + .8vw, 1.8rem); margin-top: .35rem; }
+  .opcao .pra { color: var(--texto-suave); margin-top: .4rem; font-size: 1.0625rem; }
+  .opcao dl { margin: 1.2rem 0 0; display: grid; gap: 1rem; }
+  .opcao dt { font: 600 .9375rem/1.3 var(--fonte-titulo); }
+  .opcao dd { margin: .25rem 0 0; color: var(--texto-suave); }
+  .opcao .abrir { margin-top: 1.4rem; display: inline-flex; }
+  .btn-azul { background: var(--marinho-900); color: #fff; }
+  .btn-azul:hover { background: var(--marinho-700); }
+  .igual { background: #fff; border-radius: 18px; padding: 1.4rem; border: 1px solid var(--gelo-2); margin-bottom: 1.4rem; }
+  @media (min-width: 52rem) { .igual { padding: 1.8rem; } }
+  .igual h2 { font-size: 1.4rem; }
+  .igual > p { color: var(--texto-suave); margin-top: .4rem; }
+  .igual ul { margin: 1rem 0 0; padding: 0; list-style: none; display: grid; gap: .7rem; }
+  @media (min-width: 52rem) { .igual ul { grid-template-columns: 1fr 1fr; gap: .8rem 2rem; } }
+  .igual li { padding-left: 1.6rem; position: relative; }
+  .igual li::before { content: ""; position: absolute; left: 0; top: .45rem; width: .8rem; height: .45rem; border-left: 2.5px solid var(--azul); border-bottom: 2.5px solid var(--azul); transform: rotate(-45deg); }
+  .fecho { padding: 0 0 3rem; }
+  .fecho .caixa { background: var(--marinho-900); color: #fff; border-radius: 18px; padding: 1.6rem; }
+  .fecho h2 { font-size: 1.4rem; }
+  .fecho p { color: var(--claro-suave); margin-top: .5rem; max-width: 44rem; }
+  .assina { margin-top: 1.2rem; font-size: .875rem; color: var(--texto-suave); text-align: center; }
+</style>
+</head>
+<body>
+<header class="capa">
+  <div class="wrap">
+    <img src="img/logo.svg" alt="Novo Ambiente Service, limpeza especializada" width="150" height="90">
+    <h1>Três opções para a página principal do site</h1>
+    <p>Montamos três jeitos de abrir o site, já com a logo nova e o azul do uniforme. As três têm o mesmo cuidado com o Google e o mesmo WhatsApp com mensagem pronta. O que muda é como cada uma convence quem chega a pedir o orçamento.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="opcoes">
+
+    <article class="opcao">
+      <a class="tela" href="opcao-1.html"><img src="img/print-opcao-1.webp" alt="Opção 1 no celular: título, e logo abaixo os serviços para escolher" width="780" height="1380" loading="lazy"></a>
+      <div>
+        <p class="num">Opção 1</p>
+        <h2>Orçamento em um toque</h2>
+        <p class="pra">Pra quem chega do Google já querendo preço.</p>
+        <dl>
+          <div><dt>Como funciona</dt><dd>Logo no topo, a pessoa escolhe o serviço: vidros, fachada, placa solar ou piso. O WhatsApp abre com a mensagem pronta, já dizendo o que ela precisa.</dd></div>
+          <div><dt>Por que funciona</dt><dd>Quem busca "limpeza de vidros em Curitiba" já decidiu contratar alguém. Quanto menos passos até o WhatsApp, mais orçamento chega. E como cada mensagem vem com o serviço, vocês ficam sabendo qual serviço traz mais contato.</dd></div>
+          <div><dt>O que depende de vocês</dt><dd>Nada além do que já temos.</dd></div>
+        </dl>
+        <a class="btn btn-azul abrir" href="opcao-1.html">Abrir a opção 1</a>
+      </div>
+    </article>
+
+    <article class="opcao">
+      <a class="tela" href="opcao-2.html"><img src="img/print-opcao-2.webp" alt="Opção 2 no celular: título e a foto de antes e depois do vidro" width="780" height="1380" loading="lazy"></a>
+      <div>
+        <p class="num">Opção 2</p>
+        <h2>Antes e depois no topo</h2>
+        <p class="pra">Pra quem compara empresas antes de chamar.</p>
+        <dl>
+          <div><dt>Como funciona</dt><dd>A primeira coisa da página é a foto do vidro sujo e limpo, que a pessoa arrasta com o dedo. Embaixo, o botão do WhatsApp e a opção de mandar uma foto do vidro.</dd></div>
+          <div><dt>Por que funciona</dt><dd>Síndico e gerente de loja costumam pedir orçamento pra mais de uma empresa. A foto responde "vai ficar bom?" antes de a pergunta ser feita. E receber a foto do vidro adianta o orçamento pros dois lados.</dd></div>
+          <div><dt>O que depende de vocês</dt><dd>Fotos de antes e depois de obras de vocês, no mesmo ângulo. Até chegarem, usamos imagem ilustrativa, marcada como tal.</dd></div>
+        </dl>
+        <a class="btn btn-azul abrir" href="opcao-2.html">Abrir a opção 2</a>
+      </div>
+    </article>
+
+    <article class="opcao">
+      <a class="tela" href="opcao-3.html"><img src="img/print-opcao-3.webp" alt="Opção 3 no celular: título e o cartão do condomínio com o problema e o que ele quer" width="780" height="1380" loading="lazy"></a>
+      <div>
+        <p class="num">Opção 3</p>
+        <h2>O problema de quem contrata</h2>
+        <p class="pra">Pra falar com cada cliente na dor dele.</p>
+        <dl>
+          <div><dt>Como funciona</dt><dd>Três portas no topo: condomínio, empresa e casa. Cada uma mostra o problema e o que a pessoa quer, e o botão abre o WhatsApp dizendo quem está falando.</dd></div>
+          <div><dt>Por que funciona</dt><dd>O síndico quer prazo e segurança, a loja quer não atrapalhar o atendimento, a casa quer não correr risco. Quando a página fala do problema certo, a pessoa se reconhece e chama. E a mensagem já chega dizendo se é condomínio, empresa ou casa.</dd></div>
+          <div><dt>O que depende de vocês</dt><dd>Uma foto da equipe de vocês trabalhando, no lugar da ilustrativa.</dd></div>
+        </dl>
+        <a class="btn btn-azul abrir" href="opcao-3.html">Abrir a opção 3</a>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="igual" aria-labelledby="t-igual">
+    <h2 id="t-igual">O que é igual nas três</h2>
+    <p>É a parte que faz a Novo Ambiente aparecer no Google e virar contato.</p>
+    <ul>
+      <li>O título da página com "limpeza de vidros em Curitiba", do jeito que o cliente digita</li>
+      <li>Uma página pra cada serviço: vidros, fachada, placa solar e piso, cada uma feita pra busca daquele serviço</li>
+      <li>Endereço, telefone e região escritos do jeito que o Google lê</li>
+      <li>Página leve, que abre rápido no celular</li>
+      <li>Botão do WhatsApp sempre à mão, com a mensagem pronta</li>
+      <li>Cada clique no WhatsApp medido, pra saber de onde vem cada orçamento</li>
+    </ul>
+  </section>
+
+  <section class="fecho">
+    <div class="caixa">
+      <h2>Qual combina mais com vocês?</h2>
+      <p>Podem escolher uma ou juntar partes de duas. Respondam com o número da opção, ou do que querem juntar, que seguimos a partir dela.</p>
+    </div>
+    <p class="assina">Prévia feita pela Trentini Digital · 29/10/2026 · as fotos são ilustrativas</p>
+  </section>
+</main>
+</body>
+</html>
