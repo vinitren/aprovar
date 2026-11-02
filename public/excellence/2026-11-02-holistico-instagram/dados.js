@@ -381,6 +381,81 @@ window.DADOS = {
      ]
     }
    ]
+  },
+  {
+   "id": "carrossel",
+   "nome": "Carrossel",
+   "titulo": "Carrossel do expositor",
+   "sub": "O carrossel que cada expositor confirmado recebe, na identidade nova. São duas opções: escolham uma e ela vira o padrão. O exemplo é a Claudia Cacau.",
+   "itens": [
+    {
+     "id": "2-1",
+     "titulo": "Variação A",
+     "etiqueta": "Carrossel",
+     "ordem": "1 de 2",
+     "nota": "Uma foto por expositor. Logo centrado no topo e faixa com a data. Mais simples de preencher.",
+     "escolhas": [
+      {
+       "pergunta": "Qual carrossel vira o padrão do expositor?",
+       "opcoes": [
+        "Variação A",
+        "Variação B"
+       ]
+      }
+     ],
+     "slides": [
+      {
+       "src": "img/2-1-1.webp",
+       "label": "Capa",
+       "ia": false
+      },
+      {
+       "src": "img/2-1-2.webp",
+       "label": "Sobre",
+       "ia": false
+      },
+      {
+       "src": "img/2-1-3.webp",
+       "label": "No Encontro",
+       "ia": false
+      },
+      {
+       "src": "img/2-1-4.webp",
+       "label": "Fale com ela",
+       "ia": false
+      }
+     ]
+    },
+    {
+     "id": "2-2",
+     "titulo": "Variação B",
+     "etiqueta": "Carrossel",
+     "ordem": "2 de 2",
+     "nota": "Como o carrossel que vocês já faziam: logo à esquerda e a data grande. Pede duas fotos por expositor (retrato e atendimento).",
+     "slides": [
+      {
+       "src": "img/2-2-1.webp",
+       "label": "Capa",
+       "ia": false
+      },
+      {
+       "src": "img/2-2-2.webp",
+       "label": "Quem é",
+       "ia": false
+      },
+      {
+       "src": "img/2-2-3.webp",
+       "label": "Na mesa",
+       "ia": false
+      },
+      {
+       "src": "img/2-2-4.webp",
+       "label": "Procure a mesa",
+       "ia": false
+      }
+     ]
+    }
+   ]
   }
  ]
 };
