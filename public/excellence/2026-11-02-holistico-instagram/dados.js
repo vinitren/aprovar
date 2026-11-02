@@ -399,7 +399,7 @@ window.DADOS = {
      "titulo": "Variação A",
      "etiqueta": "Carrossel",
      "ordem": "1 de 2",
-     "nota": "Uma foto por expositor. Logo centrado no topo e faixa com a data. Mais simples de preencher.",
+     "nota": "A foto do expositor no post inteiro, sem moldura, com o logo do Encontro num selo em cima. As telas de dentro seguem a linha do Instagram novo (cartão sobre as plantas). Uma foto por expositor.",
      "escolhas": [
       {
        "pergunta": "Qual carrossel vira o padrão do expositor?",
