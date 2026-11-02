@@ -17,11 +17,16 @@ window.DADOS = {
      "titulo": "O perfil do Instagram",
      "etiqueta": "Perfil",
      "grupo": "O perfil",
-     "nota": "O nome ganha \"Curitiba\" porque é o campo que a busca lê. Duas bios: a A fala só com o público; a B também chama expositor até dezembro. As duas cabem em 150 caracteres.",
+     "nota": "Arraste pro lado pra ver o antes e depois do perfil (o depois é uma simulação). O nome ganha \"Curitiba\" porque é o campo que a busca lê. Duas bios: a A fala só com o público; a B também chama expositor até dezembro. As duas cabem em 150 caracteres.",
      "livre": true,
      "slides": [
       {
        "src": "img/1-1-1.webp",
+       "label": "Antes e depois (simulação)",
+       "ia": false
+      },
+      {
+       "src": "img/1-1-2.webp",
        "label": "Foto de perfil",
        "ia": false
       }
