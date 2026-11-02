@@ -143,7 +143,8 @@ window.DADOS = {
      "etiqueta": "Post",
      "grupo": "Os 7 posts novos",
      "ordem": "4 de 7",
-     "nota": "Modelo do card de expositor. Sai em colaboração com o perfil do expositor.",
+     "nota": "A moldura que vocês aprovaram em 29/10, aqui só pra ver na ordem. Sai em colaboração com o perfil do expositor.",
+     "aprovado": "29/10",
      "slides": [
       {
        "src": "img/1-5-1.webp",
@@ -386,7 +387,7 @@ window.DADOS = {
    "id": "carrossel",
    "nome": "Carrossel",
    "titulo": "Carrossel do expositor",
-   "sub": "O carrossel que cada expositor confirmado recebe, na identidade nova. São duas opções: escolham uma e ela vira o padrão. O exemplo é a Claudia Cacau.",
+   "sub": "O carrossel que cada expositor confirmado recebe. São duas opções: escolham uma e ela vira o padrão. O exemplo é a Claudia Cacau.",
    "itens": [
     {
      "id": "2-1",
