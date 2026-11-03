@@ -18,6 +18,16 @@ window.DADOS = {
      "etiqueta": "Perfil",
      "grupo": "O perfil",
      "nota": "Arraste pro lado pra ver o antes e depois do perfil (o depois é uma simulação). O nome ganha \"Curitiba\" porque é o campo que a busca lê. Duas bios: a A fala só com o público; a B também chama expositor até dezembro. As duas cabem em 150 caracteres.",
+     "pergunta": "Pra onde vai o link da bio: a página do Encontro ou o WhatsApp de quem atende? Se for WhatsApp, qual número?",
+     "escolhas": [
+      {
+       "pergunta": "Qual bio vai no perfil?",
+       "opcoes": [
+        "Bio A",
+        "Bio B"
+       ]
+      }
+     ],
      "livre": true,
      "slides": [
       {
@@ -41,16 +51,16 @@ window.DADOS = {
        "Evento"
       ],
       [
-       "Bio (opção A, só pro público)",
-       "\nTerapias, oráculos e produtos holísticos\n5ª edição · 06 e 07 de março de 2027\nClube Dom Pedro II · Curitiba · 10h às 20h\nEntrada solidária\nBio (opção B, com chamada de expositor até dezembro):\nTerapias, oráculos e produtos holísticos\n5ª edição · 06 e 07/03/2027 · 10h às 20h\nClube Dom Pedro II · Curitiba\nCuradoria aberta pra expositores 👇"
+       "Bio A (só pro público)",
+       "Terapias, oráculos e produtos holísticos\n5ª edição · 06 e 07 de março de 2027\nClube Dom Pedro II · Curitiba · 10h às 20h\nEntrada solidária"
+      ],
+      [
+       "Bio B (também chama expositor até dezembro)",
+       "Terapias, oráculos e produtos holísticos\n5ª edição · 06 e 07/03/2027 · 10h às 20h\nClube Dom Pedro II · Curitiba\nCuradoria aberta pra expositores 👇"
       ],
       [
        "Link",
-       "[a definir: página do Encontro ou WhatsApp de quem atende]"
-      ],
-      [
-       "Título do link",
-       "[a definir junto com o link]"
+       "A definir com vocês (pergunta abaixo)"
       ]
      ]
     },
@@ -372,7 +382,8 @@ window.DADOS = {
      "etiqueta": "Destaque",
      "grupo": "Os 6 destaques",
      "ordem": "6 de 6",
-     "nota": "Opcional: só entra se o perfil também chamar expositor até dezembro (bio B). Falta o WhatsApp de quem atende expositor.",
+     "nota": "Opcional: só entra se o perfil também chamar expositor até dezembro (bio B).",
+     "pergunta": "Qual WhatsApp atende expositor? Ele entra no story no lugar do [número de quem atende expositor].",
      "slides": [
       {
        "src": "img/1-14-1.webp",
@@ -392,7 +403,7 @@ window.DADOS = {
    "id": "carrossel",
    "nome": "Carrossel",
    "titulo": "Carrossel do expositor",
-   "sub": "O carrossel que cada expositor confirmado recebe. São duas opções: escolham uma e ela vira o padrão. O exemplo é a Claudia Cacau.",
+   "sub": "O carrossel que cada expositor confirmado recebe. São duas opções: escolham uma e ela vira o padrão. O exemplo é a Claudia Cacau. O que está entre colchetes (texto, atendimentos, WhatsApp e logo) é o lugar das informações de cada expositor, preenchido quando ele confirmar.",
    "itens": [
     {
      "id": "2-1",
