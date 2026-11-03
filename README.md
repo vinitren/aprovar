@@ -91,7 +91,7 @@ as linhas tracejadas, `TÍTULO:`, `BOTÃO:`); `legenda.txt` como está;
 perfil); qualquer outro `.txt` vira "Ver <nome do arquivo>", e se tiver links,
 uma lista com um link por linha.
 
-Exemplo completo: `Desktop\Clientes\Excellence-Eventos\criativos\2026-10-14\`.
+Exemplo completo: `Desktop\Clientes\Excellence-Eventos\1-Produtora\criativos\2026-10-14-rodada-1\`.
 
 **A ordem padrão das seções** (é a ordem em que o cliente publica, e vira
 "Passo 1, 2, 3..." no Drive):
