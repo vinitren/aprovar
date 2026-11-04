@@ -90,7 +90,7 @@ window.DADOS = {
    "itens": [
     {
      "id": "2-1",
-     "titulo": "Os 15 anos que ela sonhou",
+     "titulo": "Ela sonha com a festa",
      "etiqueta": "15 anos",
      "ordem": "1 de 3",
      "nota": "O anúncio principal do 15 anos: trechos do vídeo da MVP na festa da Sophia, com a música da festa. A música foi corrigida e agora segue até o fim sem voltar ao começo. São dois formatos: tela cheia pros stories e Reels, e o formato convite pro feed.",
