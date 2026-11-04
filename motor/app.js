@@ -47,7 +47,9 @@
       </div>`;
     if (slides.length) {
       h += `<div class="galeria${slides.length > 1 ? " varias" : ""}${it.livre ? " livre" : ""}">
-        <div class="trilho">${slides.map((s, i) => `<figure data-i="${i}"><img src="${s.src}" alt="${esc(it.titulo)}, ${esc(s.label)}" loading="lazy" decoding="async"></figure>`).join("")}</div>
+        <div class="trilho">${slides.map((s, i) => s.video
+          ? `<figure data-i="${i}" class="vid"><video src="${s.video}" poster="${s.src}" controls playsinline preload="none"></video></figure>`
+          : `<figure data-i="${i}"><img src="${s.src}" alt="${esc(it.titulo)}, ${esc(s.label)}" loading="lazy" decoding="async"></figure>`).join("")}</div>
         ${slides.length > 1 ? `<button class="seta ant" type="button" aria-label="Anterior" disabled>‹</button><button class="seta prox" type="button" aria-label="Próxima">›</button>` : ""}
       </div>
       <div class="leg"><span class="rot${slides[0].ia ? " ia" : ""}">${esc(slides[0].label)}</span>${slides.length > 1 ? `<span class="pontos">${slides.map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</span>` : ""}</div>`;
@@ -91,11 +93,11 @@
       };
       trilho.addEventListener("scroll", () => {
         const i = Math.round(trilho.scrollLeft / trilho.clientWidth);
-        if (i !== atual) marca(i);
+        if (i !== atual) { trilho.querySelectorAll("video").forEach(v => v.pause()); marca(i); }
       }, { passive: true });
       const vai = i => trilho.scrollTo({ left: i * trilho.clientWidth, behavior: "smooth" });
       if (ant) { ant.onclick = () => vai(atual - 1); prox.onclick = () => vai(atual + 1); }
-      trilho.addEventListener("click", e => { const f = e.target.closest("figure"); if (f) abreZoom(it, +f.dataset.i); });
+      trilho.addEventListener("click", e => { const f = e.target.closest("figure"); if (f && !f.classList.contains("vid")) abreZoom(it, +f.dataset.i); });
     }
 
     const bOk = $(".b-ok", el), bMuda = $(".b-muda", el), caixa = $(".obs-muda", el), obs = $(".obs", el);

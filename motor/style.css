@@ -76,6 +76,8 @@ main { max-width: 600px; margin: 0 auto; padding: 0 16px; }
 .trilho::-webkit-scrollbar { display: none; }
 .trilho figure { flex: 0 0 100%; margin: 0; scroll-snap-align: center; aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; padding: 12px; cursor: zoom-in; }
 .trilho figure img { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; }
+.trilho figure.vid { cursor: auto; }
+.trilho figure video { width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #000; }
 .galeria.livre .trilho figure { aspect-ratio: auto; }
 .galeria.livre .trilho figure img { height: auto; }
 .seta { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .92); color: var(--tinta); font-size: 20px; line-height: 1; box-shadow: 0 1px 6px rgba(0, 0, 0, .15); display: none; }

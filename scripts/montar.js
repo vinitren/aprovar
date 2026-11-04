@@ -85,6 +85,18 @@ function img(arquivo, nome) {
   contador++;
   return `img/${nome}.webp`;
 }
+// Vídeo: versão leve pra web (720 de largura, H.264, começa a tocar antes de
+// baixar tudo) e a capa em webp tirada do segundo 1.
+function video(arquivo, nome) {
+  const mp4 = path.join(IMG, `${nome}.mp4`), capa = path.join(IMG, `${nome}.webp`);
+  execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", arquivo,
+    "-vf", "scale='min(720,iw)':-2", "-c:v", "libx264", "-preset", "slow", "-crf", "26",
+    "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", mp4]);
+  execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", "1", "-i", arquivo,
+    "-frames:v", "1", "-vf", "scale='min(720,iw)':-2", "-c:v", "libwebp", "-quality", "80", capa]);
+  contador++;
+  return { src: `img/${nome}.webp`, video: `img/${nome}.mp4` };
+}
 
 // ---------- textos ----------
 function anuncio(t) {
@@ -141,10 +153,11 @@ function peca(dir, nomePasta, id) {
   if (/livre/i.test(i.formato || "")) it.livre = true;
   if (i.escolha) it.escolhas = i.escolha.map(escolha);
 
-  const fotos = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp)$/i.test(f)).sort(ordena);
+  const fotos = fs.readdirSync(dir).filter(f => /\.(jpe?g|png|webp|mp4|mov)$/i.test(f)).sort(ordena);
   it.slides = fotos.map((f, k) => {
     const rot = semNumero(f.replace(/\.[^.]+$/, ""));
-    return { src: img(path.join(dir, f), `${id}-${k + 1}`), label: rot || (fotos.length > 1 ? `${k + 1} de ${fotos.length}` : "Peça"), ia: /\bIA\b|ilustrativa/i.test(rot) };
+    const midia = /\.(mp4|mov)$/i.test(f) ? video(path.join(dir, f), `${id}-${k + 1}`) : { src: img(path.join(dir, f), `${id}-${k + 1}`) };
+    return { ...midia, label: rot || (fotos.length > 1 ? `${k + 1} de ${fotos.length}` : "Peça"), ia: /\bIA\b|ilustrativa/i.test(rot) };
   });
   const t = textos(dir, it);
   if (t.length) it.textos = t;
