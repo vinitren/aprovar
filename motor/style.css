@@ -164,3 +164,7 @@ dl.campos dd { margin: 0; color: var(--tinta); white-space: pre-line; }
   h1 { font-size: 52px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* modo: final (rodada.txt): só a versão final, sem resposta */
+body.final .progresso, body.final .fim, body.final .status { display: none; }
+body.final .chips small { display: none; }

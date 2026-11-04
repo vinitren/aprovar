@@ -165,7 +165,8 @@ function peca(dir, nomePasta, id) {
 }
 
 // ---------- rodada ----------
-const r = chaves(path.join(origem, "rodada.txt"), ["titulo", "título", "intro", "data"]);
+const r = chaves(path.join(origem, "rodada.txt"), ["titulo", "título", "intro", "data", "modo"]);
+const FINAL = /final/i.test(r.modo || "");
 const dataPasta = rodada.match(/^(\d{4})-(\d{2})-(\d{2})/);
 const DADOS = {
   cliente: slug,
@@ -173,6 +174,7 @@ const DADOS = {
   marca: cliente.marca || cliente.nome,
   zap: cliente.whatsapp || config.whatsapp,
   data: r.data || (dataPasta ? `${dataPasta[3]}/${dataPasta[2]}/${dataPasta[1]}` : ""),
+  final: FINAL,
   secoes: subpastas(origem).map((nomeSec, s) => {
     const dir = path.join(origem, nomeSec);
     const sx = chaves(path.join(dir, "secao.txt"), ["nome", "titulo", "título", "sub"]);
@@ -192,6 +194,8 @@ const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").re
 const negrito = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
 const estilo = cliente.estilo || {};
 const html = ler(path.join(RAIZ, "motor/index.html"))
+  .replace("· Aprovação do material", FINAL ? "· Versão final" : "· Aprovação do material")
+  .replace("Material para aprovação · ", FINAL ? "Versão final · " : "Material para aprovação · ")
   .replaceAll("{{nome}}", esc(cliente.nome))
   .replaceAll("{{fundo}}", esc(estilo["--fundo"] || "#faf8f5"))
   .replaceAll("{{fontes}}", cliente.fontes || "family=Inter:wght@400;500;600")

@@ -60,6 +60,8 @@ reduzido pra 1080 de largura em webp.
 titulo: Casamento e 15 anos
 intro: Texto curto do topo. **Negrito** assim.
 data: 14/10/2026            (sem isso, sai do nome da pasta)
+modo: final                 (opcional) página só pra mostrar a versão final: sem
+                            Aprovado / Quero mudar, perguntas, escolhas nem WhatsApp
 ```
 
 **secao.txt** (opcional)

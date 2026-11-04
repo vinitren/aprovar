@@ -5,6 +5,14 @@
   const D = window.DADOS;
   const CHAVE = `aprovar:${D.cliente}/${D.rodada}`;
   const $ = (s, el = document) => el.querySelector(s);
+  // modo: final (rodada.txt): só mostra a versão final, sem Aprovado / Quero mudar nem WhatsApp
+  const FINAL = !!D.final;
+  if (FINAL) {
+    document.body.classList.add("final");
+    document.title = document.title.replace("Aprovação do material", "Versão final");
+    $(".olho").firstChild.textContent = "Versão final · ";
+    $(".como").innerHTML = "<li>Arraste a imagem pro lado pra ver todas as telas. Toque nela pra ampliar.</li><li>Toque em <b>Ver a legenda</b> pra ler o texto que vai com cada post.</li>";
+  }
   const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const link = (texto, url) => url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(texto)}</a>` : esc(texto);
 
@@ -63,6 +71,7 @@
       if (t.linhas) h += `<ol class="lista">${t.linhas.map(l => `<li>${link(l.texto, l.url)}</li>`).join("")}</ol>`;
       h += `</details>`;
     });
+    if (FINAL) return h + `</div></article>`;
     if (it.pergunta) h += `<div class="pergunta"><p>${esc(it.pergunta)}</p><textarea class="campo resp" rows="2" placeholder="Sua resposta"></textarea></div>`;
     if (it.escolhas) {
       h += `<div class="escolhas">${it.escolhas.map((e, k) => `<div class="escolha"><span>${link(e.pergunta, e.url)}</span><span class="par" data-esc="${k}">${e.opcoes.map(o => `<button type="button" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</span></div>`).join("")}</div>`;
@@ -100,6 +109,7 @@
       trilho.addEventListener("click", e => { const f = e.target.closest("figure"); if (f && !f.classList.contains("vid")) abreZoom(it, +f.dataset.i); });
     }
 
+    if (FINAL) return;
     const bOk = $(".b-ok", el), bMuda = $(".b-muda", el), caixa = $(".obs-muda", el), obs = $(".obs", el);
     const pinta = () => {
       bOk.setAttribute("aria-pressed", s.d === "ok");
@@ -132,7 +142,7 @@
 
   // ---------- barra, resumo e WhatsApp ----------
   const chips = $("#chips");
-  chips.innerHTML = D.secoes.map(sec => `<a href="#${sec.id}" data-sec="${sec.id}">${esc(sec.nome)}<small></small></a>`).join("") + `<a class="enviar" href="#enviar">Enviar</a>`;
+  chips.innerHTML = D.secoes.map(sec => `<a href="#${sec.id}" data-sec="${sec.id}">${esc(sec.nome)}<small></small></a>`).join("") + (FINAL ? "" : `<a class="enviar" href="#enviar">Enviar</a>`);
 
   function muda() { salvar(); atualiza(); }
   function atualiza() {
@@ -197,6 +207,5 @@
     if (e.key === "ArrowLeft") zt.scrollBy({ left: -zt.clientWidth, behavior: "smooth" });
   });
 
-  salvar();
-  atualiza();
+  if (!FINAL) { salvar(); atualiza(); }
 })();
