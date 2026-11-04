@@ -10,7 +10,7 @@ window.DADOS = {
    "id": "casamento",
    "nome": "Casamento",
    "titulo": "Casamento: dois vídeos que entram agora",
-   "sub": "O anúncio da parcela trouxe 147 conversas nos últimos 14 dias. Os dois vídeos mostram a mesma oferta (entrada de R$ 3.450 e parcelas até 30 dias antes), agora em movimento: um fala com a noiva, outro com o noivo. Os três rodam juntos e, em 3 ou 4 dias, a gente vê qual traz mais conversa e reforça o melhor.",
+   "sub": "O anúncio da parcela trouxe 147 conversas nos últimos 14 dias. Os dois vídeos mostram a mesma oferta (entrada de R$ 3.450 e parcelas até 30 dias antes), agora em movimento: um fala com a noiva, outro com o noivo. Os três rodam juntos e, em 3 ou 4 dias, vemos qual traz mais conversa e reforça o melhor.",
    "itens": [
     {
      "id": "1-1",
@@ -130,7 +130,7 @@ window.DADOS = {
        "partes": [
         {
          "rotulo": "Texto principal",
-         "texto": "Os 15 anos que ela sonhou, com tudo num lugar só: gastronomia, bolo, doces, decoração e o acompanhamento da debutante na escolha do vestido, da valsa e das músicas.\n\nA partir de R$ 180 por convidado, mínimo de 50. Entrada de 30% e o resto mês a mês até um mês antes da festa. Quanto antes fechar, mais parcelas.\n\nManda no WhatsApp o mês do aniversário dela e quantos convidados."
+         "texto": "Ela sonha com a festa. Você não precisa correr atrás de buffet, bolo, decoração e cerimonial, um por um.\n\nNa Excellence, os 15 anos vêm completos, com o acompanhamento da debutante na escolha do vestido, da valsa e das músicas, no espaço que vocês escolherem.\n\nA partir de R$ 180 por convidado, mínimo de 50. Entrada de 30% e o resto mês a mês até um mês antes da festa. Quanto antes fechar, mais parcelas.\n\nManda no WhatsApp o mês do aniversário dela e quantos convidados."
         },
         {
          "rotulo": "Título",
