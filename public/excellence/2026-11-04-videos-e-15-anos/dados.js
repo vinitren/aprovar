@@ -86,13 +86,12 @@ window.DADOS = {
    "id": "15-anos",
    "nome": "15 anos",
    "titulo": "15 anos: a campanha própria",
-   "sub": "Até agora só o casamento estava no ar. O 15 anos ganha a campanha dele, separada, porque quem decide é a mãe: o anúncio é mostrado pra mulheres de Curitiba e região, mães de adolescentes. Começa com 3 anúncios: o vídeo da Sophia na frente e as duas artes que você já aprovou em 14/10. Só liga depois do seu ok e da autorização da família da Sophia.",
+   "sub": "Até agora só o casamento estava no ar. O 15 anos ganha a campanha dele, separada, porque quem decide é a mãe: o anúncio é mostrado pra mulheres de Curitiba e região, mães de adolescentes. Começa com o vídeo da Sophia. Só liga depois do seu ok e da autorização da família da Sophia.",
    "itens": [
     {
      "id": "2-1",
      "titulo": "Ela sonha com a festa",
      "etiqueta": "15 anos",
-     "ordem": "1 de 3",
      "nota": "O anúncio principal do 15 anos: trechos do vídeo da MVP na festa da Sophia, com a música da festa. A música foi corrigida e agora segue até o fim sem voltar ao começo. São dois formatos: tela cheia pros stories e Reels, e o formato convite pro feed.",
      "escolhas": [
       {
@@ -131,84 +130,6 @@ window.DADOS = {
         {
          "rotulo": "Texto principal",
          "texto": "Ela sonha com a festa. Você não precisa correr atrás de buffet, bolo, decoração e cerimonial, um por um.\n\nNa Excellence, os 15 anos vêm completos, com o acompanhamento da debutante na escolha do vestido, da valsa e das músicas, no espaço que vocês escolherem.\n\nA partir de R$ 180 por convidado, mínimo de 50. Entrada de 30% e o resto mês a mês até um mês antes da festa. Quanto antes fechar, mais parcelas.\n\nManda no WhatsApp o mês do aniversário dela e quantos convidados."
-        },
-        {
-         "rotulo": "Título",
-         "texto": "Receba o valor da festa de 15 anos"
-        },
-        {
-         "rotulo": "Botão",
-         "texto": "Enviar mensagem pelo WhatsApp (mensagem pronta: “Quero o valor da festa de 15 anos”)"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "2-2",
-     "titulo": "A festa de 15 anos completa, paga mês a mês",
-     "etiqueta": "15 anos",
-     "ordem": "2 de 3",
-     "nota": "Você já aprovou esta em 14/10. Entra como o segundo anúncio: fala com a mãe que está pensando em como pagar.",
-     "aprovado": "14/10",
-     "slides": [
-      {
-       "src": "img/2-2-1.webp",
-       "label": "Feed",
-       "ia": false
-      },
-      {
-       "src": "img/2-2-2.webp",
-       "label": "Stories",
-       "ia": false
-      }
-     ],
-     "textos": [
-      {
-       "resumo": "Ver o texto do anúncio",
-       "partes": [
-        {
-         "rotulo": "Texto principal",
-         "texto": "A festa de 15 anos completa, paga mês a mês até o aniversário.\n\nBuffet, decoração, bolo, doces e o acompanhamento da debutante na escolha do vestido, da valsa e das músicas, no espaço que vocês escolherem.\n\nA partir de R$ 180 por convidado, mínimo de 50. Entrada de 30% e o resto em parcelas até um mês antes da festa.\n\nManda a data e quantos convidados no WhatsApp."
-        },
-        {
-         "rotulo": "Título",
-         "texto": "Receba o valor da festa de 15 anos"
-        },
-        {
-         "rotulo": "Botão",
-         "texto": "Enviar mensagem pelo WhatsApp (mensagem pronta: “Quero o valor da festa de 15 anos”)"
-        }
-       ]
-      }
-     ]
-    },
-    {
-     "id": "2-3",
-     "titulo": "Qual é a festa que ela imagina?",
-     "etiqueta": "15 anos · IA",
-     "ordem": "3 de 3",
-     "nota": "Você já aprovou esta em 14/10. O que mudou: ganhou o aviso “Imagem ilustrativa” no canto, porque a foto é feita com IA. Entra como inspiração; o texto não diz que essa festa foi feita pela Excellence.",
-     "aprovado": "14/10",
-     "slides": [
-      {
-       "src": "img/2-3-1.webp",
-       "label": "Feed · imagem ilustrativa (IA)",
-       "ia": true
-      },
-      {
-       "src": "img/2-3-2.webp",
-       "label": "Stories · imagem ilustrativa (IA)",
-       "ia": true
-      }
-     ],
-     "textos": [
-      {
-       "resumo": "Ver o texto do anúncio",
-       "partes": [
-        {
-         "rotulo": "Texto principal",
-         "texto": "Qual é a festa que ela imagina?\n\nManda no WhatsApp as fotos que ela salvou: o tema, as cores, o vestido. A Excellence cria um projeto personalizado e exclusivo no espaço de vocês, e vocês já sabem quanto fica.\n\nFesta de 15 anos completa a partir de R$ 180 por convidado: buffet, decoração, bolo, doces e o acompanhamento da debutante."
         },
         {
          "rotulo": "Título",
