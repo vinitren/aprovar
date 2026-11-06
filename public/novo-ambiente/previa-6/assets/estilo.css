@@ -155,14 +155,17 @@ p, dl, dd, ol, ul, figure { margin: 0; }
 .comparar { background: var(--marinho); color: var(--off); }
 .comparar .cabeca p { color: var(--claro-2); }
 .ba-palco { margin-top: clamp(2.5rem, 1.75rem + 2.5vw, 4.5rem); }
-.ba { --pos: 50%; --topo-ba: 4.75rem; position: relative; height: min(56.25vw, calc(100svh - var(--topo-ba))); overflow: hidden; background: var(--marinho-2); }
+.ba { --mx: 50%; --topo-ba: 4.75rem; position: relative; height: min(56.25vw, calc(100svh - var(--topo-ba))); overflow: hidden; background: var(--marinho-2); }
 @media (max-width: 47.99rem) { .ba { height: calc(100svh - var(--topo-ba) - 4.5rem); } }
-.js .ba-palco { height: calc(min(56.25vw, 100svh - 4.75rem) + 110svh); }
+.js .ba-palco { height: calc(min(56.25vw, 100svh - 4.75rem) + 130svh); }
 .js .ba { position: sticky; top: var(--topo-ba); }
-@media (max-width: 47.99rem) { .js .ba-palco { height: calc(100svh - 9.25rem + 110svh); } }
+@media (max-width: 47.99rem) { .js .ba-palco { height: calc(100svh - 9.25rem + 130svh); } }
 .ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
-.ba .depois { clip-path: inset(0 0 0 var(--pos)); }
-.rodo { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 1px; background: rgba(246, 244, 239, .85); }
+/* a máscara tem 3x a largura da imagem: basta deslizar a borda larga e irregular por cima dela */
+.ba .depois {
+  -webkit-mask: url("img/mascara-vidro.webp") no-repeat var(--mx) 0 / 300% 100%;
+  mask: url("img/mascara-vidro.webp") no-repeat var(--mx) 0 / 300% 100%;
+}
 .rot { position: absolute; bottom: 1.25rem; font-size: .8125rem; letter-spacing: .01em; color: var(--off); text-shadow: 0 1px 10px rgba(2, 11, 20, .75); transition: opacity .4s var(--sai); }
 .rot-antes { left: var(--margem); }
 .rot-depois { right: var(--margem); }

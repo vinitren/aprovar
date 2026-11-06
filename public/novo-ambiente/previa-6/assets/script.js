@@ -103,28 +103,42 @@
   var palco = document.querySelector('.ba-palco');
   var ba = palco && palco.querySelector('[data-ba]');
   if (ba && !calmo) {
-    var agendadoBa = false, contou = false;
-    var limpar = function () {
-      agendadoBa = false;
+    var contou = false, baAlvo = 0, baAtual = 0, baLoop = 0, baAntes = 0;
+    var baMedir = function () {
       var q = palco.getBoundingClientRect();
       var topoBa = parseFloat(getComputedStyle(ba).top) || 0;
       var curso = q.height - ba.offsetHeight;
       /* um respiro no começo (vê o sujo) e outro no fim (vê o limpo) */
-      var p = curso > 0 ? lim(((topoBa - q.top) / curso - .06) / .84) : 1;
-      var pos = 100 - p * 100;
-      ba.style.setProperty('--pos', pos.toFixed(2) + '%');
-      ba.classList.toggle('sem-antes', pos < 14);
-      ba.classList.toggle('sem-depois', pos > 86);
-      if (!contou && p >= .5) {
+      baAlvo = curso > 0 ? lim(((topoBa - q.top) / curso - .06) / .84) : 1;
+    };
+    var baPintar = function () {
+      /* a borda da máscara sai toda pela direita em 12% e toda pela esquerda em 88% */
+      ba.style.setProperty('--mx', (12 + baAtual * 76).toFixed(2) + '%');
+      ba.classList.toggle('sem-antes', baAtual > .85);
+      ba.classList.toggle('sem-depois', baAtual < .15);
+      if (!contou && baAtual >= .5) {
         contou = true;
         ba.dispatchEvent(new CustomEvent('limpou-metade', { bubbles: true }));
       }
     };
-    limpar();
-    window.addEventListener('scroll', function () {
-      if (!agendadoBa) { agendadoBa = true; requestAnimationFrame(limpar); }
-    }, { passive: true });
-    window.addEventListener('resize', limpar);
+    /* a limpeza persegue a rolagem com inércia: desliza entre um giro e outro da roda do mouse */
+    var baAndar = function (t) {
+      var dt = Math.min(t - baAntes, 50);
+      baAntes = t;
+      baAtual += (baAlvo - baAtual) * (1 - Math.exp(-dt / 170));
+      if (Math.abs(baAlvo - baAtual) < .0006) baAtual = baAlvo;
+      baPintar();
+      baLoop = baAtual === baAlvo ? 0 : requestAnimationFrame(baAndar);
+    };
+    var baMexeu = function () {
+      baMedir();
+      if (!baLoop && baAtual !== baAlvo) { baAntes = performance.now(); baLoop = requestAnimationFrame(baAndar); }
+    };
+    baMedir();
+    baAtual = baAlvo;
+    baPintar();
+    window.addEventListener('scroll', baMexeu, { passive: true });
+    window.addEventListener('resize', baMexeu);
   }
 
   /* ---------- barra do WhatsApp no celular: some quando já tem botão na tela ---------- */
