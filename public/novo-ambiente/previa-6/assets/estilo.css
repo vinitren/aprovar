@@ -1,5 +1,5 @@
 /* Novo Ambiente Service · página principal (prévia 6, 05/11/2026)
-   Marinho e bege. O gesto do site é a passada do rodo: a foto se revela da
+   Marinho e azul-gelo. O gesto do site é a passada do rodo: a foto se revela da
    direita pra esquerda, e o comparador é a própria lâmina. */
 
 @font-face { font-family: "Instrument Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/instrument-sans-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
@@ -11,16 +11,16 @@
   --marinho: #08192a;
   --marinho-2: #0d2438;
   --marinho-3: #020b14;
-  --bege: #eae5da;
-  --off: #f6f4ef;
+  --bege: #d8e6ef;
+  --off: #f4f8fa;
   --azul: #0095da;
   --azul-texto: #006596;
   --azul-claro: #8cc3e6;
   --texto: #0b1d2e;
   --texto-2: #4a5866;
-  --claro-2: rgba(246, 244, 239, .8);
+  --claro-2: rgba(244, 248, 250, .8);
   --linha: rgba(8, 25, 42, .16);
-  --linha-clara: rgba(246, 244, 239, .2);
+  --linha-clara: rgba(244, 248, 250, .2);
   --wrap: 90rem;
   --margem: clamp(1.25rem, .6rem + 2.8vw, 3rem);
   --secao: clamp(5.5rem, 4rem + 6.5vw, 10.5rem);
