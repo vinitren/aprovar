@@ -127,11 +127,9 @@
       if (det.open) registrar('pergunta_aberta', { pergunta: det.querySelector('summary').textContent.trim() });
     });
   });
-  var ba = document.querySelector('[data-ba] input');
-  if (ba) ba.addEventListener('input', function usou() {
-    ba.removeEventListener('input', usou);
-    registrar('antes_depois_usado', {});
-  });
+  /* script.js avisa quando a rolagem limpou metade do vidro */
+  var ba = document.querySelector('[data-ba]');
+  if (ba) ba.addEventListener('limpou-metade', function () { registrar('antes_depois_visto', {}); });
   var vistos = {};
   document.querySelectorAll('.lista > li').forEach(function (li) {
     function viu() {

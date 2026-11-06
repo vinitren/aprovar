@@ -1,20 +1,47 @@
 /* Novo Ambiente · página principal. Sem biblioteca. Tudo já aparece sem script;
-   aqui só entram o menu que encolhe, a passada do rodo nas fotos e o comparador. */
+   aqui só entram a logo que sobe pro menu, a passada do rodo nas fotos e o comparador. */
 (function () {
   var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var temIO = 'IntersectionObserver' in window;
   function lim(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
-  function sai(t) { return 1 - Math.pow(1 - t, 3); }
 
-  /* ---------- menu: transparente sobre a foto, sólido depois dela ---------- */
+  /* ---------- logo: grande acima do título, sobe com a página e encaixa no menu.
+     O menu fica sólido quando ela encaixa, pra nada passar por baixo dela ---------- */
   var topo = document.querySelector('.topo');
-  var entrada = document.querySelector('.entrada');
-  if (temIO) {
+  var marca = document.querySelector('.marca');
+  var lugarLogo = document.querySelector('.entrada-logo');
+  if (calmo && temIO) {
     new IntersectionObserver(function (es) {
       topo.classList.toggle('solido', !es[0].isIntersecting);
-    }, { rootMargin: '-80px 0px 0px 0px' }).observe(entrada);
-  } else {
+    }, { rootMargin: '-80px 0px 0px 0px' }).observe(document.querySelector('.entrada'));
+  } else if (calmo) {
     topo.classList.add('solido');
+  }
+  if (marca) {
+    if (lugarLogo && !calmo) {
+      var ml = { x: 0, y: 0, s: 1 }, agendado = false;
+      var posicionar = function () {
+        agendado = false;
+        var rolou = window.scrollY;
+        var falta = ml.y > 0 ? 1 - lim(rolou / ml.y) : 0;
+        marca.style.transform = 'translate(' + (ml.x * falta).toFixed(2) + 'px,' + Math.max(0, ml.y - rolou).toFixed(2) + 'px) scale(' + (1 + (ml.s - 1) * falta).toFixed(4) + ')';
+        topo.classList.toggle('solido', rolou >= ml.y);
+      };
+      var medir = function () {
+        marca.style.transform = 'none';
+        var q = marca.getBoundingClientRect(), a = lugarLogo.getBoundingClientRect();
+        ml = { x: a.left - q.left, y: a.top + window.scrollY - q.top, s: a.height / q.height };
+        posicionar();
+      };
+      medir();
+      window.addEventListener('scroll', function () {
+        if (!agendado) { agendado = true; requestAnimationFrame(posicionar); }
+      }, { passive: true });
+      window.addEventListener('resize', medir);
+      window.addEventListener('load', medir);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(medir);
+    }
+    marca.classList.add('pronta');
   }
 
   /* ---------- foto que se revela na passada do rodo ---------- */
@@ -72,51 +99,33 @@
     }
   }
 
-  /* ---------- antes e depois: abre sozinho ao chegar na tela ---------- */
-  document.querySelectorAll('[data-ba]').forEach(function (ba) {
-    var r = ba.querySelector('input');
-    function por(v) { ba.style.setProperty('--pos', v + '%'); r.value = v; }
-    var mexeu = false;
-    r.addEventListener('input', function () { mexeu = true; por(r.value); });
-    /* arrastar em qualquer ponto da imagem, com mouse ou dedo */
-    function pelaPosicao(ev) {
-      var q = ba.getBoundingClientRect();
-      r.value = lim((ev.clientX - q.left) / q.width) * 100;
-      r.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-    /* no dedo, só mexe depois de um movimento claramente pro lado: quem está
-       rolando a página não move a lâmina nem conta como uso */
-    var arrastando = false, inicio = null;
-    ba.addEventListener('pointerdown', function (ev) {
-      if (ev.pointerType === 'mouse') { arrastando = true; ba.setPointerCapture(ev.pointerId); pelaPosicao(ev); return; }
-      inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };
-    });
-    ba.addEventListener('pointermove', function (ev) {
-      if (inicio && !arrastando) {
-        var dx = Math.abs(ev.clientX - inicio.x), dy = Math.abs(ev.clientY - inicio.y);
-        if (dx > 8 && dx > dy * 1.5) { arrastando = true; ba.setPointerCapture(inicio.id); }
-        else if (dy > 8) inicio = null;
+  /* ---------- antes e depois: o vidro limpa conforme a página desce ---------- */
+  var palco = document.querySelector('.ba-palco');
+  var ba = palco && palco.querySelector('[data-ba]');
+  if (ba && !calmo) {
+    var agendadoBa = false, contou = false;
+    var limpar = function () {
+      agendadoBa = false;
+      var q = palco.getBoundingClientRect();
+      var topoBa = parseFloat(getComputedStyle(ba).top) || 0;
+      var curso = q.height - ba.offsetHeight;
+      /* um respiro no começo (vê o sujo) e outro no fim (vê o limpo) */
+      var p = curso > 0 ? lim(((topoBa - q.top) / curso - .06) / .84) : 1;
+      var pos = 100 - p * 100;
+      ba.style.setProperty('--pos', pos.toFixed(2) + '%');
+      ba.classList.toggle('sem-antes', pos < 14);
+      ba.classList.toggle('sem-depois', pos > 86);
+      if (!contou && p >= .5) {
+        contou = true;
+        ba.dispatchEvent(new CustomEvent('limpou-metade', { bubbles: true }));
       }
-      if (arrastando) pelaPosicao(ev);
-    });
-    function solta() { arrastando = false; inicio = null; }
-    ba.addEventListener('pointerup', solta);
-    ba.addEventListener('pointercancel', solta);
-    if (calmo || !temIO) { por(50); return; }
-    por(92);
-    var o = new IntersectionObserver(function (es) {
-      if (!es[0].isIntersecting) return;
-      o.disconnect();
-      var t0 = performance.now();
-      (function anda(t) {
-        if (mexeu) return;
-        var k = lim((t - t0) / 1600);
-        por(92 - 42 * sai(k));
-        if (k < 1) requestAnimationFrame(anda);
-      })(t0);
-    }, { threshold: .4 });
-    o.observe(ba);
-  });
+    };
+    limpar();
+    window.addEventListener('scroll', function () {
+      if (!agendadoBa) { agendadoBa = true; requestAnimationFrame(limpar); }
+    }, { passive: true });
+    window.addEventListener('resize', limpar);
+  }
 
   /* ---------- barra do WhatsApp no celular: some quando já tem botão na tela ---------- */
   var barra = document.querySelector('.barra-wa');
