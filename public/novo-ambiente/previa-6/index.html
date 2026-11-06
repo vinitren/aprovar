@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prévia do novo site | Novo Ambiente Service</title>
+<meta name="theme-color" content="#08192a">
+<link rel="icon" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+<link rel="stylesheet" href="assets/estilo.css">
+<style>
+  .ap-topo { background: var(--marinho); color: var(--off); padding-block: 2rem clamp(3.5rem, 2.5rem + 4vw, 6rem); }
+  .ap-topo img { height: 2.9rem; width: auto; margin-bottom: clamp(3rem, 2rem + 5vw, 6rem); }
+  .ap-topo h1 { font-size: clamp(2.75rem, 1.7rem + 4.4vw, 5.25rem); max-width: 14ch; }
+  .ap-topo h1 em { display: block; }
+  .ap-topo p { margin-top: 1.25rem; max-width: 36rem; font-size: 1.125rem; color: var(--claro-2); }
+  .ap-secao { padding-block: clamp(4rem, 3rem + 5vw, 8rem); }
+  .ap-secao h2 { font-size: clamp(2.125rem, 1.5rem + 2.4vw, 3.5rem); max-width: 20ch; }
+  .ap-sub { margin-top: 1rem; max-width: 38rem; font-size: 1.125rem; color: var(--texto-2); }
+  .opcoes { margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); display: grid; gap: 2.5rem; }
+  @media (min-width: 48rem) { .opcoes { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+  .opcao { text-decoration: none; display: block; }
+  .opcao img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: opacity .3s var(--sai); }
+  .opcao:hover img { opacity: .86; }
+  .opcao h3 { margin-top: 1.25rem; font-size: clamp(1.5rem, 1.3rem + .75vw, 2rem); display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .opcao h3 svg { width: 1.3rem; height: 1.3rem; flex: none; transition: transform .35s var(--sai); }
+  .opcao:hover h3 svg { transform: translate(3px, -3px); }
+  .opcao p { margin-top: .5rem; color: var(--texto-2); }
+  .ap-bege { background: var(--bege); }
+  .motivos { margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); border-top: 1px solid var(--linha); }
+  .motivo { display: grid; gap: .9rem; padding-block: 2rem; border-bottom: 1px solid var(--linha); }
+  .motivo h3 { font-size: clamp(1.4rem, 1.25rem + .6vw, 1.875rem); }
+  .motivo p { color: var(--texto-2); max-width: 38rem; }
+  .motivo dl { display: grid; gap: .75rem; font-size: 1rem; }
+  .motivo dt { font-size: .8125rem; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--texto-2); }
+  .motivo dd { margin-top: .15rem; }
+  @media (min-width: 62rem) {
+    .motivo { grid-template-columns: 5fr 7fr; gap: 3rem; padding-block: 2.5rem; }
+    .motivo dl { grid-template-columns: 1fr 1fr; gap: 2rem; align-content: start; }
+  }
+  .nota { margin-top: 2rem; max-width: 42rem; font-size: 1.125rem; }
+  .fonte { margin-top: 1rem; max-width: 42rem; font-size: .875rem; color: var(--texto-2); }
+  .medimos { margin-top: 2.5rem; display: grid; border-top: 1px solid var(--linha); }
+  .medimos li { padding-block: 1.1rem; border-bottom: 1px solid var(--linha); }
+  .medimos { list-style: none; padding: 0; }
+  .medimos strong { font-weight: 500; }
+  .precisa { background: var(--marinho); color: var(--off); }
+  .precisa .ap-sub { color: var(--claro-2); }
+  .precisa .medimos, .precisa .medimos li { border-color: var(--linha-clara); }
+  .precisa .acoes { margin-top: 2.5rem; }
+  .ap-rodape { background: var(--marinho-3); color: var(--claro-2); padding-block: 2.5rem; font-size: .9375rem; }
+</style>
+</head>
+<body>
+<header class="ap-topo">
+  <div class="wrap">
+    <img src="assets/img/logo-branca.svg" alt="Novo Ambiente Service" width="120" height="61">
+    <h1>A prévia do <em>novo site</em></h1>
+    <p>Duas opções da página principal. O site é o mesmo nas duas: só muda a foto da entrada.</p>
+  </div>
+</header>
+
+<main>
+<section class="ap-secao">
+  <div class="wrap">
+    <h2>Abram as duas e nos digam qual fica</h2>
+    <p class="ap-sub">Vale abrir no celular, que é onde a maioria das pessoas vai ver.</p>
+    <div class="opcoes">
+      <a class="opcao" href="a/">
+        <img src="assets/img/entrada-janela-1600.webp" alt="Prévia da opção A: rodo abrindo uma faixa limpa numa fachada de vidro suja" width="1600" height="900">
+        <h3>Opção A: a janela limpa<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></h3>
+        <p>O resultado aparece primeiro: uma passada do rodo e o vidro volta a refletir a cidade.</p>
+      </a>
+      <a class="opcao" href="b/">
+        <img src="assets/img/entrada-rapel-1600.webp" alt="Prévia da opção B: técnico em rapel limpando uma fachada de vidro" width="1600" height="900">
+        <h3>Opção B: o rapel<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></h3>
+        <p>O trabalho aparece primeiro: a equipe em altura, na fachada do prédio.</p>
+      </a>
+    </div>
+    <p class="fonte">As imagens são cenas ilustrativas geradas por inteligência artificial. Conforme chegarem as fotos reais de vocês, elas entram no lugar.</p>
+  </div>
+</section>
+
+<section class="ap-secao ap-bege">
+  <div class="wrap">
+    <h2>Por que este site foi feito pra trazer mais orçamento</h2>
+    <div class="motivos">
+      <article class="motivo">
+        <div><h3>Abre rápido no celular</h3><p>Quem procura no celular desiste de site lento e chama o próximo da busca.</p></div>
+        <dl><div><dt>Hoje</dt><dd>{{VEL_ATUAL}} até a imagem principal aparecer</dd></div><div><dt>No novo</dt><dd>{{VEL_NOVO}}, no mesmo teste</dd></div></dl>
+      </article>
+      <article class="motivo">
+        <div><h3>O Google entende que vocês limpam vidro</h3><p>Foi o pedido de vocês: aparecer pra quem procura limpeza de vidros.</p></div>
+        <dl><div><dt>Hoje</dt><dd>O título principal da página é "Serviços de Limpeza Especializada", sem falar de vidro nem de Curitiba</dd></div><div><dt>No novo</dt><dd>"Limpeza de vidros em Curitiba", com as palavras-chave que vocês mandaram no texto e os 6 termos que não querem fora</dd></div></dl>
+      </article>
+      <article class="motivo">
+        <div><h3>Nada de página vazia aparecendo pro Google</h3><p>O Google lê a lista de páginas do site. Quanto mais limpa, melhor ele entende o que importa.</p></div>
+        <dl><div><dt>Hoje</dt><dd>A lista tem 21 publicações sem conteúdo real, como "olá mundo", "x" e "x-2"</dd></div><div><dt>No novo</dt><dd>Só as páginas de verdade: a principal, uma pra cada serviço e o contato</dd></div></dl>
+      </article>
+      <article class="motivo">
+        <div><h3>Pedir orçamento leva um toque</h3><p>Quanto menos a pessoa precisa pensar no que escrever, mais gente chama.</p></div>
+        <dl><div><dt>No novo</dt><dd>Botão de WhatsApp em toda a página e fixo no celular, com a mensagem pronta</dd></div><div><dt>Pra vocês</dt><dd>A mensagem já chega dizendo o serviço ou quem está chamando, como síndico, empresa ou casa</dd></div></dl>
+      </article>
+      <article class="motivo">
+        <div><h3>Fala com quem decide e mostra o resultado</h3><p>Síndico, dono de loja e morador procuram coisas diferentes.</p></div>
+        <dl><div><dt>Cada público</dt><dd>Um caminho pra condomínio e prédio, outro pra loja e clínica, outro pra casa</dd></div><div><dt>O resultado</dt><dd>Comparador de antes e depois, que vira a maior prova do site quando entrarem as fotos reais</dd></div></dl>
+      </article>
+    </div>
+    <p class="nota">Quanto a mais de orçamento, só o número vai dizer. Por isso medimos desde o primeiro dia e voltamos no dia 30 com o resultado na mão.</p>
+    <p class="fonte">Lido no site atual em 05/11/2026. Velocidade: média de 3 testes em cada site, com celular e internet 4G simulados nas mesmas condições.</p>
+  </div>
+</section>
+
+<section class="ap-secao">
+  <div class="wrap">
+    <h2>O que vamos medir</h2>
+    <p class="ap-sub">Vocês não precisam abrir nenhum painel. Todo mês, o resumo chega pronto.</p>
+    <ul class="medimos">
+      <li><strong>Quantos chamaram no WhatsApp,</strong> de qual botão e sobre qual serviço</li>
+      <li><strong>Quantos ligaram</strong> ou abriram o endereço no mapa</li>
+      <li><strong>De onde vieram:</strong> Google, Instagram, indicação ou anúncio</li>
+      <li><strong>O que buscaram no Google</strong> pra encontrar o site</li>
+      <li><strong>Até onde as pessoas leram</strong> e o que mais olharam</li>
+    </ul>
+  </div>
+</section>
+
+<section class="ap-secao precisa">
+  <div class="wrap">
+    <h2>O que precisamos de vocês</h2>
+    <ul class="medimos">
+      <li><strong>Qual opção fica:</strong> A ou B</li>
+      <li><strong>Fotos reais de obra,</strong> de antes e depois, do mesmo ângulo. É o que mais dá confiança</li>
+      <li><strong>NR-35, seguro e ART,</strong> se tiverem. Pra quem contrata limpeza em altura, faz diferença</li>
+      <li><strong>Empresas e condomínios atendidos,</strong> se pudermos citar, e as cidades que vocês atendem</li>
+      <li><strong>Acesso ao domínio e ao Google Meu Negócio,</strong> pra colocar o site no ar sem perder o que já está no Google</li>
+    </ul>
+    <div class="acoes">
+      <a class="botao botao-claro" href="https://wa.me/5541997128458?text=Vimos%20a%20pr%C3%A9via%20do%20site.%20Escolhemos%20a%20op%C3%A7%C3%A3o%20A." target="_blank" rel="noopener">Escolhemos a opção A<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></a>
+      <a class="botao botao-claro" href="https://wa.me/5541997128458?text=Vimos%20a%20pr%C3%A9via%20do%20site.%20Escolhemos%20a%20op%C3%A7%C3%A3o%20B." target="_blank" rel="noopener">Escolhemos a opção B<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ap-rodape">
+  <div class="wrap">Trentini Digital · Vinicius Trentini</div>
+</footer>
+</body>
+</html>
