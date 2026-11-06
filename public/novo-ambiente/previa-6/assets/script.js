@@ -84,11 +84,24 @@
       r.value = lim((ev.clientX - q.left) / q.width) * 100;
       r.dispatchEvent(new Event('input', { bubbles: true }));
     }
-    var arrastando = false;
-    ba.addEventListener('pointerdown', function (ev) { arrastando = true; ba.setPointerCapture(ev.pointerId); pelaPosicao(ev); });
-    ba.addEventListener('pointermove', function (ev) { if (arrastando) pelaPosicao(ev); });
-    ba.addEventListener('pointerup', function () { arrastando = false; });
-    ba.addEventListener('pointercancel', function () { arrastando = false; });
+    /* no dedo, só mexe depois de um movimento claramente pro lado: quem está
+       rolando a página não move a lâmina nem conta como uso */
+    var arrastando = false, inicio = null;
+    ba.addEventListener('pointerdown', function (ev) {
+      if (ev.pointerType === 'mouse') { arrastando = true; ba.setPointerCapture(ev.pointerId); pelaPosicao(ev); return; }
+      inicio = { x: ev.clientX, y: ev.clientY, id: ev.pointerId };
+    });
+    ba.addEventListener('pointermove', function (ev) {
+      if (inicio && !arrastando) {
+        var dx = Math.abs(ev.clientX - inicio.x), dy = Math.abs(ev.clientY - inicio.y);
+        if (dx > 8 && dx > dy * 1.5) { arrastando = true; ba.setPointerCapture(inicio.id); }
+        else if (dy > 8) inicio = null;
+      }
+      if (arrastando) pelaPosicao(ev);
+    });
+    function solta() { arrastando = false; inicio = null; }
+    ba.addEventListener('pointerup', solta);
+    ba.addEventListener('pointercancel', solta);
     if (calmo || !temIO) { por(50); return; }
     por(92);
     var o = new IntersectionObserver(function (es) {
