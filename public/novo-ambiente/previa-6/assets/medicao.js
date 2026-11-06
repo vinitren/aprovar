@@ -56,7 +56,11 @@
     carregar('https://www.clarity.ms/tag/' + CONFIG.clarity);
   }
   if (noDominio && CONFIG.metaPixel) {
-    window.fbq = window.fbq || function () { (window.fbq.q = window.fbq.q || []).push(arguments); };
+    if (!window.fbq) {
+      var n = window.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+      if (!window._fbq) window._fbq = n;
+      n.push = n; n.loaded = true; n.version = '2.0'; n.queue = [];
+    }
     window.fbq('init', CONFIG.metaPixel);
     window.fbq('track', 'PageView');
     carregar('https://connect.facebook.net/en_US/fbevents.js');
@@ -136,5 +140,8 @@
     }
     li.addEventListener('pointerenter', viu);
     li.addEventListener('focusin', viu);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { if (es[0].isIntersecting) viu(); }, { rootMargin: '-45% 0px -45% 0px' }).observe(li);
+    }
   });
 })();

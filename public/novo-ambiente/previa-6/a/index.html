@@ -17,12 +17,11 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="theme-color" content="#08192a">
-<link rel="icon" href="../assets/img/logo.svg">
+<link rel="icon" href="../assets/img/icone-48.png" type="image/png">
+<link rel="apple-touch-icon" href="../assets/img/icone-180.png">
 <link rel="preload" as="image" imagesrcset="../assets/img/entrada-janela-1600.webp 1600w, ../assets/img/entrada-janela-2560.webp 2560w" imagesizes="100vw" media="(min-width: 48rem)" fetchpriority="high">
 <link rel="preload" as="image" imagesrcset="../assets/img/entrada-janela-cel-750.webp 750w, ../assets/img/entrada-janela-cel-1080.webp 1080w" imagesizes="100vw" media="(max-width: 47.99rem)" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap">
+<link rel="preload" as="font" type="font/woff2" href="../assets/fonts/instrument-sans-latin.woff2" crossorigin>
 <link rel="stylesheet" href="../assets/estilo.css">
 <script>document.documentElement.classList.replace('sem-js', 'js');</script>
 <script type="application/ld+json">
@@ -125,14 +124,16 @@
       <h2 id="t-ba">Arraste e veja o vidro <em>voltar a ser vidro</em></h2>
       <p>Marca de chuva, poeira de obra e marca de dedo saem. A fachada volta a refletir o céu, e quem está dentro volta a ver a cidade.</p>
     </div>
-    <div class="ba" data-ba>
-      <img src="../assets/img/vidro-sujo-1920.webp" srcset="../assets/img/vidro-sujo-1000.webp 1000w, ../assets/img/vidro-sujo-1920.webp 1920w" sizes="(min-width: 90rem) 85rem, 100vw" width="1920" height="1080" alt="Fachada de vidro opaca, com poeira e marcas de chuva, antes da limpeza" loading="lazy">
-      <img class="depois" src="../assets/img/vidro-limpo-1920.webp" srcset="../assets/img/vidro-limpo-1000.webp 1000w, ../assets/img/vidro-limpo-1920.webp 1920w" sizes="(min-width: 90rem) 85rem, 100vw" width="1920" height="1080" alt="A mesma fachada de vidro depois da limpeza, refletindo o céu e as araucárias" loading="lazy">
+  </div>
+  <div class="ba" data-ba>
+      <img src="../assets/img/vidro-sujo-1920.webp" srcset="../assets/img/vidro-sujo-1000.webp 1000w, ../assets/img/vidro-sujo-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="Fachada de vidro opaca, com poeira e marcas de chuva, antes da limpeza" loading="lazy">
+      <img class="depois" src="../assets/img/vidro-limpo-1920.webp" srcset="../assets/img/vidro-limpo-1000.webp 1000w, ../assets/img/vidro-limpo-1920.webp 1920w" sizes="100vw" width="1920" height="1080" alt="A mesma fachada de vidro depois da limpeza, refletindo o céu e as araucárias" loading="lazy">
       <span class="rodo" aria-hidden="true"><span class="pega"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg></span></span>
       <span class="rot rot-antes">Antes</span>
       <span class="rot rot-depois">Depois</span>
       <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois da limpeza do vidro">
-    </div>
+  </div>
+  <div class="wrap">
     <p class="legenda">Fachada de vidro, prédio comercial. Imagem ilustrativa: no site no ar, entram fotos de limpezas feitas pela Novo Ambiente.</p>
   </div>
 </section>
@@ -148,7 +149,7 @@
         <li data-foto="0" data-servico="altura" data-local="servicos">
           <span class="num" aria-hidden="true">01</span>
           <div>
-            <span class="foto-cel"><img src="../assets/img/servico-altura.webp" alt="Técnico em rapel limpando a fachada de vidro de uma torre em Curitiba" width="1000" height="1250" loading="lazy"></span>
+            <span class="foto-cel revela"><img src="../assets/img/servico-altura.webp" alt="Técnico em rapel limpando a fachada de vidro de uma torre em Curitiba" width="1000" height="1250" loading="lazy"></span>
             <h3>Vidros em altura e com rapel</h3>
             <p>Pra onde escada e haste não chegam: a equipe desce de rapel e limpa o vidro de cima a baixo.</p>
             <p class="termos">Vidros altos · difícil acesso · pé-direito alto e átrios · elevadores panorâmicos</p>
@@ -158,7 +159,7 @@
         <li data-foto="1" data-servico="fachada-de-vidro" data-local="servicos">
           <span class="num" aria-hidden="true">02</span>
           <div>
-            <span class="foto-cel"><img src="../assets/img/servico-fachada.webp" alt="Faixa limpa numa pele de vidro de prédio comercial, refletindo o céu e uma araucária" width="1000" height="1250" loading="lazy"></span>
+            <span class="foto-cel revela"><img src="../assets/img/servico-fachada.webp" alt="Faixa limpa numa pele de vidro de prédio comercial, refletindo o céu e uma araucária" width="1000" height="1250" loading="lazy"></span>
             <h3>Fachadas de vidro</h3>
             <p>Vidros externos de prédios, edifícios comerciais e condomínios, limpos por fora, painel a painel.</p>
             <p class="termos">Pele de vidro (Structural Glazing) · cortina de fachada (Curtain Wall) · cortina de vidro · fachadas envidraçadas</p>
@@ -168,7 +169,7 @@
         <li data-foto="2" data-servico="vitrine" data-local="servicos">
           <span class="num" aria-hidden="true">03</span>
           <div>
-            <span class="foto-cel"><img src="../assets/img/servico-vitrine.webp" alt="Rodo limpando a vitrine de uma loja de alto padrão em Curitiba" width="1000" height="1250" loading="lazy"></span>
+            <span class="foto-cel revela"><img src="../assets/img/servico-vitrine.webp" alt="Rodo limpando a vitrine de uma loja de alto padrão em Curitiba" width="1000" height="1250" loading="lazy"></span>
             <h3>Vitrines, lojas, clínicas e escritórios</h3>
             <p>Vitrine sem marca de dedo e de chuva, no dia e no horário que não atrapalham o atendimento.</p>
             <p class="termos">Vidros comerciais · lojas de alto padrão · portas e painéis do chão ao teto · muros e painéis de vidro</p>
@@ -178,7 +179,7 @@
         <li data-foto="3" data-servico="casa-e-sacada" data-local="servicos">
           <span class="num" aria-hidden="true">04</span>
           <div>
-            <span class="foto-cel"><img src="../assets/img/servico-sacada.webp" alt="Rodo limpando o envidraçamento de sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy"></span>
+            <span class="foto-cel revela"><img src="../assets/img/servico-sacada.webp" alt="Rodo limpando o envidraçamento de sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy"></span>
             <h3>Casas e sacadas</h3>
             <p>Vidro alto e de sacada que você não alcança sem se arriscar, transparente de novo e sem ninguém da família subir em escada.</p>
             <p class="termos">Vidros residenciais · janelas e esquadrias · envidraçamento de sacada · guarda-corpos de vidro</p>
@@ -188,7 +189,7 @@
         <li data-foto="4" data-servico="pos-obra" data-local="servicos">
           <span class="num" aria-hidden="true">05</span>
           <div>
-            <span class="foto-cel"><img src="../assets/img/servico-posobra.webp" alt="Raspador tirando resto de obra do vidro de uma sala comercial recém-terminada" width="1000" height="1250" loading="lazy"></span>
+            <span class="foto-cel revela"><img src="../assets/img/servico-posobra.webp" alt="Raspador tirando respingos de tinta do vidro de uma sala comercial recém-terminada" width="1000" height="1250" loading="lazy"></span>
             <h3>Pós-obra de vidros</h3>
             <p>Resto de tinta, cimento e poeira de obra saem do vidro novo, com cuidado pra não riscar.</p>
             <p class="termos">Limpeza pós-obra de vidros · salas e lojas recém-entregues</p>
@@ -210,13 +211,15 @@
 
 <section class="secao passos" aria-labelledby="t-passos" data-secao="como-funciona" data-local="como-funciona">
   <div class="wrap">
-    <h2 id="t-passos">Como funciona</h2>
+    <div class="passos-cabeca">
+      <h2 id="t-passos">Como <em>funciona</em></h2>
+      <a class="botao botao-marinho" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Vou%20mandar%20uma%20foto%20do%20vidro%20pra%20voc%C3%AAs%20me%20passarem%20o%20or%C3%A7amento." target="_blank" rel="noopener">Mandar foto do vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+    </div>
     <ol class="passos-lista">
       <li><span class="num" aria-hidden="true">1</span><h3>Mande uma foto</h3><p>Uma foto do vidro e o endereço pelo WhatsApp já bastam pra começar.</p></li>
       <li><span class="num" aria-hidden="true">2</span><h3>Receba o orçamento</h3><p>Sem compromisso, e já combinamos o melhor dia e horário pra você.</p></li>
       <li><span class="num" aria-hidden="true">3</span><h3>Limpamos na data marcada</h3><p>A equipe chega no dia combinado, com o acesso certo pra cada tipo de vidro.</p></li>
     </ol>
-    <a class="botao botao-marinho" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1%21%20Vim%20pelo%20site.%20Vou%20mandar%20uma%20foto%20do%20vidro%20pra%20voc%C3%AAs%20me%20passarem%20o%20or%C3%A7amento." target="_blank" rel="noopener">Mandar foto do vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
   </div>
 </section>
 
@@ -230,7 +233,7 @@
 
 <section class="secao quem" aria-labelledby="t-quem" data-secao="pra-quem">
   <div class="wrap">
-    <h2 id="t-quem">Pra quem limpamos</h2>
+    <h2 id="t-quem">Pra quem <em>limpamos</em></h2>
     <div class="colunas">
       <article data-publico="predio" data-local="pra-quem">
         <h3>Condomínio e prédio comercial</h3>
@@ -256,7 +259,7 @@
 
 <section class="secao tambem" aria-labelledby="t-tambem" data-secao="tambem-limpamos" data-local="tambem-limpamos">
   <div class="wrap">
-    <h2 id="t-tambem">Também limpamos</h2>
+    <h2 id="t-tambem">Também <em>limpamos</em></h2>
     <ul class="linhas">
       <li id="fachada" data-servico="fachada"><a href="https://wa.me/5541997799646?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20fachada." target="_blank" rel="noopener"><h3>Fachada</h3><p>ACM, pastilha, textura e pedra em prédios e empresas.</p><svg aria-hidden="true"><use href="#i-seta"/></svg></a></li>
       <li id="placa-solar" data-servico="placa-solar"><a href="https://wa.me/5541997799646?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20placa%20solar." target="_blank" rel="noopener"><h3>Placa solar</h3><p>Placas de casas, comércios e indústrias, sem riscar o vidro.</p><svg aria-hidden="true"><use href="#i-seta"/></svg></a></li>
@@ -267,7 +270,7 @@
 
 <section class="secao perguntas" aria-labelledby="t-perguntas" data-secao="perguntas" data-local="perguntas">
   <div class="wrap">
-    <h2 id="t-perguntas">Perguntas frequentes</h2>
+    <h2 id="t-perguntas">Perguntas <em>frequentes</em></h2>
     <div class="faq">
       <details><summary>Vocês atendem fora de Curitiba?<svg aria-hidden="true"><use href="#i-mais"/></svg></summary><p>Sim. Atendemos Curitiba e a Região Metropolitana. Mande o endereço pelo WhatsApp e confirmamos.</p></details>
       <details><summary>Como peço um orçamento de limpeza de vidros?<svg aria-hidden="true"><use href="#i-mais"/></svg></summary><p>Pelo WhatsApp <a href="https://wa.me/5541997799646" target="_blank" rel="noopener">(41) 99779-9646</a>. Uma foto do vidro e o endereço já bastam pra começar, e o orçamento é sem compromisso.</p></details>
