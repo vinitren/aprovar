@@ -111,7 +111,12 @@
     var p = (scrollY / alt) * 100;
     marcas.forEach(function (m) { if (p >= m - .5 && !feitas[m]) { feitas[m] = 1; registrar('rolagem', { porcentagem: m }); } });
   }
-  addEventListener('scroll', rolou, { passive: true });
+  /* no máximo 4 leituras por segundo: medir a página a cada giro pesa no celular */
+  var rolagemEspera = 0;
+  addEventListener('scroll', function () {
+    if (rolagemEspera) return;
+    rolagemEspera = setTimeout(function () { rolagemEspera = 0; rolou(); }, 250);
+  }, { passive: true });
 
   /* ---------- o que a pessoa viu e usou ---------- */
   if ('IntersectionObserver' in window) {

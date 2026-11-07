@@ -1,15 +1,16 @@
 /* Novo Ambiente · página principal. Sem biblioteca. Tudo já aparece sem script;
-   aqui só entram a logo que sobe pro menu, a passada do rodo nas fotos e o comparador. */
+   aqui só entram a logo que diminui, a passada do rodo no computador e o comparador. */
 (function () {
   var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var temIO = 'IntersectionObserver' in window;
   function lim(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
 
-  /* ---------- logo: grande acima do título, sobe com a página e encaixa no menu.
-     O menu fica sólido quando ela encaixa, pra nada passar por baixo dela ---------- */
+  /* ---------- logo: presa no canto, grande no topo, diminui até o tamanho do menu.
+     Termina antes do título chegar nela, e o menu fica sólido nessa hora ---------- */
   var topo = document.querySelector('.topo');
   var marca = document.querySelector('.marca');
-  var lugarLogo = document.querySelector('.entrada-logo');
+  var logo = marca && marca.querySelector('.marca-logo');
+  var titulo = document.querySelector('.entrada h1');
   if (calmo && temIO) {
     new IntersectionObserver(function (es) {
       topo.classList.toggle('solido', !es[0].isIntersecting);
@@ -17,41 +18,62 @@
   } else if (calmo) {
     topo.classList.add('solido');
   }
-  if (marca) {
-    if (lugarLogo && !calmo) {
-      var ml = { x: 0, y: 0, s: 1 }, agendado = false;
-      var posicionar = function () {
-        agendado = false;
-        var rolou = window.scrollY;
-        var falta = ml.y > 0 ? 1 - lim(rolou / ml.y) : 0;
-        marca.style.transform = 'translate(' + (ml.x * falta).toFixed(2) + 'px,' + Math.max(0, ml.y - rolou).toFixed(2) + 'px) scale(' + (1 + (ml.s - 1) * falta).toFixed(4) + ')';
-        topo.classList.toggle('solido', rolou >= ml.y);
-      };
-      var medir = function () {
-        marca.style.transform = 'none';
-        var q = marca.getBoundingClientRect(), a = lugarLogo.getBoundingClientRect();
-        ml = { x: a.left - q.left, y: a.top + window.scrollY - q.top, s: a.height / q.height };
-        posicionar();
-      };
-      medir();
-      window.addEventListener('scroll', function () {
-        if (!agendado) { agendado = true; requestAnimationFrame(posicionar); }
-      }, { passive: true });
-      window.addEventListener('resize', medir);
-      window.addEventListener('load', medir);
-      if (document.fonts && document.fonts.ready) document.fonts.ready.then(medir);
-    }
-    marca.classList.add('pronta');
+  if (logo && titulo && !calmo) {
+    var regua = document.createElement('span');
+    regua.style.cssText = 'position:absolute;visibility:hidden;height:var(--logo-grande)';
+    marca.appendChild(regua);
+    var fator = 1, cursoLogo = 1, feito = -1, agendado = false;
+    var posicionar = function () {
+      agendado = false;
+      var p = lim(window.scrollY / cursoLogo);
+      if (p === feito) return;
+      feito = p;
+      logo.style.transform = p < 1 ? 'scale(' + (1 + (fator - 1) * p).toFixed(4) + ')' : '';
+      topo.classList.toggle('solido', p >= 1);
+    };
+    var medir = function () {
+      var menu = marca.offsetHeight, grande = regua.offsetHeight;
+      var bordaTopo = marca.getBoundingClientRect().top;
+      fator = menu / grande;
+      /* offsetTop ignora a subida do título na abertura */
+      cursoLogo = Math.max(grande - menu, titulo.offsetTop - bordaTopo - menu - 16);
+      feito = -1;
+      posicionar();
+    };
+    medir();
+    window.addEventListener('scroll', function () {
+      if (!agendado) { agendado = true; requestAnimationFrame(posicionar); }
+    }, { passive: true });
+    window.addEventListener('resize', medir);
+    window.addEventListener('load', medir);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(medir);
+  }
+  if (marca) marca.classList.add('pronta');
+
+  /* ---------- fotos: baixam com folga, antes de chegar perto da tela. No celular é
+     isso que garante a foto pronta quando a pessoa chega nela ---------- */
+  if (temIO) {
+    var adianta = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { e.target.loading = 'eager'; adianta.unobserve(e.target); }
+      });
+    }, { rootMargin: '200% 0px' });
+    document.querySelectorAll('img[loading="lazy"]').forEach(function (i) { adianta.observe(i); });
   }
 
-  /* ---------- foto que se revela na passada do rodo ---------- */
+  /* ---------- faixa no computador: a passada do rodo começa com a foto já pronta ---------- */
   var revelas = document.querySelectorAll('.revela');
-  if (temIO && !calmo) {
+  var revelar = function (r) {
+    var i = r.querySelector('img');
+    var vai = function () { r.classList.add('vis'); };
+    if (i && i.decode) { i.loading = 'eager'; i.decode().then(vai, vai); } else vai();
+  };
+  if (temIO && !calmo && window.matchMedia('(min-width: 62rem)').matches) {
     var ver = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('vis'); ver.unobserve(e.target); }
+        if (e.isIntersecting) { revelar(e.target); ver.unobserve(e.target); }
       });
-    }, { threshold: .2 });
+    }, { threshold: .1 });
     revelas.forEach(function (r) { ver.observe(r); });
   } else {
     revelas.forEach(function (r) { r.classList.add('vis'); });
@@ -103,17 +125,24 @@
   var palco = document.querySelector('.ba-palco');
   var ba = palco && palco.querySelector('[data-ba]');
   if (ba && !calmo) {
+    var janela = ba.querySelector('.ba-janela'), fotoLimpa = ba.querySelector('.depois');
     var contou = false, baAlvo = 0, baAtual = 0, baLoop = 0, baAntes = 0;
+    var palcoTopo = 0, baCurso = 0, baTopo = 0;
+    /* as medidas ficam guardadas: ler o layout a cada giro é o que pesa na rolagem */
+    var baRegua = function () {
+      palcoTopo = palco.getBoundingClientRect().top + window.scrollY;
+      baTopo = parseFloat(getComputedStyle(ba).top) || 0;
+      baCurso = palco.offsetHeight - ba.offsetHeight;
+    };
     var baMedir = function () {
-      var q = palco.getBoundingClientRect();
-      var topoBa = parseFloat(getComputedStyle(ba).top) || 0;
-      var curso = q.height - ba.offsetHeight;
       /* um respiro no começo (vê o sujo) e outro no fim (vê o limpo) */
-      baAlvo = curso > 0 ? lim(((topoBa - q.top) / curso - .06) / .84) : 1;
+      baAlvo = baCurso > 0 ? lim(((baTopo - palcoTopo + window.scrollY) / baCurso - .06) / .84) : 1;
     };
     var baPintar = function () {
       /* a borda da máscara sai toda pela direita em 12% e toda pela esquerda em 88% */
-      ba.style.setProperty('--mx', (12 + baAtual * 76).toFixed(2) + '%');
+      var p = .12 + baAtual * .76;
+      janela.style.transform = 'translate3d(' + (p * -66.6667).toFixed(3) + '%,0,0)';
+      fotoLimpa.style.transform = 'translate3d(' + (p * 200).toFixed(3) + '%,0,0)';
       ba.classList.toggle('sem-antes', baAtual > .85);
       ba.classList.toggle('sem-depois', baAtual < .15);
       if (!contou && baAtual >= .5) {
@@ -134,11 +163,15 @@
       baMedir();
       if (!baLoop && baAtual !== baAlvo) { baAntes = performance.now(); baLoop = requestAnimationFrame(baAndar); }
     };
+    var baRefazer = function () { baRegua(); baMexeu(); };
+    baRegua();
     baMedir();
     baAtual = baAlvo;
     baPintar();
     window.addEventListener('scroll', baMexeu, { passive: true });
-    window.addEventListener('resize', baMexeu);
+    window.addEventListener('resize', baRefazer);
+    window.addEventListener('load', baRefazer);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(baRefazer);
   }
 
   /* ---------- barra do WhatsApp no celular: some quando já tem botão na tela ---------- */
