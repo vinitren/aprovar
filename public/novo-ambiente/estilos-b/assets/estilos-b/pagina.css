@@ -1,0 +1,199 @@
+/* A B escolhida (12/11/2026). Vem depois de estilo.css, comum.css e b.css e só muda o que os áudios pediram:
+   1. a entrada ganha o painel "O que você precisa limpar?", com uma foto por serviço
+   2. a barra do celular fica sempre visível, com ligar e WhatsApp
+   3. três cores, trocadas por data-paleta no <html>
+   4. o movimento é a passada do rodo: um brilho atravessa o vidro da entrada e as linhas do painel
+      entram como uma faixa limpa. O resto só acompanha (a régua dos planos, a linha dos passos) */
+
+.eb {
+  --pg: #fff;
+  --pg-2: #f4f8fa;
+  --destaque: #0095da;           /* o azul da logo, inteiro */
+  --em: #0095da;                 /* destaque em título grande (3,4:1 no branco, passa pra texto grande) */
+  --em-escuro: #46b6ea;          /* o mesmo azul, um tom acima, no marinho */
+  --botao: #0a72ad;              /* o azul da logo escurecido pro texto branco passar (5,2:1) */
+  --botao-2: #085d8d;
+  --escuro: var(--marinho);
+  --estampa: linear-gradient(rgba(8, 25, 42, .5), rgba(8, 25, 42, .62)), url("../img/estampa-uniforme-1600.webp") 50% 50% / cover var(--marinho);
+}
+.eb body { background: var(--pg); }
+.eb .secao h2 em { color: var(--em); }
+/* no quadro gelo dos planos o azul da logo não passa nem pra texto grande (2,6:1): ali vai o azul do botão */
+.eb .planos h2 em { color: var(--botao); }
+.eb .botao-azul { background: var(--botao); }
+.eb .botao-azul:hover { background: var(--botao-2); }
+.eb .topo.solido .botao-topo { background: var(--botao); }
+.eb .topo.solido .botao-topo:hover { background: var(--botao-2); }
+.eb ::selection { background: var(--destaque); color: #fff; }
+html.eb { scrollbar-color: var(--destaque) var(--pg-2); }
+
+/* os ícones ganham o azul da logo cheio: é onde a cor da marca aparece mais */
+.eb .b-bolinha { background: var(--destaque); color: #fff; }
+.eb .b-bolinha-grande { background: var(--destaque); box-shadow: 0 16px 30px -16px rgba(0, 149, 218, .75); }
+
+/* ---------- 1. entrada: título à esquerda, painel à direita (no celular, um embaixo do outro) ---------- */
+.eb .entrada-texto.eb-entrada { display: grid; gap: 2rem; padding-bottom: clamp(1.25rem, 4vh, 3rem); }
+.eb .eb-titulo h1 { max-width: 11ch; }
+@media (min-width: 62rem) {
+  .eb .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) 27rem; align-items: end; gap: 4rem; padding-bottom: clamp(2.5rem, 7vh, 4.5rem); }
+  /* o técnico do rapel fica à direita da foto, justo onde entra o painel: no computador a foto é espelhada
+     (cena ilustrativa, sem texto nem logo) e ele aparece no alto da esquerda, com o título embaixo em duas linhas */
+  .eb .entrada-foto { transform: scaleX(-1); }
+  .eb .eb-titulo h1 { max-width: none; }
+  .eb .b-quem { margin-top: 0; }
+}
+.eb-painel { color: var(--texto); background: #fff; border-radius: 16px; padding: 1.5rem 1.25rem 1.25rem;
+  box-shadow: 0 34px 60px -30px rgba(2, 11, 20, .7), 0 2px 8px -2px rgba(2, 11, 20, .18); animation: sobe 1s var(--sai) .3s both; }
+@media (min-width: 30rem) { .eb-painel { padding: 1.75rem 1.5rem 1.4rem; } }
+.eb-painel h2 { font: 500 1.4375rem/1.15 var(--sans); letter-spacing: -.02em; color: var(--marinho); }
+/* o painel mora dentro da entrada: desfaz o que o estilo.css dá pros parágrafos de lá (cor clara, subida, largura) */
+.eb-painel .eb-painel-sub, .eb-painel .eb-ligar { max-width: none; font-size: .9375rem; line-height: 1.45; color: var(--texto-2); animation: none; }
+.eb-painel .eb-painel-sub { margin-top: .4rem; }
+.eb-painel ul { list-style: none; padding: 0; margin-top: 1.25rem; display: grid; gap: .5rem; }
+.eb-linha { position: relative; display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; align-items: center; gap: .9rem; padding: .45rem .9rem .45rem .45rem;
+  border-radius: 12px; background: var(--pg-2); color: var(--texto); text-decoration: none; transition: background-color .3s var(--sai), box-shadow .3s var(--sai); }
+.eb-linha-texto { display: grid; gap: .15rem; min-width: 0; }
+.eb-linha strong { font: 500 1.0625rem/1.2 var(--sans); letter-spacing: -.01em; color: var(--marinho); }
+.eb-linha small { font-size: .8125rem; line-height: 1.35; color: var(--texto-2); }
+.eb-linha > svg { width: 1.1rem; height: 1.1rem; color: var(--botao); transition: transform .35s var(--sai); }
+.eb-linha:hover { background: #e7f1f8; box-shadow: inset 0 0 0 1px rgba(0, 149, 218, .35); }
+.eb-linha:hover > svg { transform: translate(3px, -3px); }
+.eb-linha-principal { background: var(--botao); }
+.eb-linha-principal strong { color: #fff; }
+.eb-linha-principal small { color: #fff; }
+.eb-linha-principal > svg { color: #fff; }
+.eb-linha-principal:hover { background: var(--botao-2); box-shadow: none; }
+.eb-linha:focus-visible { outline-offset: 2px; }
+.eb-mini { position: relative; overflow: hidden; display: block; width: 3.5rem; aspect-ratio: 1; border-radius: 9px; background: var(--gelo); }
+.eb-mini img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--sai); }
+.eb-linha:hover .eb-mini img { transform: scale(1.08); }
+.eb-painel .eb-ligar { margin-top: 1rem; text-align: center; }
+.eb-ligar a { color: var(--marinho); font-weight: 600; text-decoration-color: rgba(0, 149, 218, .5); text-decoration-thickness: 2px; }
+.eb-ligar a:hover { text-decoration-color: var(--destaque); }
+
+/* os três passos começam na mesma altura, mesmo com título de uma ou duas linhas */
+.eb .b-trilha li { align-content: start; }
+
+/* ---------- pra quem: deixa de subir na foto e vira uma seção normal ---------- */
+.eb .b-quem { position: static; padding-top: var(--secao); padding-bottom: clamp(4.5rem, 3rem + 5vw, 8rem); background: var(--pg-2); }
+.eb .b-quem .b-cartoes-3 { margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); }
+.eb .b-vidros { background: var(--pg); }
+.eb .b-par { background: var(--pg-2); }
+.eb .b-passos { background: var(--pg); }
+.eb .b-tambem { background: var(--pg-2); }
+.eb .b-fecho { background: var(--pg); }
+.eb .b-fecho-painel { background: var(--escuro); }
+.eb .b-fecho h2 em { color: var(--em-escuro); }
+.eb .b-fecho .botao-claro { color: var(--marinho); }
+.eb .rodape { background: var(--pg); }
+.eb .rodape-logo-clara { display: none; }
+
+/* ---------- 2. barra fixa no celular: ligar e WhatsApp, o tempo todo ---------- */
+.barra-fixa { position: fixed; inset: auto 0 0; z-index: 35; display: flex; gap: .5rem; padding: .6rem .75rem calc(.6rem + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, .97); box-shadow: 0 -14px 30px -20px rgba(8, 25, 42, .45), 0 -1px 0 var(--linha); }
+.barra-fixa a { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 3.25rem; border-radius: 10px;
+  font: 600 .875rem/1.1 var(--sans); letter-spacing: .02em; text-decoration: none; transition: background-color .25s var(--sai), transform .15s var(--sai); }
+.barra-fixa a:active { transform: scale(.97); }
+.barra-fixa svg { width: 1.25rem; height: 1.25rem; flex: none; }
+.bf-ligar { flex: 0 0 auto; padding-inline: 1.1rem; color: var(--marinho); box-shadow: inset 0 0 0 1.5px var(--marinho); }
+.bf-wa { flex: 1; padding-inline: 1rem; background: var(--botao); color: #fff; }
+.bf-wa:hover { background: var(--botao-2); }
+@media (max-width: 47.99rem) { .eb body { padding-bottom: calc(4.45rem + env(safe-area-inset-bottom)); } .eb .rodape { padding-bottom: 3.5rem; } }
+@media (min-width: 48rem) { .barra-fixa { display: none; } }
+
+/* ---------- 3. as três cores ---------- */
+/* cor 2: a estampa do uniforme em dois blocos (como funciona e o fechamento) */
+.eb[data-paleta="2"] .b-passos { background: var(--estampa); }
+.eb[data-paleta="2"] .b-fecho-painel { background: var(--estampa); }
+
+/* cor 3: marinho e branco se alternando, o rodapé escuro */
+.eb[data-paleta="3"] .b-quem { background: var(--pg); }
+.eb[data-paleta="3"] .b-vidros { background: var(--marinho); }
+.eb[data-paleta="3"] .b-par { background: var(--pg); }
+.eb[data-paleta="3"] .b-passos { background: var(--marinho-2); }
+.eb[data-paleta="3"] .b-tambem { background: var(--marinho); }
+.eb[data-paleta="3"] .b-fecho-painel { background: var(--botao); }
+.eb[data-paleta="3"] .b-fecho h2 em { color: #fff; }
+.eb[data-paleta="3"] .b-fecho .botao-claro { color: var(--botao-2); }
+.eb[data-paleta="3"] .rodape { background: var(--marinho-3); color: var(--claro-2); }
+.eb[data-paleta="3"] .rodape strong, .eb[data-paleta="3"] .rodape a { color: var(--off); }
+.eb[data-paleta="3"] .rodape a { text-decoration-color: var(--linha-clara); }
+.eb[data-paleta="3"] .rodape .previa { color: var(--claro-2); }
+.eb[data-paleta="3"] .rodape-logo-escura { display: none; }
+.eb[data-paleta="3"] .rodape-logo-clara { display: block; }
+
+/* o texto das seções escuras (as de marinho e as de estampa); os cartões brancos dentro delas continuam como são */
+.eb[data-paleta="2"] .b-passos,
+.eb[data-paleta="3"] .b-vidros,
+.eb[data-paleta="3"] .b-passos,
+.eb[data-paleta="3"] .b-tambem { color: var(--off); }
+.eb[data-paleta="2"] .b-passos .b-cabeca p,
+.eb[data-paleta="3"] .b-vidros .b-cabeca p,
+.eb[data-paleta="3"] .b-tambem .b-cabeca p { color: var(--claro-2); }
+.eb[data-paleta="2"] .b-passos h2 em,
+.eb[data-paleta="3"] .b-vidros h2 em,
+.eb[data-paleta="3"] .b-passos h2 em,
+.eb[data-paleta="3"] .b-tambem h2 em { color: var(--em-escuro); }
+.eb[data-paleta="2"] .b-trilha h3, .eb[data-paleta="3"] .b-trilha h3 { color: var(--off); }
+.eb[data-paleta="2"] .b-trilha p, .eb[data-paleta="3"] .b-trilha p { color: var(--claro-2); }
+.eb[data-paleta="2"] .b-passo, .eb[data-paleta="3"] .b-passo { color: var(--azul-claro); }
+.eb[data-paleta="2"] .b-trilha li + li::before, .eb[data-paleta="3"] .b-trilha li + li::before { border-top-color: rgba(244, 248, 250, .3); }
+.eb[data-paleta="2"] .b-bolinha-grande, .eb[data-paleta="3"] .b-passos .b-bolinha-grande { box-shadow: 0 0 0 6px rgba(0, 149, 218, .18); }
+
+/* a troca de cor é visível: o fundo das seções desliza pra cor nova em vez de piscar */
+.eb .secao, .eb .b-fecho-painel, .eb .rodape { transition: background-color .5s var(--sai), color .5s var(--sai); }
+
+/* ---------- a escolha da cor (só na prévia) ---------- */
+.eb-cor { position: fixed; z-index: 36; left: 50%; bottom: calc(5.05rem + env(safe-area-inset-bottom)); transform: translateX(-50%);
+  display: flex; align-items: center; gap: .3rem; padding: .3rem .3rem .3rem .9rem; border-radius: 999px; background: var(--marinho); color: var(--off);
+  box-shadow: 0 18px 40px -16px rgba(2, 11, 20, .6); font-size: .8125rem; white-space: nowrap; }
+.eb-cor-rotulo { margin-right: .3rem; color: var(--claro-2); }
+.eb-cor button { width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: rgba(244, 248, 250, .1); color: var(--off); font: 600 .9375rem/1 var(--sans); cursor: pointer; transition: background-color .25s var(--sai), color .25s var(--sai); }
+.eb-cor button:hover { background: rgba(244, 248, 250, .2); }
+.eb-cor button[aria-pressed="true"] { background: var(--destaque); color: #fff; }
+.eb-cor-responder { margin-left: .3rem; display: inline-flex; align-items: center; gap: .35rem; height: 2.25rem; padding-inline: 1rem; border-radius: 999px; background: var(--off); color: var(--marinho); font-weight: 600; text-decoration: none; }
+.eb-cor-responder:hover { background: #fff; }
+.eb-cor-nome { display: none; }
+@media (min-width: 48rem) {
+  .eb-cor { left: auto; right: 1.25rem; bottom: 1.25rem; transform: none; }
+  .eb-cor-nome { display: inline; }
+}
+
+/* ---------- 4. movimento ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* a passada: um brilho de vidro limpo atravessa a foto da entrada, uma vez */
+  .eb .entrada-foto::after { content: ""; position: absolute; top: -10%; bottom: -10%; left: 0; width: 38%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .1) 38%, rgba(255, 255, 255, .26) 50%, rgba(255, 255, 255, .1) 62%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-130%) skewX(-14deg); animation: eb-brilho 2.4s cubic-bezier(.5, 0, .2, 1) .8s both; }
+  @keyframes eb-brilho { to { transform: translateX(330%) skewX(-14deg); } }
+
+  /* as linhas do painel entram como uma faixa limpa, da esquerda pra direita */
+  .eb-linha { animation: eb-faixa .8s var(--sai) both; animation-delay: calc(.65s + var(--i) * .09s); }
+  @keyframes eb-faixa { from { clip-path: inset(0 100% 0 0 round 12px); } to { clip-path: inset(0 0 0 0 round 12px); } }
+
+  /* o mesmo brilho passa na foto quando o dedo ou o mouse para em cima */
+  .eb-mini::after, .eb .b-servico figure::after { content: ""; position: absolute; inset: -20% auto -20% 0; width: 60%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .38) 50%, rgba(255, 255, 255, 0));
+    transform: translateX(-160%) skewX(-14deg); }
+  .eb .b-servico figure { position: relative; }
+  .eb-linha:hover .eb-mini::after, .eb .b-servico:hover figure::after { transform: translateX(260%) skewX(-14deg); transition: transform .9s var(--sai); }
+
+  /* os serviços chegam como lista, um depois do outro, só na primeira vez */
+  .js .eb .b-servicos[data-anima] > li { transition: opacity .7s var(--sai), transform .9s var(--sai); transition-delay: calc(var(--i) * .08s); }
+  .js .eb .b-servicos[data-anima]:not(.visto) > li { opacity: 0; transform: translateY(22px); }
+
+  /* a régua dos planos se desenha no ano, do semanal ao pontual */
+  .js .eb .ano[data-anima] .trilho { transition: clip-path 1.3s var(--sai); }
+  .js .eb .ano[data-anima] li:nth-child(2) .trilho { transition-delay: .08s; }
+  .js .eb .ano[data-anima] li:nth-child(3) .trilho { transition-delay: .16s; }
+  .js .eb .ano[data-anima] li:nth-child(4) .trilho { transition-delay: .24s; }
+  .js .eb .ano[data-anima] li:nth-child(5) .trilho { transition-delay: .32s; }
+  .js .eb .ano[data-anima] li:nth-child(6) .trilho { transition-delay: .4s; }
+  .js .eb .ano[data-anima]:not(.visto) .trilho { clip-path: inset(0 100% 0 0); }
+
+  /* a linha dos passos liga um ao outro */
+  .js .eb .b-trilha[data-anima] li + li::before { transform-origin: 0 50%; transition: transform 1s var(--sai) .25s; }
+  .js .eb .b-trilha[data-anima]:not(.visto) li + li::before { transform: scaleX(0); }
+  .js .eb .b-trilha[data-anima] .b-bolinha-grande { transition: transform .6s var(--sai); transition-delay: calc(var(--i) * .25s); }
+  .js .eb .b-trilha[data-anima]:not(.visto) .b-bolinha-grande { transform: scale(.6); }
+}
