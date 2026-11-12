@@ -50,7 +50,8 @@
   .es-letras label:hover span { border-color: var(--azul); }
   .es-aberto { display: grid; gap: .75rem; padding: 1.4rem 1.5rem; border-radius: 14px; background: var(--branco); }
   .es-aberto label { font-size: 1.125rem; font-weight: 500; color: var(--marinho); }
-  .es-aberto textarea { width: 100%; min-height: 7rem; padding: .9rem 1rem; border-radius: 10px; border: 1px solid var(--gelo); font: inherit; color: var(--texto); resize: vertical; -webkit-user-select: text; user-select: text; }
+  .es-dica { color: var(--texto-2); font-size: 1rem; max-width: 40rem; }
+  .es-aberto textarea { width: 100%; min-height: 11rem; padding: .9rem 1rem; border-radius: 10px; border: 1px solid var(--gelo); font: inherit; color: var(--texto); resize: vertical; -webkit-user-select: text; user-select: text; }
   .es-aberto textarea:focus { outline: 2px solid var(--azul); outline-offset: 1px; }
   .es-enviar { margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
   .es-falta { color: #a0371a; font-size: 1rem; }
@@ -95,7 +96,7 @@
 <section class="es-secao es-escolha">
   <div class="wrap">
     <h2>Agora escolham parte por parte</h2>
-    <p class="es-sub">Pode misturar: as cores de um com as fotos de outro, por exemplo. O botão no fim já manda tudo pelo WhatsApp.</p>
+    <p class="es-sub">Pode misturar: as cores de um com as fotos de outro, por exemplo. Se ficar em dúvida em alguma parte, pode deixar sem marcar. O botão no fim já manda tudo pelo WhatsApp.</p>
     <form class="es-form" id="escolha" novalidate>
       <fieldset class="es-grupo" data-parte="As cores">
         <legend>As cores<small>o fundo e onde entra o azul</small></legend>
@@ -122,8 +123,9 @@
         <div class="es-letras"><label><input type="radio" name="tela" value="celular"><span>Celular</span></label><label><input type="radio" name="tela" value="computador"><span>Computador</span></label><label><input type="radio" name="tela" value="os dois"><span>Os dois</span></label></div>
       </fieldset>
       <div class="es-aberto">
-        <label for="nao-gostou">Tem alguma parte que vocês não gostaram em nenhum dos três?</label>
-        <textarea id="nao-gostou" name="nao-gostou" placeholder="Opcional. Pode ser bem curto."></textarea>
+        <label for="opiniao">E a opinião de vocês, do jeito que vier</label>
+        <p class="es-dica">O que gostaram, o que mudariam, o que faltou, uma ideia que tiveram, um site que lembraram. Nada aqui é definitivo: a gente ajusta até ficar do jeito de vocês.</p>
+        <textarea id="opiniao" name="opiniao" placeholder="Escrevam à vontade, ou mandem um áudio depois no WhatsApp."></textarea>
       </div>
       <div class="es-enviar">
         <button class="botao botao-azul" type="submit">Enviar pelo WhatsApp<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></button>
@@ -145,19 +147,19 @@
   form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     var linhas = ['*Novo Ambiente · escolha do estilo*', ''];
-    var faltam = [];
+    var marcados = 0;
     form.querySelectorAll('fieldset').forEach(function (g) {
       var marcado = g.querySelector('input:checked');
-      if (marcado) linhas.push(g.dataset.parte + ': ' + marcado.value);
-      else faltam.push(g.dataset.parte.toLowerCase());
+      if (marcado) marcados++;
+      linhas.push(g.dataset.parte + ': ' + (marcado ? marcado.value : 'sem escolha'));
     });
-    if (faltam.length) {
-      falta.textContent = 'Falta escolher: ' + faltam.join(', ') + '.';
+    var obs = form.querySelector('textarea').value.trim();
+    if (!marcados && !obs) {
+      falta.textContent = 'Marquem pelo menos uma parte ou escrevam a opinião de vocês.';
       return;
     }
     falta.textContent = '';
-    var obs = form.querySelector('textarea').value.trim();
-    linhas.push('Não gostaram: ' + (obs || 'nada a apontar'));
+    linhas.push('', 'Opinião: ' + (obs || '(não escreveram)'));
     window.open('https://wa.me/5541997128458?text=' + encodeURIComponent(linhas.join('\n')), '_blank', 'noopener');
   });
 })();
