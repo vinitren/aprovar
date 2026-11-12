@@ -1,0 +1,67 @@
+/* Vidraça (12/11/2026): a segunda home, só com o que eles pediram. Vem depois do pagina.css.
+   O Lucas quer mais imagens na entrada ("parece que só trabalham com rapel"); ela gostou da foto grande
+   e quer tudo organizado. A entrada é uma fachada de vidro: cada painel é uma foto de serviço, o título
+   é o painel sólido e a esquadria é o filete entre eles. Ao abrir, a fachada é limpa painel a painel. */
+
+html.ev { --logo-grande: var(--logo-menu); --moldura: var(--pg); --painel-titulo: var(--botao); --v-gap: 8px; }
+.ev[data-paleta="2"] { --moldura: var(--marinho-3); --painel-titulo: var(--estampa); }
+.ev[data-paleta="3"] { --moldura: var(--marinho-3); --painel-titulo: var(--marinho); }
+
+/* a entrada deixa de ser foto com véu: vira a moldura da grade, com o menu em cima */
+.ev .v-entrada { display: block; min-height: 0; padding-top: 4.75rem; background: var(--moldura); color: var(--off); transition: background-color .5s var(--sai); }
+.v-grade { display: grid; gap: var(--v-gap); padding: var(--v-gap);
+  grid-template-columns: 1fr 1fr; grid-template-rows: auto clamp(15rem, 62vw, 26rem) clamp(10rem, 40vw, 17rem) clamp(10rem, 40vw, 17rem);
+  grid-template-areas: "t t" "r r" "vi ca" "so pi"; }
+@media (min-width: 62rem) {
+  .v-grade { height: calc(100svh - 4.75rem); min-height: 38rem; max-height: 62rem;
+    grid-template-columns: 1.2fr 1.2fr 1fr 1fr; grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: "r r vi ca" "r r t t" "so pi t t"; }
+}
+
+/* o painel do título */
+.v-titulo { grid-area: t; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(1.75rem, 1rem + 2.5vw, 3.25rem);
+  border-radius: 14px; background: var(--painel-titulo); color: #fff; }
+.ev .v-titulo h1 { max-width: none; font-size: clamp(2.5rem, 1.6rem + 2.8vw, 4.5rem); }
+.ev .v-titulo p { max-width: 30rem; color: rgba(255, 255, 255, .9); }
+.ev .v-titulo .botao { align-self: flex-start; background: #fff; color: var(--marinho); }
+.ev .v-titulo .botao:hover { background: var(--off); }
+@media (max-width: 29.99rem) { .ev .v-titulo .botao { align-self: stretch; } }
+
+/* os painéis de foto: cada um leva pra parte dele na página */
+.v-painel { position: relative; overflow: hidden; isolation: isolate; display: block; border-radius: 14px; background: var(--marinho-2); color: #fff; text-decoration: none; }
+.v-painel img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--sai); }
+.v-painel::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(2, 11, 20, .78) 0%, rgba(2, 11, 20, .3) 34%, rgba(2, 11, 20, 0) 58%); }
+.v-nome { position: absolute; left: clamp(.9rem, .6rem + .8vw, 1.4rem); right: 1rem; bottom: clamp(.8rem, .6rem + .6vw, 1.25rem);
+  display: inline-flex; align-items: center; gap: .5rem; font: 500 clamp(1rem, .9rem + .35vw, 1.1875rem)/1.2 var(--sans); letter-spacing: -.01em; }
+.v-nome svg { width: 1rem; height: 1rem; flex: none; transition: transform .35s var(--sai); }
+.v-rapel { grid-area: r; }
+.v-rapel .v-nome { font-size: clamp(1.25rem, 1rem + .9vw, 1.75rem); }
+.v-vitrine { grid-area: vi; }
+.v-casa { grid-area: ca; }
+.v-solar { grid-area: so; }
+.v-piso { grid-area: pi; }
+@media (hover: hover) {
+  .v-painel:hover img { transform: scale(1.04); }
+  .v-painel:hover .v-nome svg { transform: translate(3px, -3px); }
+}
+
+/* o menu tem a cor da moldura, pra nunca ficar transparente por cima das fotos */
+.ev .topo:not(.solido) { background: var(--moldura); }
+/* cor 1: a moldura é branca e o menu já nasce escuro sobre ela */
+.ev[data-paleta="1"] .topo:not(.solido) { color: var(--marinho); }
+.ev[data-paleta="1"] .topo:not(.solido) .logo-clara { opacity: 0; }
+.ev[data-paleta="1"] .topo:not(.solido) .logo-escura { opacity: 1; }
+.ev[data-paleta="1"] .topo:not(.solido) .botao-topo { background: var(--botao); color: #fff; box-shadow: none; }
+
+/* a barra antiga do WhatsApp volta (some quando já tem botão na tela) */
+.ev .barra-wa .botao { background: var(--botao); color: #fff; }
+
+/* ---------- movimento: a fachada é limpa, painel a painel ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* cada painel abre com um véu de poeira, que o rodo tira da esquerda pra direita */
+  .v-painel::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(222, 230, 236, .62), rgba(205, 216, 224, .7));
+    animation: v-passada 1.1s cubic-bezier(.6, 0, .2, 1) both; animation-delay: calc(.35s + var(--i) * .14s); }
+  @keyframes v-passada { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 0 100%); } }
+  .ev .v-titulo { animation: sobe 1s var(--sai) .15s both; }
+}

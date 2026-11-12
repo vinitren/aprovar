@@ -98,7 +98,7 @@ html.eb { scrollbar-color: var(--destaque) var(--pg-2); }
 .bf-ligar { flex: 0 0 auto; padding-inline: 1.1rem; color: var(--marinho); box-shadow: inset 0 0 0 1.5px var(--marinho); }
 .bf-wa { flex: 1; padding-inline: 1rem; background: var(--botao); color: #fff; }
 .bf-wa:hover { background: var(--botao-2); }
-@media (max-width: 47.99rem) { .eb body { padding-bottom: calc(4.45rem + env(safe-area-inset-bottom)); } .eb .rodape { padding-bottom: 3.5rem; } }
+@media (max-width: 47.99rem) { .eb-painel-home body { padding-bottom: calc(4.45rem + env(safe-area-inset-bottom)); } .eb-painel-home .rodape { padding-bottom: 3.5rem; } }
 @media (min-width: 48rem) { .barra-fixa { display: none; } }
 
 /* ---------- 3. as três cores ---------- */
