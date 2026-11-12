@@ -123,9 +123,14 @@
         <div class="es-letras"><label><input type="radio" name="tela" value="celular"><span>Celular</span></label><label><input type="radio" name="tela" value="computador"><span>Computador</span></label><label><input type="radio" name="tela" value="os dois"><span>Os dois</span></label></div>
       </fieldset>
       <div class="es-aberto">
+        <label for="vida">Querem o site mais vivo, com mais movimento? Ou acharam simples demais?</label>
+        <p class="es-dica">Hoje as páginas são quase paradas. Dá pra ter, por exemplo, fotos que surgem devagar quando a página desce, um vídeo curto da equipe trabalhando, botões e quadros que reagem ao toque. Se acharam simples, contem o que deu essa sensação: a cor, o tamanho das fotos, pouca coisa na tela, falta de movimento.</p>
+        <textarea id="vida" name="vida" data-rotulo="Movimento e simplicidade" placeholder="Escrevam do jeito que vier."></textarea>
+      </div>
+      <div class="es-aberto">
         <label for="opiniao">E a opinião de vocês, do jeito que vier</label>
         <p class="es-dica">O que gostaram, o que mudariam, o que faltou, uma ideia que tiveram, um site que lembraram. Nada aqui é definitivo: a gente ajusta até ficar do jeito de vocês.</p>
-        <textarea id="opiniao" name="opiniao" placeholder="Escrevam à vontade, ou mandem um áudio depois no WhatsApp."></textarea>
+        <textarea id="opiniao" name="opiniao" data-rotulo="Opinião" placeholder="Escrevam à vontade, ou mandem um áudio depois no WhatsApp."></textarea>
       </div>
       <div class="es-enviar">
         <button class="botao botao-azul" type="submit">Enviar pelo WhatsApp<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></button>
@@ -153,13 +158,20 @@
       if (marcado) marcados++;
       linhas.push(g.dataset.parte + ': ' + (marcado ? marcado.value : 'sem escolha'));
     });
-    var obs = form.querySelector('textarea').value.trim();
-    if (!marcados && !obs) {
+    var escreveram = false;
+    var textos = [];
+    form.querySelectorAll('textarea').forEach(function (t) {
+      var v = t.value.trim();
+      if (v) escreveram = true;
+      textos.push(t.dataset.rotulo + ': ' + (v || '(não escreveram)'));
+    });
+    if (!marcados && !escreveram) {
       falta.textContent = 'Marquem pelo menos uma parte ou escrevam a opinião de vocês.';
       return;
     }
     falta.textContent = '';
-    linhas.push('', 'Opinião: ' + (obs || '(não escreveram)'));
+    linhas.push('');
+    linhas = linhas.concat(textos);
     window.open('https://wa.me/5541997128458?text=' + encodeURIComponent(linhas.join('\n')), '_blank', 'noopener');
   });
 })();
