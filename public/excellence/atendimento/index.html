@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Atendimento automático · Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: relatório da T Digital (mesmo molde de /snowflakes/plano). Trilho de 186px com a etiqueta mono, conteúdo à direita; coluna única abaixo de 880px. */
+:root {
+  --bg: #E6EEF4; --card: #FFFFFF; --ink: #091E2D; --text: #3C4C57; --muted: #5A6A75;
+  --line: #DCE6EE; --line-strong: #C8D5DF; --accent: #035897; --accent-bar: #2C82B5; --accent-soft: #F1F6FA;
+  --pend: #8A4A12; --pend-soft: #FBF3EA; --on-accent: #FFFFFF;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #08161F; --card: #10232F; --ink: #E6EEF4; --text: #BFD0DB; --muted: #8FA6B5;
+    --line: #172C3A; --line-strong: #1D3646; --accent: #56A8D8; --accent-bar: #56A8D8; --accent-soft: #04222F;
+    --pend: #F0A56A; --pend-soft: #2A1C10; --on-accent: #04222F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08161F; --card: #10232F; --ink: #E6EEF4; --text: #BFD0DB; --muted: #8FA6B5;
+  --line: #172C3A; --line-strong: #1D3646; --accent: #56A8D8; --accent-bar: #56A8D8; --accent-soft: #04222F;
+  --pend: #F0A56A; --pend-soft: #2A1C10; --on-accent: #04222F; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-block: 0 72px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); letter-spacing: -0.018em; line-height: 1.1; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(32px, 5.4vw, 52px); font-weight: 800; }
+h2 { font-size: clamp(23px, 3vw, 30px); font-weight: 700; }
+h3 { font-size: 18px; font-weight: 700; }
+p { margin: 0; }
+strong { color: var(--ink); font-weight: 600; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.mono { font-family: var(--mono); font-weight: 600; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
+.lead { font-size: 18px; max-width: 64ch; }
+.small { font-size: 14px; color: var(--muted); }
+
+.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 28px 20px; border-bottom: 1px solid var(--line-strong); }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+.brand svg { width: 34px; height: 30px; }
+.brand span { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -0.03em; }
+.top .mono { color: var(--muted); }
+
+.hero { padding-block: 48px 40px; display: grid; gap: 20px; border-bottom: 1px solid var(--line-strong); }
+.hero .mono { color: var(--accent); }
+.status { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border: 1px solid var(--line-strong); border-radius: 2px; background: var(--card); font-size: 13.5px; color: var(--text); }
+.chip.ok::before { content: ""; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+.chip.pend { border-style: dashed; border-color: var(--pend); background: var(--pend-soft); color: var(--pend); }
+
+.sec { display: grid; grid-template-columns: 186px minmax(0, 1fr); gap: 32px; padding-block: 48px; border-bottom: 1px solid var(--line-strong); }
+.sec > .rail { padding-top: 6px; color: var(--accent); }
+.sec > .rail .mono { display: block; }
+.sec > .rail .n { font-family: var(--mono); color: var(--muted); font-size: 12px; margin-top: 6px; display: block; }
+.body { display: grid; gap: 22px; min-width: 0; }
+@media (max-width: 880px) { .sec { grid-template-columns: minmax(0, 1fr); gap: 14px; padding-block: 36px; } }
+
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--card); border-radius: 2px; }
+.trio > div { padding: 20px; display: grid; gap: 6px; align-content: start; }
+.trio > div + div { border-left: 1px solid var(--line); }
+.trio .big { font-family: var(--display); font-weight: 800; font-size: 30px; color: var(--ink); line-height: 1.05; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) { .trio { grid-template-columns: minmax(0, 1fr); } .trio > div + div { border-left: 0; border-top: 1px solid var(--line); } }
+
+.fact { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.fact:first-child { border-top: 1px solid var(--line); }
+.fact .val { font-family: var(--display); font-weight: 800; font-size: 26px; color: var(--ink); line-height: 1.05; font-variant-numeric: tabular-nums; }
+@media (max-width: 520px) { .fact { grid-template-columns: minmax(0, 1fr); gap: 4px; } }
+.src { display: block; font-size: 13px; color: var(--muted); }
+.src::before { content: "Fonte: "; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; }
+
+.note { background: var(--accent-soft); border: 1px solid var(--line); border-radius: 2px; padding: 16px 18px; }
+.note .mono { color: var(--accent); display: block; margin-bottom: 4px; }
+
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.two h3 { margin-bottom: 10px; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.checks li { padding: 11px 0 11px 28px; border-bottom: 1px solid var(--line); position: relative; }
+.checks li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 12px; height: 12px; border: 1.5px solid var(--line-strong); border-radius: 2px; }
+.checks.ok li::before { background: var(--accent); border-color: var(--accent); }
+.checks li small { display: block; color: var(--muted); font-size: 13.5px; }
+
+.timeline { display: grid; border-top: 1px solid var(--line); }
+.timeline > div { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.timeline .when { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .08em; color: var(--accent); text-transform: uppercase; padding-top: 2px; }
+.timeline small { display: block; color: var(--muted); font-size: 14px; }
+@media (max-width: 560px) { .timeline > div { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
+
+.lote { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 2px; background: var(--card); }
+.lote > div { padding: 16px; display: grid; gap: 4px; align-content: start; }
+.lote > div + div { border-left: 1px solid var(--line); }
+.lote .big { font-family: var(--display); font-weight: 800; font-size: 30px; color: var(--ink); line-height: 1; }
+@media (max-width: 720px) { .lote { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lote > div:nth-child(3) { border-left: 0; } .lote > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+.tabs { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 2px; overflow: hidden; }
+.tabs button { font: 600 14px var(--body); padding: 8px 16px; border: 0; background: var(--card); color: var(--text); cursor: pointer; }
+.tabs button + button { border-left: 1px solid var(--line-strong); }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--on-accent); }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.passos { counter-reset: p; list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.passos li { counter-increment: p; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+.passos li::before { content: counter(p, decimal-leading-zero); font-family: var(--mono); font-size: 12px; color: var(--accent); padding-top: 3px; }
+.passos li small { display: block; color: var(--muted); font-size: 14px; }
+[hidden] { display: none !important; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 16px; padding: 13px 20px; border-radius: 2px; text-decoration: none; min-height: 48px; }
+.btn:hover { filter: brightness(1.08); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.sign { padding-block: 40px 0; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: end; }
+.sign .who { display: grid; gap: 2px; }
+.sign .who b { font-family: var(--display); font-size: 20px; color: var(--ink); }
+</style>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand" aria-label="T Digital">
+      <svg viewBox="155 389 286 246" aria-hidden="true"><path fill="var(--accent-bar)" d="M255.60 552.17 l0 -82.55 -50.14 0 -50.14 0 0 -40.36 0 -40.36 143.09 0 143.09 0 0 40.36 0 40.36 -50.75 0 -50.75 0 0 82.55 0 82.55 -42.19 0 -42.19 0 0 -82.55z"/></svg>
+      <span>Digital</span>
+    </div>
+    <span class="mono">Excellence · produtora · 11/11/2026</span>
+  </header>
+
+  <section class="hero">
+    <span class="mono">Atendimento automático no WhatsApp</span>
+    <h1>Todo casal respondido na hora, e ninguém esquecido depois do orçamento</h1>
+    <p class="lead">Um atendimento automático no WhatsApp da produtora. Ele responde em minutos, a qualquer hora, manda o orçamento pela tabela de vocês e faz os retornos. A chamada de vídeo e o fechamento continuam com você.</p>
+    <div class="status">
+      <span class="chip ok">Começa com você aprovando cada mensagem</span>
+      <span class="chip ok">O número continua no seu celular</span>
+      <span class="chip pend">Para começar: suas conversas e 11 áudios</span>
+    </div>
+  </section>
+
+  <!-- 01 onde estamos -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Onde estamos</span><span class="n">01</span></div>
+    <div class="body">
+      <h2>O anúncio traz gente. Agora o que decide é a velocidade</h2>
+      <div class="trio">
+        <div><span class="big">213</span><span>conversas começadas no WhatsApp pelo anúncio</span></div>
+        <div><span class="big">32</span><span>pedidos de orçamento, cerca de 15% das conversas</span></div>
+        <div><span class="big">1</span><span>contrato enviado, de um casamento de 50 convidados</span></div>
+      </div>
+      <div>
+        <div class="fact"><span class="val">12 de 27</span><p>das primeiras conversas do anúncio chegaram <strong>entre meia-noite e 8 da manhã</strong>, quando ninguém está no WhatsApp.</p></div>
+        <div class="fact"><span class="val">Em blocos</span><p>Os orçamentos saem quando sobra tempo: <strong>12 num dia</strong> (29/10) e <strong>9 num domingo</strong> (08/11). Quem pediu no meio da semana esperou.</p></div>
+      </div>
+      <p>Quando o casal pede valor para três lugares, quem responde primeiro, com o número na mão, sai na frente. E quem já recebeu o orçamento precisa de um retorno com motivo, no dia certo, sem depender de alguém lembrar.</p>
+      <span class="src">Gerenciador de Anúncios da conta da produtora, de 23/10 a 11/11/2026, e planilha "Orçamentos · Excellence Eventos", lida em 09/11 e 11/11. Horário das conversas: Meta, 24/10. Orçamentos repetidos do mesmo casal contados uma vez.</span>
+    </div>
+  </section>
+
+  <!-- 02 quem faz o quê -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Quem faz o quê</span><span class="n">02</span></div>
+    <div class="body">
+      <h2>O atendimento cuida do começo. Você cuida do que fecha</h2>
+      <div class="two">
+        <div>
+          <h3>O atendimento faz</h3>
+          <ul class="checks ok">
+            <li>Responde na hora, de dia, de noite e no fim de semana</li>
+            <li>Pergunta a data, quantos convidados e se já tem o espaço</li>
+            <li>Confere o mínimo de 50 convidados e passa para você quem casa em menos de 6 meses</li>
+            <li>Manda o orçamento pela tabela de vocês, com o que entra e a conta da parcela</li>
+            <li>Oferece a chamada de vídeo em dois horários seus</li>
+            <li>Faz os retornos de 2, 7 e 30 dias</li>
+            <li>Anota cada pedido na planilha, com o anúncio de onde veio</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Fica com você</h3>
+          <ul class="checks">
+            <li>A chamada de vídeo com o casal</li>
+            <li><span>Confirmar se a data está livre<small>O atendimento nunca confirma data sozinho</small></span></li>
+            <li><span>Tudo o que sai da tabela<small>Preço especial, só decoração, formatura, corporativo</small></span></li>
+            <li>Contrato e pagamento</li>
+            <li>Qualquer caso em que você queira ser chamada</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note"><span class="mono">Sem fingir</span>O atendimento nunca se passa por você. Se alguém perguntar, ele diz que é o atendimento da Excellence e que a Valerya assume na chamada e no fechamento. Preço, só o da tabela que vocês passaram, e nunca desconto.</div>
+    </div>
+  </section>
+
+  <!-- 03 como começa -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Como começa</span><span class="n">03</span></div>
+    <div class="body">
+      <h2>Do seu jeito de atender, sem susto</h2>
+      <div class="timeline">
+        <div><span class="when">1 · Você</span><p><strong>Manda as conversas e os áudios</strong> (seções 04 e 05).<small>É daí que o atendimento aprende o seu jeito de falar e as respostas que já funcionam.</small></p></div>
+        <div><span class="when">2 · Nós</span><p><strong>Montamos e testamos com as suas conversas reais.</strong><small>Cada conversa vira um teste: o atendimento precisa responder tão bem quanto você respondeu.</small></p></div>
+        <div><span class="when">3 · Juntos</span><p><strong>Ligamos no seu número, com você junto.</strong><small>Uns 10 minutos, com o seu celular na mão. O WhatsApp Business continua no seu celular, como hoje.</small></p></div>
+        <div><span class="when">4 · Duas semanas</span><p><strong>Você aprova cada mensagem antes de sair.</strong><small>O atendimento escreve e você só confere. O que você corrigir, ele aprende.</small></p></div>
+        <div><span class="when">5 · Automático</span><p><strong>Ele responde sozinho e passa para você o que é seu.</strong><small>No dia 30, os números de antes e de depois, lado a lado.</small></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 conversas -->
+  <section class="sec" id="conversas">
+    <div class="rail"><span class="mono">O que precisamos</span><span class="n">04</span></div>
+    <div class="body">
+      <h2>15 conversas do seu WhatsApp</h2>
+      <p class="lead">Ninguém sabe atender esses casais melhor que você. As suas conversas são o melhor material para o atendimento aprender.</p>
+      <div class="lote">
+        <div><span class="big">5</span><span><strong>que andaram</strong>: fizeram a chamada, pediram contrato ou fecharam</span></div>
+        <div><span class="big">5</span><span><strong>que pararam</strong> depois do orçamento: sumiram ou disseram que iam ver</span></div>
+        <div><span class="big">3</span><span><strong>fora do padrão</strong>: valor diferente, só decoração, menos de 50 ou de outra cidade</span></div>
+        <div><span class="big">2</span><span><strong>de 15 anos</strong></span></div>
+      </div>
+      <p class="small">Inclua o casamento de 50 convidados que recebeu o contrato.</p>
+
+      <div>
+        <h3 style="margin-bottom:12px">Como exportar uma conversa</h3>
+        <div class="tabs" role="tablist" aria-label="Tipo de celular">
+          <button role="tab" aria-selected="true" aria-controls="p-android" id="t-android">Android</button>
+          <button role="tab" aria-selected="false" aria-controls="p-iphone" id="t-iphone">iPhone</button>
+        </div>
+        <ol class="passos" id="p-android" role="tabpanel" aria-labelledby="t-android" style="margin-top:14px">
+          <li>Abra a conversa com o casal</li>
+          <li>Toque nos 3 pontinhos, no canto de cima</li>
+          <li><span>Toque em <strong>Mais</strong> e depois em <strong>Exportar conversa</strong></span></li>
+          <li><span>Escolha <strong>Sem mídia</strong><small>Fica leve e manda só o texto, que é o que precisamos</small></span></li>
+          <li>Escolha o WhatsApp e mande para o número da T Digital</li>
+        </ol>
+        <ol class="passos" id="p-iphone" role="tabpanel" aria-labelledby="t-iphone" style="margin-top:14px" hidden>
+          <li>Abra a conversa com o casal</li>
+          <li>Toque no nome do contato, lá em cima</li>
+          <li><span>Desça até <strong>Exportar conversa</strong></span></li>
+          <li><span>Escolha <strong>Sem mídia</strong><small>Fica leve e manda só o texto, que é o que precisamos</small></span></li>
+          <li>Escolha o WhatsApp e mande para o número da T Digital</li>
+        </ol>
+      </div>
+
+      <div class="two">
+        <div>
+          <h3>Junto, se tiver</h3>
+          <ul class="checks">
+            <li>O cardápio ou os pacotes escritos, do jeito que você manda para o casal</li>
+            <li>O vídeo ou as fotos que você manda depois do orçamento</li>
+          </ul>
+        </div>
+        <div class="note" style="align-self:start"><span class="mono">Fica entre nós</span>Ninguém além da T Digital vê as conversas. Usamos só para montar o atendimento e os próximos anúncios, e o nome e o telefone dos casais não saem daqui.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 perguntas -->
+  <section class="sec" id="perguntas">
+    <div class="rail"><span class="mono">Por áudio</span><span class="n">05</span></div>
+    <div class="body">
+      <h2>11 perguntas que só você sabe responder</h2>
+      <p class="lead">Um áudio por pergunta, começando pelo número ("pergunta 1..."). Fale do jeito que vier, com exemplo de casal se lembrar. Não precisa ser bonito.</p>
+      <ol class="passos">
+        <li><span><strong>Alguns orçamentos saíram com valor diferente da tabela</strong>: R$ 150, R$ 250, R$ 260 e R$ 280 por convidado. O que mudou em cada um?<small>Assim o atendimento sabe quando manda a tabela e quando passa para você</small></span></li>
+        <li><span><strong>Criança de 6 a 10 anos paga quanto?</strong> E criança conta para o mínimo de 50 convidados?</span></li>
+        <li><span><strong>Até onde vocês atendem?</strong> Tem cidade que não atendem, ou que tem custo de deslocamento?</span></li>
+        <li><span><strong>O que é servido no buffet do pacote?</strong><small>Se tiver o cardápio escrito, pode mandar no lugar do áudio</small></span></li>
+        <li><span><strong>Na Chácara Esperança</strong>, o valor com o espaço continua R$ 160 por pessoa? O cardápio é o mesmo, e garçom e bartender valem igual?</span></li>
+        <li><span><strong>Vocês fazem mais de um evento no mesmo dia?</strong> E como você confere se uma data está livre?</span></li>
+        <li><span><strong>Vocês fazem degustação?</strong> Antes ou depois do contrato?</span></li>
+        <li><span><strong>Fazem só decoração, ou só uma parte do pacote?</strong> Como você orça nesse caso?</span></li>
+        <li><span><strong>Como o casal paga</strong> a entrada e as parcelas: Pix, boleto, cartão?</span></li>
+        <li><span><strong>Em que dias e horários você pode fazer a chamada de vídeo?</strong><small>O atendimento já oferece dois horários para o casal</small></span></li>
+        <li><span><strong>O que nunca pode ser dito ou prometido ao cliente?</strong> E em que casos você quer ser chamada na hora, mesmo à noite?</span></li>
+      </ol>
+      <div class="btn-row">
+        <a class="btn" href="https://wa.me/5541997128458?text=Oi!%20Vou%20mandar%20as%20conversas%20e%20os%20%C3%A1udios%20do%20atendimento%20da%20produtora." target="_blank" rel="noopener">Mandar pelo WhatsApp</a>
+        <span class="small">Abre a conversa com a T Digital</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 dia 30 -->
+  <section class="sec">
+    <div class="rail"><span class="mono">Dia 30</span><span class="n">06</span></div>
+    <div class="body">
+      <h2>O que vamos medir, antes e depois</h2>
+      <ul class="checks">
+        <li><span><strong>Tempo até a primeira resposta</strong><small>Medido nas conversas que você mandar, e de novo depois</small></span></li>
+        <li><span><strong>Conversas que viram orçamento</strong><small>Hoje, cerca de 15%</small></span></li>
+        <li><span><strong>Orçamentos retomados pelo retorno</strong><small>Quem tinha parado e voltou a conversar</small></span></li>
+        <li><span><strong>Chamadas de vídeo e contratos</strong><small>E de qual anúncio veio cada casal</small></span></li>
+      </ul>
+      <p>Mesma fonte antes e depois: as suas conversas, o Gerenciador de Anúncios e a planilha de orçamentos.</p>
+    </div>
+  </section>
+
+  <!-- próximo passo -->
+  <section class="sec" style="border-bottom:0">
+    <div class="rail"><span class="mono">Próximo passo</span></div>
+    <div class="body">
+      <h2>Você manda, nós montamos</h2>
+      <p class="lead">Mande as conversas e os áudios quando puder, aos poucos se for mais fácil. Com eles na mão, montamos o atendimento e marcamos com você os 10 minutos para ligar no seu número.</p>
+      <div class="sign">
+        <div class="who"><span class="mono small">Quem assina</span><b>Vinicius Trentini</b><span class="small">T Digital · tdigital.tech</span></div>
+        <span class="mono small">11/11/2026</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.tabs [role="tab"]');
+  function show(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) { t.addEventListener('click', function () { show(t); }); });
+  if (/iPhone|iPad/.test(navigator.userAgent)) { show(document.getElementById('t-iphone')); }
+})();
+</script>
+</body>
+</html>
