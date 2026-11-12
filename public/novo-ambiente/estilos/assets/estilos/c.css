@@ -1,0 +1,81 @@
+/* Estilo C · Arcos (referência da cliente: Hajar Home Decor, 11/11).
+   A foto ganha a forma de uma janela com o topo em arco: casa com vidro.
+   Títulos centralizados na serifada, fundo off-white e gelo, muito respiro.
+   O fechamento é uma meia-lua. */
+.estilo-c body { background: var(--off); }
+.estilo-c .secao { padding-block: clamp(5rem, 3.5rem + 5.5vw, 9rem); }
+.c-quem, .c-par, .c-tambem { background: var(--branco); }
+.c-vidros, .c-passos, .c-fecho { background: var(--off); }
+
+.c-titulo { font-family: var(--serif); font-size: clamp(2.25rem, 1.5rem + 2.8vw, 4rem); letter-spacing: -.02em; text-align: center; }
+.estilo-c .secao .c-titulo em { display: inline; font-family: var(--serif); color: var(--azul-texto); }
+.c-cabeca { display: grid; justify-items: center; gap: 1.25rem; text-align: center; }
+.c-cabeca .c-titulo { max-width: 22ch; }
+.c-cabeca p { max-width: 38rem; color: var(--texto-2); }
+
+/* o arco: topo em meio círculo, base reta. Proporção 4:5, então o raio vertical é 40% */
+.c-arco { overflow: hidden; border-radius: 50% 50% 0 0 / 40% 40% 0 0; background: var(--gelo); }
+.c-arco img { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: transform 1.2s var(--sai); }
+
+/* a janelinha dos ícones: o mesmo arco, pequeno */
+.c-janelinha { display: grid; place-items: center; width: 3.25rem; height: 4rem; margin-inline: auto; border-radius: 999px 999px 4px 4px; background: var(--gelo-2); color: var(--azul-forte); }
+
+/* pra quem / também limpamos: três colunas centradas, com fio entre elas */
+.c-tres { list-style: none; padding: 0; margin-top: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); display: grid; gap: 3rem; text-align: center; }
+.c-tres > * { display: grid; justify-items: center; align-content: start; }
+.c-tres h3 { margin-top: 1.5rem; font: 400 clamp(1.5rem, 1.3rem + .7vw, 1.875rem)/1.15 var(--serif); letter-spacing: -.015em; max-width: 18ch; }
+.c-tres p { margin-top: .75rem; max-width: 32ch; color: var(--texto-2); }
+.c-tres .resolve { color: var(--texto); }
+.c-tres .link-seta { margin-top: 1.25rem; font-size: .9375rem; }
+.c-tres li > a { display: grid; justify-items: center; text-decoration: none; }
+.c-tambem li { scroll-margin-top: 5.5rem; }
+.c-tambem a .link-seta { text-decoration: underline; text-decoration-color: rgba(0, 101, 150, .3); }
+.c-tambem a:hover .link-seta svg { transform: translate(3px, -3px); }
+@media (min-width: 62rem) {
+  .c-tres { grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .c-tres > * { padding-inline: clamp(1.5rem, 3vw, 3.5rem); }
+  .c-tres > * + * { border-left: 1px solid var(--linha); }
+}
+
+/* serviços: uma fileira de janelas */
+.c-arcos { list-style: none; padding: 0; margin-top: clamp(3rem, 2rem + 3vw, 5rem); display: grid; gap: 3.5rem 1.5rem; text-align: center; }
+.c-arcos li { display: grid; justify-items: center; align-content: start; }
+.c-arcos .c-arco { width: min(100%, 20rem); }
+.c-arcos h3 { margin-top: 1.5rem; font: 400 clamp(1.375rem, 1.25rem + .5vw, 1.625rem)/1.15 var(--serif); letter-spacing: -.015em; max-width: 16ch; }
+.c-arcos p { margin-top: .6rem; max-width: 30ch; color: var(--texto-2); font-size: 1rem; }
+.c-arcos .link-seta { margin-top: 1rem; font-size: .9375rem; }
+@media (hover: hover) { .c-arcos li:hover img { transform: scale(1.04); } }
+@media (min-width: 48rem) { .c-arcos { grid-template-columns: repeat(6, 1fr); } .c-arcos li { grid-column: span 2; } .c-arcos li:nth-child(4) { grid-column: 2 / span 2; } }
+@media (min-width: 75rem) { .c-arcos { grid-template-columns: repeat(5, 1fr); } .c-arcos li, .c-arcos li:nth-child(4) { grid-column: auto; } }
+
+/* antes e depois: duas janelas lado a lado */
+.c-fotos { margin: clamp(2.5rem, 2rem + 2.5vw, 4.5rem) auto 0; max-width: 56rem; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, .5rem + 2vw, 2.5rem); }
+.c-fotos img { object-position: 62% 50%; }
+.c-fotos figcaption { margin-top: 1rem; text-align: center; font: 400 clamp(1.25rem, 1.1rem + .5vw, 1.5rem)/1.2 var(--serif); color: var(--texto-2); }
+.c-fotos figure + figure figcaption { color: var(--azul-texto); }
+
+/* como funciona: a janela grande ao lado dos passos */
+.c-passos .wrap { display: grid; gap: 3rem; align-items: center; }
+.c-arco-grande { width: min(100%, 30rem); margin-inline: auto; }
+.c-arco-grande img { object-position: 30% 50%; }
+.c-passos-texto .c-titulo { text-align: left; }
+.c-passos ol { list-style: none; padding: 0; margin: 2.5rem 0; display: grid; gap: 1.75rem; }
+.c-passos li { display: grid; grid-template-columns: 3rem 1fr; gap: 1.25rem; align-items: start; }
+.c-num { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid var(--gelo); background: var(--branco); font: 400 1.375rem/1 var(--serif); color: var(--azul-texto); }
+.c-passos h3 { font: 400 clamp(1.375rem, 1.25rem + .5vw, 1.625rem)/1.2 var(--serif); letter-spacing: -.015em; padding-top: .55rem; }
+.c-passos li p { margin-top: .5rem; color: var(--texto-2); max-width: 36rem; }
+@media (min-width: 62rem) { .c-passos .wrap { grid-template-columns: 5fr 6fr; gap: clamp(4rem, 8vw, 9rem); } }
+
+/* planos: a régua com o título centralizado, como o resto */
+.estilo-c .planos .cabeca { justify-items: center; text-align: center; grid-template-columns: 1fr; gap: 1.25rem; }
+.estilo-c .planos h2 { font-family: var(--serif); text-align: center; }
+.estilo-c .planos h2 em { display: inline; }
+.estilo-c .planos .wrap > .botao { display: flex; width: fit-content; margin-inline: auto; }
+
+/* fechamento: a meia-lua */
+.c-lua { max-width: 60rem; margin-inline: auto; padding: clamp(5rem, 3rem + 8vw, 10rem) clamp(1.5rem, 1rem + 4vw, 6rem) clamp(3.5rem, 2.5rem + 3vw, 5rem); border-radius: 50% 50% 24px 24px / 15rem 15rem 24px 24px; background: var(--gelo); text-align: center; display: grid; justify-items: center; }
+.c-lua p { margin-top: 1.25rem; max-width: 30rem; color: var(--texto-2); font-size: 1.0625rem; }
+.c-lua .acoes { justify-content: center; margin-top: 2rem; }
+@media (max-width: 47.99rem) { .c-lua { border-radius: 50% 50% 20px 20px / 9rem 9rem 20px 20px; } }
+
+.estilo-c .rodape { background: var(--off); }

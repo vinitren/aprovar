@@ -1,0 +1,76 @@
+/* Estilo A · Claro. Branco, foto grande com canto suave e muito espaço em volta.
+   Pouca coisa por tela: a foto fala, o texto acompanha. O azul da logo só no risco
+   curto em cima de cada coluna, nos botões e nos links. */
+.estilo-a .secao { padding-block: clamp(5rem, 3.5rem + 6vw, 9.5rem); }
+.a-quem, .a-par, .a-tambem { background: var(--branco); }
+.a-vidros, .a-passos, .a-fecho { background: var(--off); }
+
+/* três colunas com um risco azul curto em cima (pra quem / como funciona) */
+.a-tres { list-style: none; padding: 0; margin-top: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); display: grid; gap: 3rem; }
+.a-tres > * { position: relative; padding-top: 1.75rem; }
+.a-tres > *::before { content: ""; position: absolute; left: 0; top: 0; width: 2.5rem; height: 2px; background: var(--azul); }
+.a-tres h3 { font-size: clamp(1.5rem, 1.3rem + .8vw, 2rem); max-width: 16ch; }
+.a-tres p { margin-top: .9rem; max-width: 34ch; color: var(--texto-2); }
+.a-tres .resolve { color: var(--texto); }
+.a-tres .link-seta { margin-top: 1.25rem; }
+@media (min-width: 62rem) { .a-tres { grid-template-columns: repeat(3, 1fr); gap: clamp(3rem, 5vw, 6rem); } }
+.a-quem h2 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); }
+
+/* serviços: um em destaque, grande, e quatro embaixo, foto em cima e texto embaixo */
+.a-destaque { margin-top: clamp(3rem, 2rem + 3vw, 5.5rem); display: grid; gap: 2rem; align-items: center; }
+.a-destaque figure, .a-grade figure, .a-fotos figure, .a-fecho figure { overflow: hidden; border-radius: 14px; background: var(--gelo); }
+.a-destaque img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.a-destaque h3 { font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem); max-width: 14ch; }
+.a-destaque p { margin-top: 1rem; max-width: 30rem; font-size: 1.125rem; color: var(--texto-2); }
+.a-destaque .termos { font-size: .875rem; color: var(--azul-texto); }
+.a-destaque .botao { margin-top: 2rem; }
+@media (min-width: 62rem) {
+  .a-destaque { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(3rem, 6vw, 7rem); }
+  .a-destaque img { aspect-ratio: 5 / 4; }
+}
+.a-grade { list-style: none; padding: 0; margin-top: clamp(3.5rem, 2.5rem + 4vw, 6.5rem); display: grid; gap: 3rem 2rem; }
+.a-grade img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1.2s var(--sai); }
+.a-grade h3 { margin-top: 1.5rem; font-size: clamp(1.375rem, 1.25rem + .5vw, 1.625rem); }
+.a-grade p { margin-top: .6rem; color: var(--texto-2); }
+.a-grade .termos { color: var(--azul-texto); }
+.a-grade .link-seta { margin-top: 1rem; font-size: .9375rem; }
+@media (hover: hover) { .a-grade li:hover img { transform: scale(1.035); } }
+@media (min-width: 48rem) { .a-grade { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .a-grade { grid-template-columns: repeat(4, 1fr); } .a-grade img { aspect-ratio: 4 / 5; } }
+
+/* antes e depois: duas fotos grandes, a palavra embaixo */
+.a-fotos { margin-top: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); display: grid; gap: 1.5rem; }
+.a-fotos figure { background: none; border-radius: 0; }
+.a-fotos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 62% 50%; border-radius: 14px; }
+.a-fotos figcaption { margin-top: .9rem; font: 500 .8125rem/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-2); }
+.a-fotos figure + figure figcaption { color: var(--azul-texto); }
+@media (min-width: 48rem) { .a-fotos { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+
+/* como funciona */
+.a-passos-cabeca { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 2rem; }
+.a-passos h2 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); }
+.a-num { display: block; margin-bottom: 1.25rem; font: 400 clamp(2.5rem, 2rem + 2vw, 3.5rem)/1 var(--serif); color: var(--azul-texto); }
+
+/* também limpamos: linhas finas, nome grande */
+.a-tambem h2 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem); }
+.a-linhas { list-style: none; padding: 0; margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); border-top: 1px solid var(--linha); }
+.a-linhas li { border-bottom: 1px solid var(--linha); scroll-margin-top: 5.5rem; }
+.a-linhas a { display: grid; grid-template-columns: 1fr auto; gap: .35rem 2rem; align-items: center; padding-block: 1.75rem; text-decoration: none; }
+.a-linhas h3 { font: 400 clamp(1.875rem, 1.4rem + 2vw, 3.25rem)/1.05 var(--serif); letter-spacing: -.02em; transition: color .3s, transform .5s var(--sai); }
+.a-linhas p { grid-column: 1 / -1; color: var(--texto-2); }
+.a-linhas svg { grid-column: 2; grid-row: 1; width: 1.5rem; height: 1.5rem; color: var(--azul-texto); transition: transform .35s var(--sai); }
+.a-linhas a:hover h3 { color: var(--azul-texto); transform: translateX(.4rem); }
+.a-linhas a:hover svg { transform: translate(3px, -3px); }
+@media (min-width: 62rem) {
+  .a-linhas a { grid-template-columns: 24rem 1fr auto; padding-block: 2rem; }
+  .a-linhas p { grid-column: 2; grid-row: 1; font-size: 1.125rem; }
+  .a-linhas svg { grid-column: 3; }
+}
+
+/* fechamento: texto ao lado da foto do rodo */
+.a-fecho .wrap { display: grid; gap: 3rem; align-items: center; }
+.a-fecho h2 { font-size: clamp(2.5rem, 1.5rem + 4vw, 4.75rem); max-width: 12ch; }
+.a-fecho p { margin-top: 1.25rem; max-width: 30rem; font-size: 1.125rem; color: var(--texto-2); }
+.a-fecho .acoes { margin-top: 2rem; }
+.a-fecho img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 30% 50%; }
+@media (min-width: 62rem) { .a-fecho .wrap { grid-template-columns: 5fr 6fr; gap: clamp(3rem, 6vw, 7rem); } }

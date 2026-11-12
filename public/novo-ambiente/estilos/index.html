@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Escolha do estilo | Novo Ambiente Service</title>
+<meta name="theme-color" content="#eaf2f7">
+<link rel="icon" href="assets/img/icone-48.png" type="image/png">
+<link rel="stylesheet" href="assets/estilo.css">
+<link rel="stylesheet" href="assets/estilos/comum.css">
+<script src="assets/blindagem.js" defer></script>
+<style>
+  body { background: var(--branco); }
+  .es-topo { background: var(--gelo-2); padding-block: 2rem clamp(3.5rem, 2.5rem + 4vw, 6rem); }
+  .es-topo img { height: 2.9rem; width: auto; margin-bottom: clamp(3rem, 2rem + 5vw, 5.5rem); }
+  .es-topo h1 { font-size: clamp(2.5rem, 1.6rem + 4vw, 4.75rem); max-width: 15ch; color: var(--marinho); }
+  .es-topo h1 em { display: block; color: var(--azul-texto); }
+  .es-topo p { margin-top: 1.25rem; max-width: 38rem; font-size: 1.125rem; color: var(--texto-2); }
+  .es-secao { padding-block: clamp(4rem, 3rem + 4vw, 7rem); }
+  .es-secao h2 { font-size: clamp(2rem, 1.5rem + 2vw, 3.25rem); max-width: 22ch; color: var(--marinho); }
+  .es-sub { margin-top: 1rem; max-width: 40rem; font-size: 1.0625rem; color: var(--texto-2); }
+
+  .es-opcoes { margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; gap: 2rem; }
+  @media (min-width: 48rem) { .es-opcoes { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+  .es-opcao { display: block; text-decoration: none; border-radius: 16px; background: var(--branco); box-shadow: var(--sombra); overflow: hidden; transition: transform .45s var(--sai); }
+  .es-opcao:hover { transform: translateY(-4px); }
+  .es-opcao figure { background: var(--gelo-2); aspect-ratio: 9 / 16; overflow: hidden; }
+  .es-opcao figure img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .es-opcao div { padding: 1.25rem 1.4rem 1.5rem; }
+  .es-opcao h3 { display: flex; align-items: center; gap: .75rem; font-size: 1.5rem; color: var(--marinho); }
+  .es-opcao h3 b { display: grid; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--azul-forte); color: var(--branco); font: 600 1rem/1 var(--sans); }
+  .es-opcao h3 svg { width: 1.2rem; height: 1.2rem; margin-left: auto; color: var(--azul-texto); transition: transform .35s var(--sai); }
+  .es-opcao:hover h3 svg { transform: translate(3px, -3px); }
+  .es-opcao p { margin-top: .5rem; color: var(--texto-2); font-size: 1rem; }
+  .es-igual { margin-top: 2rem; max-width: 46rem; padding: 1.25rem 1.5rem; border-radius: 12px; background: var(--gelo-2); color: var(--texto); font-size: 1rem; }
+
+  .es-escolha { background: var(--gelo-2); }
+  .es-form { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); display: grid; gap: 1rem; max-width: 52rem; }
+  .es-grupo { border: 0; margin: 0; padding: 1.4rem 1.5rem; border-radius: 14px; background: var(--branco); display: grid; gap: 1rem; }
+  @media (min-width: 48rem) { .es-grupo { grid-template-columns: 1fr auto; align-items: center; gap: 2rem; } }
+  .es-grupo legend { float: left; padding: 0; font-size: 1.125rem; font-weight: 500; color: var(--marinho); }
+  .es-grupo legend small { display: block; margin-top: .2rem; font-size: .9375rem; font-weight: 400; color: var(--texto-2); }
+  .es-letras { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .es-letras label { position: relative; }
+  .es-letras input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .es-letras span { display: grid; place-items: center; min-width: 3.25rem; height: 3.25rem; padding-inline: 1rem; border-radius: 10px; border: 1px solid var(--gelo); color: var(--texto); font-weight: 500; transition: background-color .25s, color .25s, border-color .25s; }
+  .es-letras input:checked + span { background: var(--azul-forte); border-color: var(--azul-forte); color: var(--branco); }
+  .es-letras input:focus-visible + span { outline: 2px solid var(--azul); outline-offset: 3px; }
+  .es-letras label:hover span { border-color: var(--azul); }
+  .es-aberto { display: grid; gap: .75rem; padding: 1.4rem 1.5rem; border-radius: 14px; background: var(--branco); }
+  .es-aberto label { font-size: 1.125rem; font-weight: 500; color: var(--marinho); }
+  .es-aberto textarea { width: 100%; min-height: 7rem; padding: .9rem 1rem; border-radius: 10px; border: 1px solid var(--gelo); font: inherit; color: var(--texto); resize: vertical; -webkit-user-select: text; user-select: text; }
+  .es-aberto textarea:focus { outline: 2px solid var(--azul); outline-offset: 1px; }
+  .es-enviar { margin-top: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .es-falta { color: #a0371a; font-size: 1rem; }
+  .es-rodape { background: var(--branco); border-top: 1px solid var(--linha); color: var(--texto-2); padding-block: 2.5rem; font-size: .9375rem; }
+</style>
+</head>
+<body>
+<header class="es-topo">
+  <div class="wrap">
+    <img src="assets/img/logo-escura.svg" alt="Novo Ambiente Service" width="120" height="61">
+    <h1>Três jeitos de vestir <em>o mesmo site</em></h1>
+    <p>A foto grande da entrada e os planos de limpeza ficam como vocês aprovaram. O que muda é o resto da página, e só o visual: o texto e as fotos são iguais nos três.</p>
+  </div>
+</header>
+
+<main>
+<section class="es-secao">
+  <div class="wrap">
+    <h2>Abram os três, no celular também</h2>
+    <p class="es-sub">Desçam um pouco depois da foto da entrada: é ali que eles ficam diferentes.</p>
+    <div class="es-opcoes">
+      <a class="es-opcao" href="a/">
+        <figure><img src="prints/a.webp" alt="Como fica o estilo A no celular" width="780" height="1386" loading="lazy" decoding="async"></figure>
+        <div><h3><b>A</b>Claro<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></h3>
+        <p>Fundo branco, fotos grandes e bastante espaço. Pouca coisa por tela.</p></div>
+      </a>
+      <a class="es-opcao" href="b/">
+        <figure><img src="prints/b.webp" alt="Como fica o estilo B no celular" width="780" height="1386" loading="lazy" decoding="async"></figure>
+        <div><h3><b>B</b>Cartões<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></h3>
+        <p>Cada coisa no seu quadro, com ícones. O jeito das referências que vocês mandaram.</p></div>
+      </a>
+      <a class="es-opcao" href="c/">
+        <figure><img src="prints/c.webp" alt="Como fica o estilo C no celular" width="780" height="1386" loading="lazy" decoding="async"></figure>
+        <div><h3><b>C</b>Arcos<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></h3>
+        <p>As fotos em formato de janela, títulos centralizados. Mais delicado.</p></div>
+      </a>
+    </div>
+    <p class="es-igual">Os três usam as cores de vocês: o azul-marinho aparece só nos detalhes, e o azul da logo nos botões.</p>
+  </div>
+</section>
+
+<section class="es-secao es-escolha">
+  <div class="wrap">
+    <h2>Agora escolham parte por parte</h2>
+    <p class="es-sub">Pode misturar: as cores de um com as fotos de outro, por exemplo. O botão no fim já manda tudo pelo WhatsApp.</p>
+    <form class="es-form" id="escolha" novalidate>
+      <fieldset class="es-grupo" data-parte="As cores">
+        <legend>As cores<small>o fundo e onde entra o azul</small></legend>
+        <div class="es-letras"><label><input type="radio" name="cores" value="A"><span>A</span></label><label><input type="radio" name="cores" value="B"><span>B</span></label><label><input type="radio" name="cores" value="C"><span>C</span></label></div>
+      </fieldset>
+      <fieldset class="es-grupo" data-parte="Letras e espaço">
+        <legend>O tamanho das letras e o espaço<small>mais solto ou mais junto</small></legend>
+        <div class="es-letras"><label><input type="radio" name="letras" value="A"><span>A</span></label><label><input type="radio" name="letras" value="B"><span>B</span></label><label><input type="radio" name="letras" value="C"><span>C</span></label></div>
+      </fieldset>
+      <fieldset class="es-grupo" data-parte="Jeito das fotos">
+        <legend>O jeito de mostrar as fotos<small>formato e tamanho</small></legend>
+        <div class="es-letras"><label><input type="radio" name="fotos" value="A"><span>A</span></label><label><input type="radio" name="fotos" value="B"><span>B</span></label><label><input type="radio" name="fotos" value="C"><span>C</span></label></div>
+      </fieldset>
+      <fieldset class="es-grupo" data-parte="Os serviços">
+        <legend>A parte dos serviços<small>a que mostra os tipos de vidro</small></legend>
+        <div class="es-letras"><label><input type="radio" name="servicos" value="A"><span>A</span></label><label><input type="radio" name="servicos" value="B"><span>B</span></label><label><input type="radio" name="servicos" value="C"><span>C</span></label></div>
+      </fieldset>
+      <fieldset class="es-grupo" data-parte="O resto da página">
+        <legend>O resto da página<small>como funciona, também limpamos e o fim</small></legend>
+        <div class="es-letras"><label><input type="radio" name="resto" value="A"><span>A</span></label><label><input type="radio" name="resto" value="B"><span>B</span></label><label><input type="radio" name="resto" value="C"><span>C</span></label></div>
+      </fieldset>
+      <fieldset class="es-grupo" data-parte="Olharam no">
+        <legend>Olharam no celular ou no computador?</legend>
+        <div class="es-letras"><label><input type="radio" name="tela" value="celular"><span>Celular</span></label><label><input type="radio" name="tela" value="computador"><span>Computador</span></label><label><input type="radio" name="tela" value="os dois"><span>Os dois</span></label></div>
+      </fieldset>
+      <div class="es-aberto">
+        <label for="nao-gostou">Tem alguma parte que vocês não gostaram em nenhum dos três?</label>
+        <textarea id="nao-gostou" name="nao-gostou" placeholder="Opcional. Pode ser bem curto."></textarea>
+      </div>
+      <div class="es-enviar">
+        <button class="botao botao-azul" type="submit">Enviar pelo WhatsApp<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="square" d="M6 18 18 6M8 6h10v10"/></svg></button>
+        <p class="es-falta" id="falta" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="es-rodape">
+  <div class="wrap">Trentini Digital · Vinicius Trentini</div>
+</footer>
+
+<script>
+(function () {
+  var form = document.getElementById('escolha');
+  var falta = document.getElementById('falta');
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var linhas = ['*Novo Ambiente · escolha do estilo*', ''];
+    var faltam = [];
+    form.querySelectorAll('fieldset').forEach(function (g) {
+      var marcado = g.querySelector('input:checked');
+      if (marcado) linhas.push(g.dataset.parte + ': ' + marcado.value);
+      else faltam.push(g.dataset.parte.toLowerCase());
+    });
+    if (faltam.length) {
+      falta.textContent = 'Falta escolher: ' + faltam.join(', ') + '.';
+      return;
+    }
+    falta.textContent = '';
+    var obs = form.querySelector('textarea').value.trim();
+    linhas.push('Não gostaram: ' + (obs || 'nada a apontar'));
+    window.open('https://wa.me/5541997128458?text=' + encodeURIComponent(linhas.join('\n')), '_blank', 'noopener');
+  });
+})();
+</script>
+</body>
+</html>
