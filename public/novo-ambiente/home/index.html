@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home" data-entrada="rapel" data-paleta="1">
+<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home" data-entrada="rapel" data-home="a" data-paleta="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,9 +15,17 @@
 <link rel="stylesheet" href="assets/estilos/comum.css">
 <link rel="stylesheet" href="assets/estilos/b.css">
 <link rel="stylesheet" href="assets/estilos-b/pagina.css">
+<link rel="stylesheet" href="assets/estilos-b/vidraca.css">
+<link rel="stylesheet" href="assets/estilos-b/icones.css">
 <script>
 document.documentElement.classList.replace('sem-js', 'js');
-(function () { var c = new URLSearchParams(location.search).get('cor'); try { c = c || localStorage.getItem('na-cor'); } catch (e) {} if (/^[123]$/.test(c || '')) document.documentElement.dataset.paleta = c; })();
+(function () {
+  var q = new URLSearchParams(location.search), h = document.documentElement, c = q.get('cor'), e = q.get('home');
+  try { c = c || localStorage.getItem('na-cor'); e = e || localStorage.getItem('na-home'); } catch (x) {}
+  if (/^[123]$/.test(c || '')) h.dataset.paleta = c;
+  var classes = {"a":"eb-painel-home","b":"ev","c":"ei"};
+  if (classes[e]) { h.classList.remove('eb-painel-home'); h.classList.add(classes[e]); h.dataset.home = e; }
+})();
 </script>
 </head>
 <body>
@@ -53,7 +61,7 @@ document.documentElement.classList.replace('sem-js', 'js');
 </header>
 
 <main id="conteudo">
-<section class="entrada" aria-labelledby="t-entrada">
+<div class="eb-home" data-home="a"><section class="entrada" aria-labelledby="t-entrada">
   <picture class="entrada-foto">
     <source media="(max-width: 47.99rem)" srcset="assets/img/entrada-rapel-cel-750.webp 750w, assets/img/entrada-rapel-cel-1080.webp 1080w" sizes="100vw" width="1080" height="1920">
     <img src="assets/img/entrada-rapel-1600.webp" srcset="assets/img/entrada-rapel-1600.webp 1600w, assets/img/entrada-rapel-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="Técnico em rapel limpando a fachada de vidro de um prédio, com araucárias refletidas no vidro" fetchpriority="high">
@@ -88,7 +96,64 @@ document.documentElement.classList.replace('sem-js', 'js');
       <p class="eb-ligar">Prefere ligar? <a href="tel:+5541997799646" data-servico="ligar">(41) 99779-9646</a></p>
     </nav>
   </div>
+</section></div><div class="eb-home" data-home="b"><section class="entrada v-entrada" aria-labelledby="t-entrada">
+  <div class="v-grade">
+    <div class="v-titulo">
+      <h1 id="t-entrada">Limpeza de vidros <em>em Curitiba</em></h1>
+      <p>Do térreo ao último andar: vidros em altura com rapel, fachadas, vitrines, casas, placa solar e piso.</p>
+      <a class="botao botao-azul" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener">Pedir orçamento no WhatsApp<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+    </div>
+    <a class="v-painel v-rapel" style="--i: 0" href="#vidros">
+      <img src="assets/img/servico-altura.webp" alt="Técnico em rapel limpando a fachada de vidro de uma torre" width="1000" height="1250" style="object-position: 45% 35%" fetchpriority="high">
+      <span class="v-nome">Vidros em altura e rapel<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+    </a>
+    <a class="v-painel v-vitrine" style="--i: 1" href="#vidros">
+      <img src="assets/img/servico-vitrine.webp" alt="Vitrine de loja sendo limpa com rodo" width="1000" height="1250" style="object-position: 40% 50%">
+      <span class="v-nome">Vitrines e lojas<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+    </a>
+    <a class="v-painel v-casa" style="--i: 2" href="#vidros">
+      <img src="assets/img/servico-sacada.webp" alt="Envidraçamento de sacada de apartamento sendo limpo" width="1000" height="1250" style="object-position: 50% 45%">
+      <span class="v-nome">Casas e sacadas<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+    </a>
+    <a class="v-painel v-solar" style="--i: 3" href="#placa-solar">
+      <img src="assets/img/servico-placa-solar.webp" alt="Técnico limpando placas solares no telhado de uma casa" width="1000" height="1250" style="object-position: 50% 55%">
+      <span class="v-nome">Placa solar<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+    </a>
+    <a class="v-painel v-piso" style="--i: 4" href="#piso">
+      <img src="assets/img/servico-piso.webp" alt="Técnico lavando piso de pedra na área externa de um condomínio" width="1000" height="1250" style="object-position: 50% 60%">
+      <span class="v-nome">Piso<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+    </a>
+  </div>
 </section>
+</div><div class="eb-home" data-home="c"><svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-janela" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4.5 3.5h15v17h-15zM12 3.5v17M4.5 12h15"/><path d="m7 9.5 2.5-2.5M14.5 17l2.5-2.5"/></g></symbol>
+  <symbol id="i-altura" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 21V3h7v18M2.5 21h19M16.5 6.5h2M16.5 10h2M16.5 13.5h2"/><path d="M9 3v8.5"/><circle cx="9" cy="13.2" r="1.6"/><path d="M9 14.8v3.4l-1.8 2.3M9 16.2l2.6-1.3M9 18.2l1.6 2.3"/></g></symbol>
+  <symbol id="i-posobra" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 4h11v4.5h-11zM14.5 6.2H18v5.3h-8.5V14"/><path d="M8.5 14h2v6.5h-2z"/></g></symbol>
+</svg>
+<section class="entrada" aria-labelledby="t-entrada">
+  <picture class="entrada-foto">
+    <source media="(max-width: 47.99rem)" srcset="assets/img/entrada-rapel-cel-750.webp 750w, assets/img/entrada-rapel-cel-1080.webp 1080w" sizes="100vw" width="1080" height="1920">
+    <img src="assets/img/entrada-rapel-1600.webp" srcset="assets/img/entrada-rapel-1600.webp 1600w, assets/img/entrada-rapel-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="Técnico em rapel limpando a fachada de vidro de um prédio, com araucárias refletidas no vidro" fetchpriority="high">
+  </picture>
+  <div class="entrada-veu"></div>
+  <div class="wrap entrada-texto">
+    <h1 id="t-entrada">Limpeza de vidros <em>em Curitiba</em></h1>
+    <p>Do térreo ao último andar, em prédios, comércios e casas.</p>
+    <a class="botao botao-claro" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener">Pedir orçamento no WhatsApp<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+    <nav class="i-servicos" aria-label="Serviços">
+      <ul>
+        <li style="--i: 0"><a href="#vidros"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-janela"/></svg></span><span class="i-nome">Vidros e janelas</span></a></li>
+        <li style="--i: 1"><a href="#vidros"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-altura"/></svg></span><span class="i-nome">Altura e rapel</span></a></li>
+        <li style="--i: 2"><a href="#vidros"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-posobra"/></svg></span><span class="i-nome">Pós-obra</span></a></li>
+        <li style="--i: 3"><a href="#fachada"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-fachada"/></svg></span><span class="i-nome">Fachada</span></a></li>
+        <li style="--i: 4"><a href="#placa-solar"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-solar"/></svg></span><span class="i-nome">Placa solar</span></a></li>
+        <li style="--i: 5"><a href="#piso"><span class="i-disco"><svg class="ico" aria-hidden="true"><use href="#i-piso"/></svg></span><span class="i-nome">Piso</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+</div>
+<script>(function () { var e = document.documentElement.dataset.home; document.querySelectorAll('.eb-home').forEach(function (d) { if (d.dataset.home !== e) d.remove(); }); })();</script>
 <section class="secao b-quem" aria-labelledby="t-quem">
   <div class="wrap">
     <div class="b-cabeca">
@@ -275,16 +340,20 @@ document.documentElement.classList.replace('sem-js', 'js');
   </div>
 </footer>
 
-<div class="barra-fixa">
+<div class="eb-home-barra" data-home="a"><div class="barra-fixa">
   <a class="bf-ligar" href="tel:+5541997799646" data-servico="ligar"><svg class="ico" aria-hidden="true"><use href="#i-fone"/></svg>Ligar</a>
   <a class="bf-wa" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Orçamento no WhatsApp</a>
+</div></div><div class="eb-home-barra" data-home="b"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div><div class="eb-home-barra" data-home="c"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div>
+<script>(function () { var e = document.documentElement.dataset.home; document.querySelectorAll('.eb-home-barra').forEach(function (d) { if (d.dataset.home !== e) d.remove(); }); })();</script>
+<div class="eb-cor" role="group" aria-label="Escolher a entrada e a cor da página">
+  <button type="button" class="eb-cor-abrir" aria-expanded="false">Entrada <b data-mostra="home">A</b> · Cor <b data-mostra="cor">1</b></button>
+  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Entrada</span>
+  <button type="button" data-home="a" aria-pressed="false" title="Painel de serviços"><span class="so-leitor">Entrada </span>A</button><button type="button" data-home="b" aria-pressed="false" title="Vidraça"><span class="so-leitor">Entrada </span>B</button><button type="button" data-home="c" aria-pressed="false" title="Foto e ícones"><span class="so-leitor">Entrada </span>C</button></div>
+  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Cor</span>
+  <button type="button" data-cor="1" aria-pressed="false" title="Branco e azul: Fundo branco, o azul da logo nos detalhes e o marinho só na entrada e no fim"><span class="so-leitor">Cor </span>1</button><button type="button" data-cor="2" aria-pressed="false" title="Estampa do uniforme: A 1, com a estampa do uniforme em dois blocos"><span class="so-leitor">Cor </span>2</button><button type="button" data-cor="3" aria-pressed="false" title="Marinho e branco: Blocos marinho e branco se alternando, como o uniforme"><span class="so-leitor">Cor </span>3</button></div>
+  <a class="eb-cor-responder" href="#" data-vinicius="5541997128458" target="_blank" rel="noopener">Escolher</a>
 </div>
-<div class="eb-cor" role="group" aria-label="Escolher a cor do site">
-  <span class="eb-cor-rotulo">Cor do site</span>
-  <button type="button" data-cor="1" aria-pressed="false" title="Branco e azul: Fundo branco, o azul da logo nos detalhes e o marinho só na entrada e no fim"><span class="so-leitor">Cor </span>1</button><button type="button" data-cor="2" aria-pressed="false" title="Estampa do uniforme: A 1, com a estampa do uniforme em dois blocos"><span class="so-leitor">Cor </span>2</button><button type="button" data-cor="3" aria-pressed="false" title="Marinho e branco: Blocos marinho e branco se alternando, como o uniforme"><span class="so-leitor">Cor </span>3</button>
-  <a class="eb-cor-responder" href="#" data-vinicius="5541997128458" target="_blank" rel="noopener">Escolher<span class="eb-cor-nome"></span></a>
-</div>
-<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Estampa do uniforme"},{"n":3,"nome":"Marinho e branco"}];</script>
+<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Estampa do uniforme"},{"n":3,"nome":"Marinho e branco"}]; window.EB_HOMES = [{"id":"a","nome":"Painel de serviços"},{"id":"b","nome":"Vidraça"},{"id":"c","nome":"Foto e ícones"}];</script>
 
 <script src="assets/blindagem.js" defer></script>
 <script src="assets/script.js" defer></script>
