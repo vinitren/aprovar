@@ -6,60 +6,97 @@
   var cores = window.EB_CORES || [];
   var homes = window.EB_HOMES || [];
   var corpos = window.EB_CORPOS || [];
-  var botoesCor = document.querySelectorAll('.eb-cor [data-cor]');
-  var botoesHome = document.querySelectorAll('.eb-cor [data-home]');
-  var botoesCorpo = document.querySelectorAll('.eb-cor [data-corpo]');
-  var responder = document.querySelector('.eb-cor-responder');
+  /* a escolha em passos (13/11): uma pergunta por vez (entrada, cor, meio da página) e o resumo com o botão do WhatsApp.
+     Antes eram as três escolhas juntas num seletor; no celular ficou poluído e fácil de se perder. */
+  var guia = document.querySelector('.eb-guia');
+  var botoesCor = document.querySelectorAll('.eb-guia [data-cor]');
+  var botoesHome = document.querySelectorAll('.eb-guia [data-home]');
+  var botoesCorpo = document.querySelectorAll('.eb-guia [data-corpo]');
+  var mandar = document.querySelector('.eb-guia-mandar');
+  var TOTAL = 3;
   function guarda(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function acha(lista, campo, v) { return lista.filter(function (x) { return String(x[campo]) === String(v); })[0]; }
+  var q = new URLSearchParams(location.search);
+  var passo = parseInt(q.get('passo'), 10);
+  if (!(passo >= 1 && passo <= TOTAL + 1)) passo = 1;
 
-  function resposta() {
+  function nomes() {
     var c = acha(cores, 'n', html.dataset.paleta), h = acha(homes, 'id', html.dataset.home), s = acha(corpos, 'id', html.dataset.corpo);
-    if (!responder || !c || !h || !s) return;
-    var texto = '*Novo Ambiente · página principal*\nEntrada: ' + h.id.toUpperCase() + ' (' + h.nome + ')\nSeções: ' + s.id.toUpperCase() + ' (' + s.nome + ')\nCor: ' + c.n + ' (' + c.nome + ')\n\nO que mais queremos mudar:\n';
-    responder.href = 'https://wa.me/' + responder.dataset.vinicius + '?text=' + encodeURIComponent(texto);
+    return { cor: c ? c.nome : '', home: h ? h.nome : '', corpo: s ? s.nome : '' };
   }
-  function marcar() {
+  function resposta() {
+    var n = nomes();
+    if (!mandar) return;
+    var texto = '*Novo Ambiente · página principal*\nEntrada: ' + n.home + '\nCor: ' + n.cor + '\nMeio da página: ' + n.corpo + '\n\nO que mais queremos mudar:\n';
+    mandar.href = 'https://wa.me/' + mandar.dataset.vinicius + '?text=' + encodeURIComponent(texto);
+  }
+  /* o passo vai no endereço, porque trocar a entrada ou o meio da página recarrega */
+  function endereco(extra) {
+    var u = new URL(location.href);
+    u.searchParams.set('home', html.dataset.home);
+    u.searchParams.set('corpo', html.dataset.corpo);
+    u.searchParams.set('cor', html.dataset.paleta);
+    u.searchParams.set('passo', passo);
+    Object.keys(extra || {}).forEach(function (k) { u.searchParams.set(k, extra[k]); });
+    u.hash = '';
+    return u;
+  }
+  function mostra() {
+    if (!guia) return;
+    guia.dataset.passo = passo;
+    guia.querySelectorAll('.eb-guia-etapa').forEach(function (e) { e.hidden = String(passo) !== e.dataset.passo; });
+    guia.querySelectorAll('[data-guia-num]').forEach(function (e) { e.textContent = passo > TOTAL ? 'Pronto' : passo + ' de ' + TOTAL; });
     botoesCor.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.cor === html.dataset.paleta ? 'true' : 'false'); });
     botoesHome.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.home === html.dataset.home ? 'true' : 'false'); });
     botoesCorpo.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.corpo === html.dataset.corpo ? 'true' : 'false'); });
-    document.querySelectorAll('.eb-cor [data-mostra]').forEach(function (b) {
-      var m = b.dataset.mostra;
-      b.textContent = m === 'cor' ? html.dataset.paleta : (m === 'home' ? html.dataset.home : html.dataset.corpo).toUpperCase();
-    });
+    var n = nomes();
+    guia.querySelectorAll('[data-mostra]').forEach(function (b) { b.textContent = n[b.dataset.mostra]; });
+    guia.querySelector('.eb-guia-voltar').textContent = passo > TOTAL ? 'Mudar' : 'Voltar';
+    guia.querySelector('.eb-guia-proximo').textContent = passo === TOTAL ? 'Ver como ficou' : 'Próximo';
+    history.replaceState(null, '', endereco().toString());
     resposta();
   }
-  var seletor = document.querySelector('.eb-cor'), abrir = document.querySelector('.eb-cor-abrir');
-  if (abrir) {
-    abrir.addEventListener('click', function (e) { e.stopPropagation(); seletor.classList.add('aberto'); abrir.setAttribute('aria-expanded', 'true'); });
-    /* tocou fora, recolhe de novo */
-    document.addEventListener('click', function (e) {
-      if (!seletor.classList.contains('aberto') || seletor.contains(e.target)) return;
-      seletor.classList.remove('aberto'); abrir.setAttribute('aria-expanded', 'false');
-    });
+  function vai(p) {
+    passo = p;
+    mostra();
+    /* no passo do meio da página, desce até ele; no da entrada, volta pro topo */
+    if (p === 1) window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (p === 3) { var c = document.querySelector('.eb-corpo'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+
+  if (guia) {
+    guia.hidden = false;
+    var abrir = guia.querySelector('.eb-guia-abrir');
+    var abre = function (sim) { guia.classList.toggle('escondido', !sim); abrir.setAttribute('aria-expanded', sim ? 'true' : 'false'); };
+    abrir.addEventListener('click', function () { abre(true); });
+    guia.querySelector('.eb-guia-esconder').addEventListener('click', function () { abre(false); });
+    guia.querySelector('.eb-guia-proximo').addEventListener('click', function () { vai(Math.min(passo + 1, TOTAL + 1)); });
+    guia.querySelector('.eb-guia-voltar').addEventListener('click', function () { vai(passo > TOTAL ? 1 : Math.max(passo - 1, 1)); });
   }
 
   /* cor: troca na hora */
   botoesCor.forEach(function (b) {
-    b.addEventListener('click', function () { html.dataset.paleta = b.dataset.cor; guarda('na-cor', b.dataset.cor); marcar(); });
+    b.addEventListener('click', function () { html.dataset.paleta = b.dataset.cor; guarda('na-cor', b.dataset.cor); mostra(); });
   });
-  /* entrada e seções: recarregam no topo, porque a logo e a barra se medem pela entrada na abertura */
+  /* entrada e meio da página: recarregam, porque a logo e a barra se medem pela entrada na abertura */
   function recarrega(campo, chave, valor) {
     if (valor === html.dataset[campo]) return;
     guarda(chave, valor);
-    var u = new URL(location.href);
-    u.searchParams.set('home', campo === 'home' ? valor : html.dataset.home);
-    u.searchParams.set('corpo', campo === 'corpo' ? valor : html.dataset.corpo);
-    u.searchParams.set('cor', html.dataset.paleta);
-    u.hash = '';
-    location.href = u.toString();
+    var extra = {}; extra[campo] = valor;
+    if (campo === 'corpo') extra.ver = 'meio';
+    location.href = endereco(extra).toString();
   }
   botoesHome.forEach(function (b) { b.addEventListener('click', function () { recarrega('home', 'na-home', b.dataset.home); }); });
   botoesCorpo.forEach(function (b) { b.addEventListener('click', function () { recarrega('corpo', 'na-corpo', b.dataset.corpo); }); });
   if (!html.dataset.paleta) html.dataset.paleta = '1';
   guarda('na-home', html.dataset.home);
   guarda('na-corpo', html.dataset.corpo);
-  marcar();
+  mostra();
+  /* trocou o meio da página: volta direto pra ele, não pro topo */
+  if (q.get('ver') === 'meio') {
+    var u0 = endereco(); u0.searchParams.delete('ver'); history.replaceState(null, '', u0.toString());
+    var c0 = document.querySelector('.eb-corpo'); if (c0) c0.scrollIntoView({ block: 'start' });
+  }
 
   /* seções B: o rodo do antes e depois acompanha o dedo */
   document.querySelectorAll('.f-comparar').forEach(function (c) {

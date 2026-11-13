@@ -714,17 +714,37 @@ document.documentElement.classList.replace('sem-js', 'js');
   <a class="bf-wa" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Orçamento no WhatsApp</a>
 </div></div><div class="eb-home-barra" data-home="b"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div><div class="eb-home-barra" data-home="c"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div>
 <script>(function () { var e = document.documentElement.dataset.home; document.querySelectorAll('.eb-home-barra').forEach(function (d) { if (d.dataset.home !== e) d.remove(); }); })();</script>
-<div class="eb-cor" role="group" aria-label="Escolher a entrada, as seções e a cor da página">
-  <button type="button" class="eb-cor-abrir" aria-expanded="false">Entrada <b data-mostra="home">A</b> · Seções <b data-mostra="corpo">A</b> · Cor <b data-mostra="cor">1</b></button>
-  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Entrada</span>
-  <button type="button" data-home="a" aria-pressed="false" title="Painel de serviços"><span class="so-leitor">Entrada </span>A</button><button type="button" data-home="b" aria-pressed="false" title="Vidraça"><span class="so-leitor">Entrada </span>B</button><button type="button" data-home="c" aria-pressed="false" title="Foto e ícones"><span class="so-leitor">Entrada </span>C</button></div>
-  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Seções</span>
-  <button type="button" data-corpo="a" aria-pressed="false" title="Cartões"><span class="so-leitor">Seções </span>A</button><button type="button" data-corpo="b" aria-pressed="false" title="Fotos"><span class="so-leitor">Seções </span>B</button><button type="button" data-corpo="c" aria-pressed="false" title="Guia"><span class="so-leitor">Seções </span>C</button></div>
-  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Cor</span>
-  <button type="button" data-cor="1" aria-pressed="false" title="Branco e azul: Fundo branco, o azul da logo nos detalhes e o marinho só na entrada e no fim"><span class="so-leitor">Cor </span>1</button><button type="button" data-cor="2" aria-pressed="false" title="Estampa do uniforme: A 1, com a estampa do uniforme em dois blocos"><span class="so-leitor">Cor </span>2</button><button type="button" data-cor="3" aria-pressed="false" title="Marinho e branco: Blocos marinho e branco se alternando, como o uniforme"><span class="so-leitor">Cor </span>3</button></div>
-  <a class="eb-cor-responder" href="#" data-vinicius="5541997128458" target="_blank" rel="noopener">Escolher</a>
+<div class="eb-guia" role="region" aria-label="Escolher a página, um passo por vez" hidden>
+  <button type="button" class="eb-guia-abrir" aria-expanded="true">Escolher <span data-guia-num>1 de 3</span></button>
+  <div class="eb-guia-caixa">
+    <div class="eb-guia-topo"><span class="eb-guia-passo" data-guia-num>1 de 3</span><button type="button" class="eb-guia-esconder" aria-label="Esconder pra ver a página">Esconder</button></div>
+    <div class="eb-guia-etapa" data-passo="1">
+      <p class="eb-guia-pergunta">Qual <b>entrada</b> vocês preferem?</p>
+      <p class="eb-guia-dica">É o topo da página. Toque e veja cada uma.</p>
+      <div class="eb-guia-opcoes"><button type="button" data-home="a" aria-pressed="false">Painel</button><button type="button" data-home="b" aria-pressed="false">Vidraça</button><button type="button" data-home="c" aria-pressed="false">Foto e ícones</button></div>
+    </div>
+    <div class="eb-guia-etapa" data-passo="2">
+      <p class="eb-guia-pergunta">Qual <b>cor</b> vocês preferem?</p>
+      <p class="eb-guia-dica">Toque e desça a página pra ver a cor no site todo.</p>
+      <div class="eb-guia-opcoes"><button type="button" data-cor="1" aria-pressed="false">Branco e azul</button><button type="button" data-cor="2" aria-pressed="false">Uniforme</button><button type="button" data-cor="3" aria-pressed="false">Marinho</button></div>
+    </div>
+    <div class="eb-guia-etapa" data-passo="3">
+      <p class="eb-guia-pergunta">O <b>meio da página</b> fica nos Cartões?</p>
+      <p class="eb-guia-dica">Foi o que vocês aprovaram. Se quiser, veja os outros dois jeitos.</p>
+      <div class="eb-guia-opcoes"><button type="button" data-corpo="a" aria-pressed="false">Cartões</button><button type="button" data-corpo="b" aria-pressed="false">Fotos</button><button type="button" data-corpo="c" aria-pressed="false">Guia</button></div>
+    </div>
+    <div class="eb-guia-etapa" data-passo="4">
+      <p class="eb-guia-pergunta">Ficou assim:</p>
+      <ul class="eb-guia-resumo"><li>Entrada: <b data-mostra="home"></b></li><li>Cor: <b data-mostra="cor"></b></li><li>Meio da página: <b data-mostra="corpo"></b></li></ul>
+    </div>
+    <div class="eb-guia-acoes">
+      <button type="button" class="eb-guia-voltar">Voltar</button>
+      <button type="button" class="eb-guia-proximo">Próximo</button>
+      <a class="eb-guia-mandar" href="#" data-vinicius="5541997128458" target="_blank" rel="noopener">Mandar pelo WhatsApp</a>
+    </div>
+  </div>
 </div>
-<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Estampa do uniforme"},{"n":3,"nome":"Marinho e branco"}]; window.EB_HOMES = [{"id":"a","nome":"Painel de serviços"},{"id":"b","nome":"Vidraça"},{"id":"c","nome":"Foto e ícones"}]; window.EB_CORPOS = [{"id":"a","nome":"Cartões"},{"id":"b","nome":"Fotos"},{"id":"c","nome":"Guia"}];</script>
+<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Uniforme"},{"n":3,"nome":"Marinho"}]; window.EB_HOMES = [{"id":"a","nome":"Painel"},{"id":"b","nome":"Vidraça"},{"id":"c","nome":"Foto e ícones"}]; window.EB_CORPOS = [{"id":"a","nome":"Cartões"},{"id":"b","nome":"Fotos"},{"id":"c","nome":"Guia"}];</script>
 
 <script src="assets/blindagem.js" defer></script>
 <script src="assets/script.js" defer></script>

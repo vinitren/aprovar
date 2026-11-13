@@ -143,34 +143,43 @@ html.eb { scrollbar-color: var(--destaque) var(--pg-2); }
 /* a troca de cor é visível: o fundo das seções desliza pra cor nova em vez de piscar */
 .eb .secao, .eb .b-fecho-painel, .eb .rodape { transition: background-color .5s var(--sai), color .5s var(--sai); }
 
-/* ---------- a escolha da entrada e da cor (só na prévia) ---------- */
-.eb-cor { position: fixed; z-index: 36; left: .75rem; right: .75rem; bottom: calc(5.05rem + env(safe-area-inset-bottom));
-  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .35rem .5rem; padding: .5rem .5rem .5rem .9rem; border-radius: 18px;
-  background: var(--marinho); color: var(--off); box-shadow: 0 18px 40px -16px rgba(2, 11, 20, .6); font-size: .8125rem; white-space: nowrap; }
-.eb-cor-linha { display: flex; align-items: center; gap: .3rem; }
-.eb-cor-rotulo { min-width: 3.6rem; color: var(--claro-2); }
-.eb-cor button { width: 2.25rem; height: 2.25rem; border: 0; border-radius: 50%; background: rgba(244, 248, 250, .1); color: var(--off); font: 600 .9375rem/1 var(--sans); cursor: pointer; transition: background-color .25s var(--sai), color .25s var(--sai); }
-.eb-cor button:hover { background: rgba(244, 248, 250, .2); }
-.eb-cor button[aria-pressed="true"] { background: var(--destaque); color: #fff; }
-.eb-cor-responder { grid-column: 2; grid-row: 1 / 3; display: inline-flex; align-items: center; height: 2.75rem; padding-inline: 1.1rem; border-radius: 999px; background: var(--off); color: var(--marinho); font-weight: 600; text-decoration: none; }
-.eb-cor-responder:hover { background: #fff; }
-/* no celular o seletor fica recolhido num botão pequeno, pra não cobrir a entrada; abre ao tocar */
-.eb-cor-abrir { display: none; }
-@media (max-width: 47.99rem) {
-  .eb-cor { top: 5.25rem; bottom: auto; }
-  /* aberto, desce pra cima da barra: no alto ele ficaria embaixo da logo grande */
-  .eb-cor.aberto { top: auto; bottom: calc(5.05rem + env(safe-area-inset-bottom)); }
-  .eb-cor:not(.aberto) { left: auto; display: block; padding: 0; border-radius: 999px; }
-  .eb-cor:not(.aberto) > :not(.eb-cor-abrir) { display: none; }
-  .eb-cor:not(.aberto) .eb-cor-abrir { display: inline-flex; align-items: center; gap: .3rem; width: auto; height: 2.75rem; padding-inline: 1.1rem; border: 0; border-radius: 999px;
-    background: var(--marinho); color: var(--off); font: 500 .8125rem/1 var(--sans); cursor: pointer; }
-  .eb-cor-abrir b { display: inline-grid; place-items: center; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--destaque); color: #fff; font-weight: 600; }
-}
+/* ---------- a escolha em passos (só na prévia, 13/11) ---------- */
+/* um cartão com uma pergunta por vez, em cima da barra de Ligar e WhatsApp; "Esconder" vira um botão pequeno */
+.eb-guia { position: fixed; z-index: 36; left: .75rem; right: .75rem; bottom: calc(5.05rem + env(safe-area-inset-bottom)); font-family: var(--sans); }
+.eb-guia[hidden], .eb-guia [hidden] { display: none !important; }
+.eb-guia-caixa { padding: .8rem .85rem .85rem; border-radius: 16px; background: var(--marinho); color: var(--off); box-shadow: 0 18px 40px -16px rgba(2, 11, 20, .6); }
+.eb-guia-topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: .3rem; }
+.eb-guia-passo { font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--claro-2); }
+.eb-guia-esconder { padding: .35rem 0 .35rem .6rem; border: 0; background: none; color: var(--claro-2); font: 500 .8125rem/1 var(--sans); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.eb-guia-pergunta { margin: 0; font-size: 1.0625rem; line-height: 1.3; font-weight: 500; }
+.eb-guia-pergunta b { font-weight: 700; color: #fff; }
+.eb-guia-dica { margin: .2rem 0 0; font-size: .8125rem; line-height: 1.35; color: var(--claro-2); }
+.eb-guia-opcoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: .4rem; margin-top: .65rem; }
+.eb-guia-opcoes button { min-height: 2.75rem; padding: .4rem .3rem; border: 1.5px solid rgba(244, 248, 250, .22); border-radius: 10px; background: none; color: var(--off);
+  font: 500 .875rem/1.15 var(--sans); cursor: pointer; transition: background-color .2s var(--sai), border-color .2s var(--sai); }
+.eb-guia-opcoes button:hover { border-color: rgba(244, 248, 250, .5); }
+.eb-guia-opcoes button[aria-pressed="true"] { border-color: var(--destaque); background: var(--destaque); color: #fff; font-weight: 600; }
+.eb-guia-resumo { margin: .45rem 0 0; padding: 0; list-style: none; font-size: .9375rem; line-height: 1.6; color: var(--claro-2); }
+.eb-guia-resumo b { color: #fff; font-weight: 600; }
+.eb-guia-acoes { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-top: .75rem; }
+.eb-guia-voltar { padding: .5rem 0; border: 0; background: none; color: var(--claro-2); font: 500 .875rem/1 var(--sans); cursor: pointer; }
+.eb-guia[data-passo="1"] .eb-guia-voltar { visibility: hidden; }
+.eb-guia-proximo, .eb-guia-mandar { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; padding-inline: 1.3rem; border: 0; border-radius: 999px;
+  background: var(--off); color: var(--marinho); font: 600 .9375rem/1 var(--sans); text-decoration: none; cursor: pointer; }
+.eb-guia-proximo:hover, .eb-guia-mandar:hover { background: #fff; }
+.eb-guia-mandar { display: none; background: #25d366; color: #fff; }
+.eb-guia-mandar:hover { background: #1ebe5b; }
+.eb-guia[data-passo="4"] .eb-guia-proximo { display: none; }
+.eb-guia[data-passo="4"] .eb-guia-mandar { display: inline-flex; }
+/* escondido: só um botão pequeno no canto, pra ver a página limpa */
+.eb-guia-abrir { display: none; }
+.eb-guia.escondido { left: auto; }
+.eb-guia.escondido .eb-guia-caixa { display: none; }
+.eb-guia.escondido .eb-guia-abrir { display: inline-flex; align-items: center; gap: .45rem; height: 2.75rem; padding-inline: 1.1rem; border: 0; border-radius: 999px;
+  background: var(--marinho); color: var(--off); font: 500 .875rem/1 var(--sans); box-shadow: 0 12px 30px -14px rgba(2, 11, 20, .6); cursor: pointer; }
+.eb-guia-abrir span { padding: .2rem .5rem; border-radius: 999px; background: var(--destaque); color: #fff; font-size: .75rem; font-weight: 600; }
 @media (min-width: 48rem) {
-  .eb-cor, .ev .eb-cor, .ei .eb-cor { left: auto; right: 1.25rem; bottom: 1.25rem; display: flex; gap: .5rem; padding: .3rem .3rem .3rem 1rem; border-radius: 999px; }
-  .eb-cor-rotulo { min-width: 0; margin-right: .2rem; }
-  .eb-cor-linha + .eb-cor-linha { padding-left: .6rem; border-left: 1px solid var(--linha-clara); }
-  .eb-cor-responder { height: 2.25rem; margin-left: .2rem; }
+  .eb-guia { left: auto; right: 1.25rem; bottom: 1.25rem; width: 23rem; }
 }
 
 /* ---------- 4. movimento ---------- */
