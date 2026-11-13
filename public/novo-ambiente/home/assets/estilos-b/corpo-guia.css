@@ -1,0 +1,175 @@
+/* Seções C · Guia (12/11/2026). O mesmo conteúdo da A, arrumado como um guia: título de um lado e a coisa do
+   outro, os oito serviços juntos em abas (um por vez, com foto), o antes e depois num botão e o fim com os
+   três jeitos de começar. Pra ela: "tudo organizado", sem rolar quadro atrás de quadro.
+   Vem depois do pagina.css; tudo aqui vale só com a classe .cg no <html>. */
+
+/* título de um lado, conteúdo do outro (no celular, um embaixo do outro) */
+.g-duas { display: grid; gap: clamp(2rem, 1.5rem + 2vw, 3rem); }
+.cg .g-lado h2 { font-size: clamp(2.125rem, 1.5rem + 2.4vw, 3.5rem); max-width: 14ch; }
+.cg .g-lado h2 em { display: inline; }
+.g-lado p { margin-top: 1.25rem; max-width: 30rem; font-size: 1.0625rem; color: var(--texto-2); }
+@media (min-width: 62rem) {
+  .g-duas { grid-template-columns: 5fr 7fr; align-items: start; gap: clamp(3rem, 2rem + 4vw, 6.5rem); }
+  .g-quem .g-lado, .g-par .g-lado { position: sticky; top: 7rem; }
+}
+
+/* ---------- pra quem: uma lista num quadro só ---------- */
+.cg .g-quem { background: var(--pg-2); }
+.g-lista { list-style: none; padding: .25rem clamp(1.25rem, 1rem + 1.5vw, 2.5rem); border-radius: 20px; background: var(--pg); box-shadow: var(--sombra); }
+.g-lista li { display: grid; gap: 1rem; padding-block: clamp(1.5rem, 1.25rem + 1vw, 2.25rem); }
+.g-lista li + li { border-top: 1px solid var(--linha); }
+.cg .g-lista h3 { font-size: 1.375rem; }
+.g-lista p { margin-top: .6rem; color: var(--texto-2); }
+.g-lista .resolve { color: var(--texto); }
+.g-lista .link-seta { margin-top: 1rem; font-size: .9375rem; }
+@media (min-width: 30rem) { .g-lista li { grid-template-columns: auto 1fr; gap: 1.25rem; } .cg .g-lista h3 { padding-top: .75rem; } }
+
+/* ---------- serviços: os oito em abas ---------- */
+.cg .g-servicos { background: var(--pg); }
+.g-abas { margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); display: grid; gap: 1.25rem; }
+.g-menu { display: grid; gap: .3rem; align-content: start; }
+.g-grupo { padding: .9rem .6rem .45rem; font: 600 .75rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--azul-texto); }
+.g-grupo:first-child { padding-top: 0; }
+.g-aba { display: grid; grid-template-columns: 2.5rem 1fr; align-items: center; gap: .85rem; padding: .4rem .9rem .4rem .4rem; border-radius: 12px;
+  color: var(--texto); font: 500 1rem/1.25 var(--sans); text-decoration: none; transition: background-color .25s var(--sai), color .25s var(--sai); }
+.cg .g-aba .b-bolinha { width: 2.5rem; height: 2.5rem; transition: background-color .25s var(--sai), color .25s var(--sai); }
+.g-aba .ico { width: 1.25rem; height: 1.25rem; }
+.g-aba:hover { background: var(--pg-2); }
+.g-aba[aria-selected="true"] { background: var(--botao); color: #fff; }
+.cg .g-aba[aria-selected="true"] .b-bolinha { background: #fff; color: var(--botao); }
+.g-aba:focus-visible { outline-offset: 2px; }
+
+.g-paineis { display: grid; gap: 1rem; }
+.g-painel { display: grid; overflow: hidden; border-radius: 20px; background: var(--pg-2); scroll-margin-top: 6rem; }
+.g-abas.pronta .g-painel:not(.ativa) { display: none; }
+.g-painel figure { overflow: hidden; aspect-ratio: 4 / 3; background: var(--gelo); }
+.g-painel img { width: 100%; height: 100% !important; object-fit: cover; }
+.g-painel-texto { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(1.5rem, 1rem + 2vw, 2.75rem); }
+.g-painel-grupo { font: 600 .75rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--azul-texto); }
+.cg .g-painel h3 { margin-top: .9rem; font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem); max-width: 16ch; }
+.g-painel p { margin-top: .9rem; max-width: 36ch; color: var(--texto-2); }
+.g-painel .termos { color: var(--azul-texto); }
+.g-painel .botao { margin-top: 1.75rem; }
+@media (min-width: 48rem) {
+  .g-painel { grid-template-columns: 1fr 1fr; min-height: 30rem; }
+  .g-painel figure { aspect-ratio: auto; }
+  .g-painel-texto { justify-content: center; }
+}
+
+/* celular e tablet: as abas viram uma fileira que corre pro lado, em cima da foto */
+@media (max-width: 61.99rem) {
+  .g-menu { display: flex; gap: .5rem; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding-bottom: .25rem;
+    margin-inline: calc(-1 * var(--margem)); padding-inline: var(--margem); scroll-padding-inline: var(--margem); }
+  .g-menu::-webkit-scrollbar { display: none; }
+  .g-grupo { display: none; }
+  .g-aba { flex: none; grid-template-columns: 2rem auto; gap: .6rem; padding: .3rem 1rem .3rem .3rem; border-radius: 999px; background: var(--pg-2); font-size: .9375rem; white-space: nowrap; }
+  .cg .g-aba .b-bolinha { width: 2rem; height: 2rem; }
+  .g-aba .ico { width: 1.1rem; height: 1.1rem; }
+}
+@media (min-width: 62rem) { .g-abas { grid-template-columns: 18rem minmax(0, 1fr); gap: 1.5rem; align-items: start; } }
+
+/* ---------- antes e depois: um botão troca a foto ---------- */
+.cg .g-par { background: var(--pg-2); }
+.g-troca { display: inline-flex; margin-top: 2rem; padding: .3rem; border-radius: 999px; background: var(--pg); box-shadow: inset 0 0 0 1px var(--linha); }
+.g-troca button { min-height: 2.75rem; padding-inline: 1.5rem; border: 0; border-radius: 999px; background: transparent; color: var(--texto);
+  font: 600 .875rem/1 var(--sans); letter-spacing: .04em; cursor: pointer; transition: background-color .3s var(--sai), color .3s var(--sai); }
+.g-troca button[aria-pressed="true"] { background: var(--botao); color: #fff; }
+.sem-js .g-troca { display: none; }
+.g-fotos { display: grid; gap: 1rem; }
+.g-fotos figure { position: relative; overflow: hidden; border-radius: 20px; background: var(--gelo); }
+.g-fotos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: 62% 50%; }
+.g-fotos figcaption { position: absolute; left: 1rem; top: 1rem; padding: .45rem .9rem; border-radius: 999px; background: #fff; color: var(--marinho);
+  font: 600 .75rem/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.g-depois figcaption { background: var(--botao); color: #fff; }
+/* com script, as duas fotos ficam uma em cima da outra, e o depois entra como a passada do rodo */
+.js .g-fotos { position: relative; display: block; }
+.js .g-depois { position: absolute; inset: 0; clip-path: inset(0 0 0 0); transition: clip-path 1s cubic-bezier(.6, 0, .2, 1); }
+.js .g-fotos[data-ver="antes"] .g-depois { clip-path: inset(0 100% 0 0); }
+
+/* ---------- como funciona: os passos em pé, ligados por uma linha ---------- */
+.cg .g-passos { background: var(--pg); }
+.g-trilha { list-style: none; padding: 0; }
+.g-trilha li { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; padding-bottom: 2.75rem; }
+.g-trilha li:last-child { padding-bottom: 0; }
+.g-trilha li:not(:last-child)::before { content: ""; position: absolute; left: 1.625rem; top: 4rem; bottom: .75rem; width: 2px; margin-left: -1px; background: var(--gelo); transform-origin: 50% 0; }
+.g-trilha .b-passo { display: block; margin-top: .25rem; }
+.cg .g-trilha h3 { margin-top: .55rem; font-size: 1.5rem; max-width: 22ch; }
+.g-trilha p { margin-top: .55rem; max-width: 40ch; color: var(--texto-2); }
+@media (min-width: 62rem) {
+  .g-passos .g-duas { grid-template-rows: auto 1fr; }
+  .g-passos .g-lado { grid-column: 1; grid-row: 1; }
+  .g-trilha { grid-column: 2; grid-row: 1 / 3; }
+  .g-passos-botao { grid-column: 1; grid-row: 2; }
+}
+
+/* ---------- fechamento: uma faixa com os três jeitos de começar ---------- */
+.cg .g-fecho { background: var(--marinho); color: var(--off); }
+.g-fecho-topo { display: grid; gap: 1.25rem; }
+.cg .g-fecho h2 { font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem); max-width: 13ch; color: #fff; }
+.cg .g-fecho h2 em { display: block; color: var(--em-escuro); }
+.g-fecho-topo p { max-width: 28rem; font-size: 1.0625rem; color: var(--claro-2); }
+@media (min-width: 62rem) { .g-fecho-topo { grid-template-columns: 7fr 5fr; align-items: end; gap: 5rem; } }
+.g-jeitos { list-style: none; padding: 0; margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; gap: .75rem; }
+.g-jeitos a { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; height: 100%; padding: 1.1rem 1.25rem 1.1rem 1.1rem; border-radius: 16px;
+  background: rgba(244, 248, 250, .07); box-shadow: inset 0 0 0 1px var(--linha-clara); color: #fff; text-decoration: none; transition: background-color .3s var(--sai); }
+.g-jeitos a:hover { background: rgba(244, 248, 250, .14); }
+.g-jeitos strong { display: block; font: 500 1.125rem/1.2 var(--sans); letter-spacing: -.01em; }
+.g-jeitos small { display: block; margin-top: .25rem; font-size: .875rem; line-height: 1.35; color: var(--claro-2); }
+.g-jeitos a > svg { width: 1.1rem; height: 1.1rem; transition: transform .35s var(--sai); }
+.g-jeitos a:hover > svg { transform: translate(3px, -3px); }
+.g-jeitos li:first-child a { background: #fff; box-shadow: none; color: var(--marinho); }
+.g-jeitos li:first-child small { color: var(--texto-2); }
+.g-jeitos li:first-child a:hover { background: var(--off); }
+@media (min-width: 48rem) { .g-jeitos { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
+
+/* ---------- as três cores ---------- */
+/* cor 2: a estampa do uniforme no como funciona e no fechamento */
+.cg[data-paleta="2"] .g-passos, .cg[data-paleta="2"] .g-fecho { background: var(--estampa); }
+
+/* cor 3: marinho e branco se alternando, o fechamento no azul */
+.cg[data-paleta="3"] .g-quem { background: var(--pg); }
+.cg[data-paleta="3"] .g-servicos { background: var(--marinho); }
+.cg[data-paleta="3"] .g-par { background: var(--pg); }
+.cg[data-paleta="3"] .g-passos { background: var(--marinho-2); }
+.cg[data-paleta="3"] .g-fecho { background: var(--botao); }
+.cg[data-paleta="3"] .g-fecho h2 em { color: #fff; }
+.cg[data-paleta="3"] .g-fecho-topo p, .cg[data-paleta="3"] .g-jeitos small { color: #fff; }
+.cg[data-paleta="3"] .g-jeitos li:first-child small { color: var(--texto-2); }
+.cg[data-paleta="3"] .g-jeitos a { background: rgba(255, 255, 255, .1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35); }
+.cg[data-paleta="3"] .g-jeitos li:first-child a { background: #fff; }
+.cg[data-paleta="3"] .g-jeitos .b-bolinha { background: var(--marinho); }
+.cg[data-paleta="3"] .g-servicos .g-painel { background: var(--pg); }
+.cg[data-paleta="3"] .g-aba { color: var(--off); }
+.cg[data-paleta="3"] .g-aba:hover { background: rgba(244, 248, 250, .08); }
+.cg[data-paleta="3"] .g-grupo { color: var(--azul-claro); }
+@media (max-width: 61.99rem) { .cg[data-paleta="3"] .g-aba:not([aria-selected="true"]) { background: rgba(244, 248, 250, .08); } }
+
+/* o texto das seções escuras */
+.cg[data-paleta="2"] .g-passos,
+.cg[data-paleta="3"] .g-servicos,
+.cg[data-paleta="3"] .g-passos { color: var(--off); }
+.cg[data-paleta="3"] .g-servicos .b-cabeca p { color: var(--claro-2); }
+.cg[data-paleta="2"] .g-passos h2 em,
+.cg[data-paleta="3"] .g-servicos h2 em,
+.cg[data-paleta="3"] .g-passos h2 em { color: var(--em-escuro); }
+.cg[data-paleta="2"] .g-trilha h3, .cg[data-paleta="3"] .g-trilha h3 { color: var(--off); }
+.cg[data-paleta="2"] .g-trilha p, .cg[data-paleta="3"] .g-trilha p { color: var(--claro-2); }
+.cg[data-paleta="2"] .g-trilha .b-passo, .cg[data-paleta="3"] .g-trilha .b-passo { color: var(--azul-claro); }
+.cg[data-paleta="2"] .g-trilha li::before, .cg[data-paleta="3"] .g-trilha li::before { background: rgba(244, 248, 250, .25); }
+
+/* ---------- movimento ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* a aba nova entra como a passada do rodo: a foto se abre da esquerda e o texto sobe */
+  .g-abas.pronta .g-painel.ativa figure { animation: g-passada .9s cubic-bezier(.6, 0, .2, 1) both; }
+  .g-abas.pronta .g-painel.ativa .g-painel-texto > * { animation: sobe .7s var(--sai) both; }
+  .g-abas.pronta .g-painel.ativa .g-painel-texto > :nth-child(2) { animation-delay: .06s; }
+  .g-abas.pronta .g-painel.ativa .g-painel-texto > :nth-child(3) { animation-delay: .12s; }
+  .g-abas.pronta .g-painel.ativa .g-painel-texto > :nth-child(n+4) { animation-delay: .18s; }
+  @keyframes g-passada { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  /* a linha dos passos desce de um pro outro */
+  .js .cg .g-trilha[data-anima] li::before { transition: transform 1s var(--sai); transition-delay: calc(.3s + var(--i) * .35s); }
+  .js .cg .g-trilha[data-anima]:not(.visto) li::before { transform: scaleY(0); }
+  .js .cg .g-trilha[data-anima] .b-bolinha { transition: transform .6s var(--sai); transition-delay: calc(var(--i) * .35s); }
+  .js .cg .g-trilha[data-anima]:not(.visto) .b-bolinha { transform: scale(.6); }
+}
+@media (prefers-reduced-motion: reduce) { .js .g-depois { transition: none; } }

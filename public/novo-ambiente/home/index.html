@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home" data-entrada="rapel" data-home="a" data-paleta="1">
+<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home cc" data-entrada="rapel" data-home="a" data-corpo="a" data-paleta="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,14 +17,17 @@
 <link rel="stylesheet" href="assets/estilos-b/pagina.css">
 <link rel="stylesheet" href="assets/estilos-b/vidraca.css">
 <link rel="stylesheet" href="assets/estilos-b/icones.css">
+<link rel="stylesheet" href="assets/estilos-b/corpo-fotos.css">
+<link rel="stylesheet" href="assets/estilos-b/corpo-guia.css">
 <script>
 document.documentElement.classList.replace('sem-js', 'js');
 (function () {
-  var q = new URLSearchParams(location.search), h = document.documentElement, c = q.get('cor'), e = q.get('home');
-  try { c = c || localStorage.getItem('na-cor'); e = e || localStorage.getItem('na-home'); } catch (x) {}
+  var q = new URLSearchParams(location.search), h = document.documentElement, c = q.get('cor'), e = q.get('home'), s = q.get('corpo');
+  try { c = c || localStorage.getItem('na-cor'); e = e || localStorage.getItem('na-home'); s = s || localStorage.getItem('na-corpo'); } catch (x) {}
   if (/^[123]$/.test(c || '')) h.dataset.paleta = c;
-  var classes = {"a":"eb-painel-home","b":"ev","c":"ei"};
+  var classes = {"a":"eb-painel-home","b":"ev","c":"ei"}, corpos = {"a":"cc","b":"cf","c":"cg"};
   if (classes[e]) { h.classList.remove('eb-painel-home'); h.classList.add(classes[e]); h.dataset.home = e; }
+  if (corpos[s]) { h.classList.remove('cc'); h.classList.add(corpos[s]); h.dataset.corpo = s; }
 })();
 </script>
 </head>
@@ -42,6 +45,12 @@ document.documentElement.classList.replace('sem-js', 'js');
   <symbol id="i-solar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M5.5 6h13l2.5 11H3z"/><path d="M4.3 11.5h15.4M9.3 6l-1 11M14.7 6l1 11M12 17v3.5M8 20.5h8"/></g></symbol>
   <symbol id="i-piso" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 4 21 9l-9 5-9-5z"/><path d="m3 13.5 9 5 9-5M7.5 6.5l9 5M16.5 6.5l-9 5"/></g></symbol>
   <symbol id="i-fone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M8.2 3.5 5 3.6c-.9 0-1.6.8-1.5 1.7.6 8 6.9 14.4 14.9 15 .9.1 1.7-.6 1.7-1.5l.1-3.2c0-.6-.4-1.2-1-1.4l-3.2-1c-.5-.2-1.1 0-1.5.4l-1.3 1.4a12.6 12.6 0 0 1-5.4-5.4l1.4-1.3c.4-.4.6-1 .4-1.5l-1-3.2c-.2-.6-.8-1-1.4-1z"/></symbol>
+</svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-janela" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4.5 3.5h15v17h-15zM12 3.5v17M4.5 12h15"/><path d="m7 9.5 2.5-2.5M14.5 17l2.5-2.5"/></g></symbol>
+  <symbol id="i-altura" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 21V3h7v18M2.5 21h19M16.5 6.5h2M16.5 10h2M16.5 13.5h2"/><path d="M9 3v8.5"/><circle cx="9" cy="13.2" r="1.6"/><path d="M9 14.8v3.4l-1.8 2.3M9 16.2l2.6-1.3M9 18.2l1.6 2.3"/></g></symbol>
+  <symbol id="i-posobra" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 4h11v4.5h-11zM14.5 6.2H18v5.3h-8.5V14"/><path d="M8.5 14h2v6.5h-2z"/></g></symbol>
+  <symbol id="i-arrasta" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M9 7 4 12l5 5M15 7l5 5-5 5"/></symbol>
 </svg>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
@@ -125,12 +134,7 @@ document.documentElement.classList.replace('sem-js', 'js');
     </a>
   </div>
 </section>
-</div><div class="eb-home" data-home="c"><svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-janela" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4.5 3.5h15v17h-15zM12 3.5v17M4.5 12h15"/><path d="m7 9.5 2.5-2.5M14.5 17l2.5-2.5"/></g></symbol>
-  <symbol id="i-altura" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M14 21V3h7v18M2.5 21h19M16.5 6.5h2M16.5 10h2M16.5 13.5h2"/><path d="M9 3v8.5"/><circle cx="9" cy="13.2" r="1.6"/><path d="M9 14.8v3.4l-1.8 2.3M9 16.2l2.6-1.3M9 18.2l1.6 2.3"/></g></symbol>
-  <symbol id="i-posobra" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 4h11v4.5h-11zM14.5 6.2H18v5.3h-8.5V14"/><path d="M8.5 14h2v6.5h-2z"/></g></symbol>
-</svg>
-<section class="entrada" aria-labelledby="t-entrada">
+</div><div class="eb-home" data-home="c"><section class="entrada" aria-labelledby="t-entrada">
   <picture class="entrada-foto">
     <source media="(max-width: 47.99rem)" srcset="assets/img/entrada-rapel-cel-750.webp 750w, assets/img/entrada-rapel-cel-1080.webp 1080w" sizes="100vw" width="1080" height="1920">
     <img src="assets/img/entrada-rapel-1600.webp" srcset="assets/img/entrada-rapel-1600.webp 1600w, assets/img/entrada-rapel-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="Técnico em rapel limpando a fachada de vidro de um prédio, com araucárias refletidas no vidro" fetchpriority="high">
@@ -154,7 +158,7 @@ document.documentElement.classList.replace('sem-js', 'js');
 </section>
 </div>
 <script>(function () { var e = document.documentElement.dataset.home; document.querySelectorAll('.eb-home').forEach(function (d) { if (d.dataset.home !== e) d.remove(); }); })();</script>
-<section class="secao b-quem" aria-labelledby="t-quem">
+<div class="eb-corpo" data-corpo="a"><section class="secao b-quem" aria-labelledby="t-quem">
   <div class="wrap">
     <div class="b-cabeca">
       <h2 id="t-quem">Pra quem <em>limpamos</em></h2>
@@ -320,6 +324,371 @@ document.documentElement.classList.replace('sem-js', 'js');
     </div>
   </div>
 </section>
+</div><div class="eb-corpo" data-corpo="b"><section class="secao f-quem" aria-labelledby="t-quem">
+  <div class="wrap">
+    <h2 id="t-quem" class="f-titulo">Pra quem <em>limpamos</em></h2>
+    <ul class="f-quem-lista">
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-predio"/></svg></span>
+        <h3>Condomínio e prédio comercial</h3>
+        <p>Fachada de vidro e vidro alto que ninguém do prédio alcança, e se alguém se machucar lá em cima quem responde é o síndico.</p>
+        <p class="resolve">Equipe de altura, visita técnica e data marcada com a administração do prédio.</p>
+        <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Sou%20s%C3%ADndico%2Fadministradora%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pro%20condom%C3%ADnio." target="_blank" rel="noopener">Orçamento pro condomínio<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </li>
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-loja"/></svg></span>
+        <h3>Loja, clínica ou escritório</h3>
+        <p>Vitrine com marca de dedo toda semana, e funcionário parando o atendimento pra passar pano.</p>
+        <p class="resolve">Vidro sempre limpo, com plano recorrente e horário combinado.</p>
+        <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Tenho%20uma%20empresa%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener">Orçamento pra empresa<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </li>
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-casa"/></svg></span>
+        <h3>Casa</h3>
+        <p>Janela alta, pé-direito alto e vidro de sacada que você não alcança sem se arriscar.</p>
+        <p class="resolve">Vidro transparente de novo, sem escada pra ninguém da família.</p>
+        <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pra%20minha%20casa." target="_blank" rel="noopener">Orçamento pra casa<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="secao f-vidros" id="vidros" aria-labelledby="t-vidros">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2 id="t-vidros">Limpeza de vidros: cada vidro pede <em>um jeito de chegar e um jeito de limpar</em></h2>
+      <p>Da sacada à pele de vidro de um prédio comercial, a Novo Ambiente limpa vidros em Curitiba e na Região Metropolitana. Orçamento por foto ou com visita técnica presencial.</p>
+    </div>
+    <ul class="f-mosaico" data-anima>
+      <li class="f-foto f-foto-grande" style="--i: 0">
+        <a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20em%20altura." target="_blank" rel="noopener">
+          <img src="assets/img/servico-altura.webp" alt="Técnico em rapel limpando a fachada de vidro de uma torre em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 40% 30%">
+          <span class="f-foto-texto"><h3>Vidros em altura e com rapel</h3><span class="f-p">Pra onde escada e haste não chegam: a equipe desce de rapel e limpa o vidro de cima a baixo.</span><span class="f-termos">Vidros altos · difícil acesso · pé-direito alto e átrios · elevadores panorâmicos</span><span class="f-pedir">Orçamento de vidro em altura<svg aria-hidden="true"><use href="#i-seta"/></svg></span></span>
+        </a>
+      </li>
+      <li class="f-foto" style="--i: 1">
+        <a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20fachada%20de%20vidro." target="_blank" rel="noopener">
+          <img src="assets/img/servico-fachada.webp" alt="Técnico na calçada limpando a fachada de vidro de um prédio comercial com haste e rodo" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 60% 40%">
+          <span class="f-foto-texto"><h3>Fachadas de vidro</h3><span class="f-p">Vidros de prédios, edifícios comerciais e condomínios, com limpeza interna e externa, painel a painel.</span><span class="f-termos">Pele de vidro (Structural Glazing) · cortina de vidro (Curtain Wall)</span><span class="f-pedir">Orçamento de fachada de vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></span></span>
+        </a>
+      </li>
+      <li class="f-foto" style="--i: 2">
+        <a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vitrine%20e%20vidros%20comerciais." target="_blank" rel="noopener">
+          <img src="assets/img/servico-vitrine.webp" alt="Rodo limpando a vitrine de uma loja de alto padrão em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 40% 50%">
+          <span class="f-foto-texto"><h3>Vitrines, lojas, clínicas e escritórios</h3><span class="f-p">Vitrine sem marca de dedo, no dia e no horário que não atrapalham o atendimento.</span><span class="f-termos">Vidros comerciais · portas e painéis do chão ao teto · muros e painéis de vidro</span><span class="f-pedir">Orçamento de vitrine<svg aria-hidden="true"><use href="#i-seta"/></svg></span></span>
+        </a>
+      </li>
+      <li class="f-foto" style="--i: 3">
+        <a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pra%20minha%20casa." target="_blank" rel="noopener">
+          <img src="assets/img/servico-sacada.webp" alt="Rodo limpando o envidraçamento de sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 45%">
+          <span class="f-foto-texto"><h3>Casas e sacadas</h3><span class="f-p">Vidro alto e de sacada transparente de novo, sem ninguém da família subir em escada.</span><span class="f-termos">Vidros residenciais · janelas e esquadrias · envidraçamento de sacada · guarda-corpos</span><span class="f-pedir">Orçamento pra casa ou sacada<svg aria-hidden="true"><use href="#i-seta"/></svg></span></span>
+        </a>
+      </li>
+      <li class="f-foto" style="--i: 4">
+        <a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20p%C3%B3s-obra%20de%20vidros." target="_blank" rel="noopener">
+          <img src="assets/img/servico-posobra.webp" alt="Técnico com raspador tirando respingos de tinta do vidro de uma sala comercial recém-terminada" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 55% 40%">
+          <span class="f-foto-texto"><h3>Pós-obra de vidros</h3><span class="f-p">Resto de tinta, cimento e poeira de obra saem do vidro novo, com cuidado pra não riscar.</span><span class="f-termos">Limpeza pós-obra de vidros · salas e lojas recém-entregues</span><span class="f-pedir">Orçamento de pós-obra<svg aria-hidden="true"><use href="#i-seta"/></svg></span></span>
+        </a>
+      </li>
+    </ul>
+    <p class="f-arraste"><svg class="ico" aria-hidden="true"><use href="#i-arrasta"/></svg>Arraste pro lado pra ver os cinco</p>
+  </div>
+</section>
+
+<section class="secao f-par" aria-labelledby="t-ba">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2 id="t-ba">O mesmo vidro, <em>antes e depois</em></h2>
+      <p>Poeira, resto de obra e marca de dedo saem. A fachada volta a refletir o céu, e quem está dentro volta a ver a cidade.</p>
+    </div>
+    <div class="f-comparar" data-ba style="--pos: 50%">
+      <figure class="f-depois"><img src="assets/img/vidro-limpo-1920.webp" srcset="assets/img/vidro-limpo-1000.webp 1000w, assets/img/vidro-limpo-1920.webp 1920w" sizes="(min-width: 48rem) 50vw, 100vw" width="1920" height="1080" alt="A mesma fachada de vidro depois da limpeza, refletindo o céu e as araucárias" loading="lazy" decoding="async"></figure>
+      <figure class="f-antes"><img src="assets/img/vidro-sujo-1920.webp" srcset="assets/img/vidro-sujo-1000.webp 1000w, assets/img/vidro-sujo-1920.webp 1920w" sizes="(min-width: 48rem) 50vw, 100vw" width="1920" height="1080" alt="Fachada de vidro sem brilho, com poeira e manchas, antes da limpeza" loading="lazy" decoding="async"></figure>
+      <span class="f-rotulo f-rotulo-antes" aria-hidden="true">Antes</span>
+      <span class="f-rotulo f-rotulo-depois" aria-hidden="true">Depois</span>
+      <input type="range" min="0" max="100" value="50" step="1" aria-label="Passe o rodo: arraste pra comparar o vidro antes e depois da limpeza">
+      <span class="f-alca" aria-hidden="true"><span><svg class="ico" aria-hidden="true"><use href="#i-arrasta"/></svg></span></span>
+    </div>
+    <p class="f-dica">Arraste o rodo pro lado</p>
+  </div>
+</section>
+
+<section class="secao f-passos" aria-labelledby="t-passos">
+  <div class="wrap">
+    <h2 id="t-passos" class="f-titulo">Como <em>funciona</em></h2>
+    <ol class="f-passos-lista" data-anima>
+      <li style="--i: 0"><span class="f-num">1</span><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-foto"/></svg></span><h3>Mande uma foto ou peça uma visita</h3><p>Uma foto do vidro e o endereço pelo WhatsApp já bastam pra começar. Se preferir, fazemos uma visita técnica presencial pra avaliar o serviço.</p></li>
+      <li style="--i: 1"><span class="f-num">2</span><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-proposta"/></svg></span><h3>Receba a proposta</h3><p>Orçamento sem compromisso e proposta personalizada, pra uma limpeza só ou com plano recorrente.</p></li>
+      <li style="--i: 2"><span class="f-num">3</span><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-agenda"/></svg></span><h3>Limpamos na data marcada</h3><p>A equipe chega no dia combinado, com o acesso certo pra cada tipo de vidro.</p></li>
+    </ol>
+    <a class="botao botao-azul" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Vou%20mandar%20uma%20foto%20do%20vidro%20pra%20voc%C3%AAs%20me%20passarem%20o%20or%C3%A7amento." target="_blank" rel="noopener">Mandar foto do vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+  </div>
+</section>
+
+<section class="secao planos" id="planos" aria-labelledby="t-planos">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2 id="t-planos">Uma limpeza só, ou o vidro <em>sempre em dia</em></h2>
+      <p>Trabalhamos com serviço pontual e com contrato periódico. O plano é montado conforme a necessidade de cada cliente, e na visita técnica avaliamos o vidro com você.</p>
+    </div>
+    <div class="ano" data-anima>
+      <div class="ano-meses" aria-hidden="true"><span>jan</span><span>fev</span><span>mar</span><span>abr</span><span>mai</span><span>jun</span><span>jul</span><span>ago</span><span>set</span><span>out</span><span>nov</span><span>dez</span></div>
+      <ul class="ano-lista">
+        <li><h3>Semanal</h3><span class="trilho" style="--n: 52" aria-hidden="true"></span><p>toda semana, 52 no ano</p></li>
+        <li><h3>Quinzenal</h3><span class="trilho" style="--n: 24" aria-hidden="true"></span><p>a cada 15 dias, 24 no ano</p></li>
+        <li><h3>Mensal</h3><span class="trilho" style="--n: 12" aria-hidden="true"></span><p>todo mês, 12 no ano</p></li>
+        <li><h3>Trimestral</h3><span class="trilho" style="--n: 4" aria-hidden="true"></span><p>a cada 3 meses, 4 no ano</p></li>
+        <li><h3>Semestral</h3><span class="trilho" style="--n: 2" aria-hidden="true"></span><p>a cada 6 meses, 2 no ano</p></li>
+        <li class="pontual"><h3>Pontual</h3><span class="trilho" style="--n: 1" aria-hidden="true"></span><p>uma vez, quando você precisar</p></li>
+      </ul>
+    </div>
+    <a class="botao botao-azul" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20dos%20planos%20de%20limpeza%20recorrente." target="_blank" rel="noopener">Montar um plano no WhatsApp<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+  </div>
+</section>
+
+<section class="secao f-tambem" aria-labelledby="t-tambem">
+  <div class="wrap">
+    <h2 id="t-tambem" class="f-titulo">Também <em>limpamos</em></h2>
+    <ul class="f-tambem-lista">
+      <li id="fachada"><a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20fachada." target="_blank" rel="noopener">
+        <figure><img src="assets/img/servico-fachada-acm.webp" alt="Técnico limpando a fachada de ACM de um prédio comercial" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 40%"></figure>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-fachada"/></svg></span>
+        <h3>Fachada</h3>
+        <p>ACM, pastilha, textura e pedra em prédios e empresas.</p>
+        <span class="link-seta">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+      </a></li>
+      <li id="placa-solar"><a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20placa%20solar." target="_blank" rel="noopener">
+        <figure><img src="assets/img/servico-placa-solar.webp" alt="Técnico limpando placas solares no telhado de uma casa" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 55%"></figure>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-solar"/></svg></span>
+        <h3>Placa solar</h3>
+        <p>Placas de casas, comércios e indústrias, sem riscar o vidro.</p>
+        <span class="link-seta">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+      </a></li>
+      <li id="piso"><a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20piso." target="_blank" rel="noopener">
+        <figure><img src="assets/img/servico-piso.webp" alt="Técnico lavando piso de pedra na área externa de um condomínio" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 60%"></figure>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-piso"/></svg></span>
+        <h3>Piso</h3>
+        <p>Pisos, pedras e áreas externas de condomínios, empresas e casas.</p>
+        <span class="link-seta">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="f-fecho" aria-labelledby="t-fecho">
+  <img src="assets/img/entrada-janela-1600.webp" srcset="assets/img/entrada-janela-800.webp 800w, assets/img/entrada-janela-1600.webp 1600w" sizes="100vw" width="1600" height="900" alt="Rodo abrindo uma faixa de vidro limpo numa fachada, com uma araucária refletida" loading="lazy" decoding="async">
+  <div class="wrap f-fecho-texto">
+    <h2 id="t-fecho">Seu vidro, <em>transparente de novo</em></h2>
+    <p>Mande uma foto do vidro pelo WhatsApp ou peça uma visita técnica, e receba a proposta sem compromisso.</p>
+    <div class="acoes" data-esconde-barra>
+      <a class="botao botao-claro" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener">Pedir orçamento no WhatsApp<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20visita%20t%C3%A9cnica." target="_blank" rel="noopener">Agendar visita técnica<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+      <a class="link-seta" href="tel:+5541997799646">Ligar: (41) 99779-9646<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+    </div>
+  </div>
+</section>
+</div><div class="eb-corpo" data-corpo="c"><section class="secao g-quem" aria-labelledby="t-quem">
+  <div class="wrap g-duas">
+    <div class="g-lado"><h2 id="t-quem">Pra quem <em>limpamos</em></h2><p>Toque no seu caso e a conversa abre no WhatsApp com a mensagem pronta.</p></div>
+    <ul class="g-lista">
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-predio"/></svg></span>
+        <div>
+          <h3>Condomínio e prédio comercial</h3>
+          <p>Fachada de vidro e vidro alto que ninguém do prédio alcança, e se alguém se machucar lá em cima quem responde é o síndico.</p>
+          <p class="resolve">Equipe de altura, visita técnica e data marcada com a administração do prédio.</p>
+          <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Sou%20s%C3%ADndico%2Fadministradora%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pro%20condom%C3%ADnio." target="_blank" rel="noopener">Orçamento pro condomínio<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </li>
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-loja"/></svg></span>
+        <div>
+          <h3>Loja, clínica ou escritório</h3>
+          <p>Vitrine com marca de dedo toda semana, e funcionário parando o atendimento pra passar pano.</p>
+          <p class="resolve">Vidro sempre limpo, com plano recorrente e horário combinado.</p>
+          <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Tenho%20uma%20empresa%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener">Orçamento pra empresa<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </li>
+      <li>
+        <span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-casa"/></svg></span>
+        <div>
+          <h3>Casa</h3>
+          <p>Janela alta, pé-direito alto e vidro de sacada que você não alcança sem se arriscar.</p>
+          <p class="resolve">Vidro transparente de novo, sem escada pra ninguém da família.</p>
+          <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pra%20minha%20casa." target="_blank" rel="noopener">Orçamento pra casa<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="secao g-servicos" id="vidros" aria-labelledby="t-vidros">
+  <div class="wrap">
+    <div class="b-cabeca">
+      <h2 id="t-vidros">Limpeza de vidros: cada vidro pede <em>um jeito de chegar e um jeito de limpar</em></h2>
+      <p>Da sacada à pele de vidro de um prédio comercial, a Novo Ambiente limpa vidros em Curitiba e na Região Metropolitana. Orçamento por foto ou com visita técnica presencial.</p>
+    </div>
+    <div class="g-abas">
+      <nav class="g-menu" aria-label="Serviços">
+        <p class="g-grupo">Vidros</p><a class="g-aba" href="#altura" data-aba="altura"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-altura"/></svg></span>Altura e rapel</a>
+        <a class="g-aba" href="#fachada-de-vidro" data-aba="fachada-de-vidro"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-predio"/></svg></span>Fachadas de vidro</a>
+        <a class="g-aba" href="#vitrine" data-aba="vitrine"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-loja"/></svg></span>Vitrines e lojas</a>
+        <a class="g-aba" href="#casa-e-sacada" data-aba="casa-e-sacada"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-casa"/></svg></span>Casas e sacadas</a>
+        <a class="g-aba" href="#pos-obra" data-aba="pos-obra"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-posobra"/></svg></span>Pós-obra</a>
+        <p class="g-grupo">Também limpamos</p><a class="g-aba" href="#fachada" data-aba="fachada"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-fachada"/></svg></span>Fachada</a>
+        <a class="g-aba" href="#placa-solar" data-aba="placa-solar"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-solar"/></svg></span>Placa solar</a>
+        <a class="g-aba" href="#piso" data-aba="piso"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-piso"/></svg></span>Piso</a>
+      </nav>
+      <div class="g-paineis">
+        <article class="g-painel ativa" id="altura" aria-labelledby="t-altura">
+          <figure><img src="assets/img/servico-altura.webp" alt="Técnico em rapel limpando a fachada de vidro de uma torre em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 40% 30%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Vidros</span>
+            <h3 id="t-altura">Vidros em altura e com rapel</h3>
+            <p>Pra onde escada e haste não chegam: a equipe desce de rapel e limpa o vidro de cima a baixo.</p>
+            <p class="termos">Vidros altos · difícil acesso · pé-direito alto e átrios · elevadores panorâmicos</p>
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20em%20altura." target="_blank" rel="noopener">Orçamento de vidro em altura<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="fachada-de-vidro" aria-labelledby="t-fachada-de-vidro">
+          <figure><img src="assets/img/servico-fachada.webp" alt="Técnico na calçada limpando a fachada de vidro de um prédio comercial com haste e rodo" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 60% 40%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Vidros</span>
+            <h3 id="t-fachada-de-vidro">Fachadas de vidro</h3>
+            <p>Vidros de prédios, edifícios comerciais e condomínios, com limpeza interna e externa, painel a painel.</p>
+            <p class="termos">Pele de vidro (Structural Glazing) · cortina de vidro (Curtain Wall)</p>
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20fachada%20de%20vidro." target="_blank" rel="noopener">Orçamento de fachada de vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="vitrine" aria-labelledby="t-vitrine">
+          <figure><img src="assets/img/servico-vitrine.webp" alt="Rodo limpando a vitrine de uma loja de alto padrão em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 40% 50%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Vidros</span>
+            <h3 id="t-vitrine">Vitrines, lojas, clínicas e escritórios</h3>
+            <p>Vitrine sem marca de dedo, no dia e no horário que não atrapalham o atendimento.</p>
+            <p class="termos">Vidros comerciais · portas e painéis do chão ao teto · muros e painéis de vidro</p>
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vitrine%20e%20vidros%20comerciais." target="_blank" rel="noopener">Orçamento de vitrine<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="casa-e-sacada" aria-labelledby="t-casa-e-sacada">
+          <figure><img src="assets/img/servico-sacada.webp" alt="Rodo limpando o envidraçamento de sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 45%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Vidros</span>
+            <h3 id="t-casa-e-sacada">Casas e sacadas</h3>
+            <p>Vidro alto e de sacada transparente de novo, sem ninguém da família subir em escada.</p>
+            <p class="termos">Vidros residenciais · janelas e esquadrias · envidraçamento de sacada · guarda-corpos</p>
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pra%20minha%20casa." target="_blank" rel="noopener">Orçamento pra casa ou sacada<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="pos-obra" aria-labelledby="t-pos-obra">
+          <figure><img src="assets/img/servico-posobra.webp" alt="Técnico com raspador tirando respingos de tinta do vidro de uma sala comercial recém-terminada" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 55% 40%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Vidros</span>
+            <h3 id="t-pos-obra">Pós-obra de vidros</h3>
+            <p>Resto de tinta, cimento e poeira de obra saem do vidro novo, com cuidado pra não riscar.</p>
+            <p class="termos">Limpeza pós-obra de vidros · salas e lojas recém-entregues</p>
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20p%C3%B3s-obra%20de%20vidros." target="_blank" rel="noopener">Orçamento de pós-obra<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="fachada" aria-labelledby="t-fachada">
+          <figure><img src="assets/img/servico-fachada-acm.webp" alt="Técnico limpando a fachada de ACM de um prédio comercial" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 40%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Também limpamos</span>
+            <h3 id="t-fachada">Fachada</h3>
+            <p>ACM, pastilha, textura e pedra em prédios e empresas.</p>
+            
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20fachada." target="_blank" rel="noopener">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="placa-solar" aria-labelledby="t-placa-solar">
+          <figure><img src="assets/img/servico-placa-solar.webp" alt="Técnico limpando placas solares no telhado de uma casa" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 55%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Também limpamos</span>
+            <h3 id="t-placa-solar">Placa solar</h3>
+            <p>Placas de casas, comércios e indústrias, sem riscar o vidro.</p>
+            
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20placa%20solar." target="_blank" rel="noopener">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+        <article class="g-painel" id="piso" aria-labelledby="t-piso">
+          <figure><img src="assets/img/servico-piso.webp" alt="Técnico lavando piso de pedra na área externa de um condomínio" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 60%"></figure>
+          <div class="g-painel-texto">
+            <span class="g-painel-grupo">Também limpamos</span>
+            <h3 id="t-piso">Piso</h3>
+            <p>Pisos, pedras e áreas externas de condomínios, empresas e casas.</p>
+            
+            <a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20piso." target="_blank" rel="noopener">Pedir orçamento<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="secao g-par" aria-labelledby="t-ba">
+  <div class="wrap g-duas">
+    <div class="g-lado">
+      <h2 id="t-ba">O mesmo vidro, <em>antes e depois</em></h2>
+      <p>Poeira, resto de obra e marca de dedo saem. A fachada volta a refletir o céu, e quem está dentro volta a ver a cidade.</p>
+      <div class="g-troca" role="group" aria-label="Ver o vidro">
+        <button type="button" data-ver="antes" aria-pressed="true">Antes</button><button type="button" data-ver="depois" aria-pressed="false">Depois</button>
+      </div>
+    </div>
+    <div class="g-fotos" data-ba data-ver="antes">
+      <figure class="g-antes"><img src="assets/img/vidro-sujo-1920.webp" srcset="assets/img/vidro-sujo-1000.webp 1000w, assets/img/vidro-sujo-1920.webp 1920w" sizes="(min-width: 48rem) 50vw, 100vw" width="1920" height="1080" alt="Fachada de vidro sem brilho, com poeira e manchas, antes da limpeza" loading="lazy" decoding="async"><figcaption>Antes</figcaption></figure>
+      <figure class="g-depois"><img src="assets/img/vidro-limpo-1920.webp" srcset="assets/img/vidro-limpo-1000.webp 1000w, assets/img/vidro-limpo-1920.webp 1920w" sizes="(min-width: 48rem) 50vw, 100vw" width="1920" height="1080" alt="A mesma fachada de vidro depois da limpeza, refletindo o céu e as araucárias" loading="lazy" decoding="async"><figcaption>Depois</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="secao g-passos" aria-labelledby="t-passos">
+  <div class="wrap g-duas">
+    <div class="g-lado"><h2 id="t-passos">Como <em>funciona</em></h2></div>
+    <ol class="g-trilha" data-anima>
+      <li style="--i: 0"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-foto"/></svg></span><div><span class="b-passo">Passo 1</span><h3>Mande uma foto ou peça uma visita</h3><p>Uma foto do vidro e o endereço pelo WhatsApp já bastam pra começar. Se preferir, fazemos uma visita técnica presencial pra avaliar o serviço.</p></div></li>
+      <li style="--i: 1"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-proposta"/></svg></span><div><span class="b-passo">Passo 2</span><h3>Receba a proposta</h3><p>Orçamento sem compromisso e proposta personalizada, pra uma limpeza só ou com plano recorrente.</p></div></li>
+      <li style="--i: 2"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-agenda"/></svg></span><div><span class="b-passo">Passo 3</span><h3>Limpamos na data marcada</h3><p>A equipe chega no dia combinado, com o acesso certo pra cada tipo de vidro.</p></div></li>
+    </ol>
+    <div class="g-passos-botao"><a class="botao botao-azul" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site.%20Vou%20mandar%20uma%20foto%20do%20vidro%20pra%20voc%C3%AAs%20me%20passarem%20o%20or%C3%A7amento." target="_blank" rel="noopener">Mandar foto do vidro<svg aria-hidden="true"><use href="#i-seta"/></svg></a></div>
+  </div>
+</section>
+
+<section class="secao planos" id="planos" aria-labelledby="t-planos">
+  <div class="wrap">
+    <div class="cabeca">
+      <h2 id="t-planos">Uma limpeza só, ou o vidro <em>sempre em dia</em></h2>
+      <p>Trabalhamos com serviço pontual e com contrato periódico. O plano é montado conforme a necessidade de cada cliente, e na visita técnica avaliamos o vidro com você.</p>
+    </div>
+    <div class="ano" data-anima>
+      <div class="ano-meses" aria-hidden="true"><span>jan</span><span>fev</span><span>mar</span><span>abr</span><span>mai</span><span>jun</span><span>jul</span><span>ago</span><span>set</span><span>out</span><span>nov</span><span>dez</span></div>
+      <ul class="ano-lista">
+        <li><h3>Semanal</h3><span class="trilho" style="--n: 52" aria-hidden="true"></span><p>toda semana, 52 no ano</p></li>
+        <li><h3>Quinzenal</h3><span class="trilho" style="--n: 24" aria-hidden="true"></span><p>a cada 15 dias, 24 no ano</p></li>
+        <li><h3>Mensal</h3><span class="trilho" style="--n: 12" aria-hidden="true"></span><p>todo mês, 12 no ano</p></li>
+        <li><h3>Trimestral</h3><span class="trilho" style="--n: 4" aria-hidden="true"></span><p>a cada 3 meses, 4 no ano</p></li>
+        <li><h3>Semestral</h3><span class="trilho" style="--n: 2" aria-hidden="true"></span><p>a cada 6 meses, 2 no ano</p></li>
+        <li class="pontual"><h3>Pontual</h3><span class="trilho" style="--n: 1" aria-hidden="true"></span><p>uma vez, quando você precisar</p></li>
+      </ul>
+    </div>
+    <a class="botao botao-azul" data-esconde-barra href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20dos%20planos%20de%20limpeza%20recorrente." target="_blank" rel="noopener">Montar um plano no WhatsApp<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+  </div>
+</section>
+
+<section class="secao g-fecho" aria-labelledby="t-fecho">
+  <div class="wrap">
+    <div class="g-fecho-topo">
+      <h2 id="t-fecho">Seu vidro, <em>transparente de novo</em></h2>
+      <p>Mande uma foto do vidro pelo WhatsApp ou peça uma visita técnica, e receba a proposta sem compromisso.</p>
+    </div>
+    <ul class="g-jeitos" data-esconde-barra>
+      <li><a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span><span><strong>Pedir orçamento</strong><small>Pelo WhatsApp, com uma foto do vidro</small></span><svg aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+      <li><a href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20agendar%20uma%20visita%20t%C3%A9cnica." target="_blank" rel="noopener"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-agenda"/></svg></span><span><strong>Agendar visita técnica</strong><small>Pra avaliar o vidro com você</small></span><svg aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+      <li><a href="tel:+5541997799646"><span class="b-bolinha"><svg class="ico" aria-hidden="true"><use href="#i-fone"/></svg></span><span><strong>Ligar</strong><small>(41) 99779-9646</small></span><svg aria-hidden="true"><use href="#i-seta"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+</div>
+<script>(function () { var e = document.documentElement.dataset.corpo; document.querySelectorAll('.eb-corpo').forEach(function (d) { if (d.dataset.corpo !== e) d.remove(); }); })();</script>
 </main>
 
 <footer class="rodape" id="contato">
@@ -345,15 +714,17 @@ document.documentElement.classList.replace('sem-js', 'js');
   <a class="bf-wa" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Orçamento no WhatsApp</a>
 </div></div><div class="eb-home-barra" data-home="b"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div><div class="eb-home-barra" data-home="c"><div class="barra-wa"><a class="botao botao-azul" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros." target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-wa"/></svg>Pedir orçamento no WhatsApp</a></div></div>
 <script>(function () { var e = document.documentElement.dataset.home; document.querySelectorAll('.eb-home-barra').forEach(function (d) { if (d.dataset.home !== e) d.remove(); }); })();</script>
-<div class="eb-cor" role="group" aria-label="Escolher a entrada e a cor da página">
-  <button type="button" class="eb-cor-abrir" aria-expanded="false">Entrada <b data-mostra="home">A</b> · Cor <b data-mostra="cor">1</b></button>
+<div class="eb-cor" role="group" aria-label="Escolher a entrada, as seções e a cor da página">
+  <button type="button" class="eb-cor-abrir" aria-expanded="false">Entrada <b data-mostra="home">A</b> · Seções <b data-mostra="corpo">A</b> · Cor <b data-mostra="cor">1</b></button>
   <div class="eb-cor-linha"><span class="eb-cor-rotulo">Entrada</span>
   <button type="button" data-home="a" aria-pressed="false" title="Painel de serviços"><span class="so-leitor">Entrada </span>A</button><button type="button" data-home="b" aria-pressed="false" title="Vidraça"><span class="so-leitor">Entrada </span>B</button><button type="button" data-home="c" aria-pressed="false" title="Foto e ícones"><span class="so-leitor">Entrada </span>C</button></div>
+  <div class="eb-cor-linha"><span class="eb-cor-rotulo">Seções</span>
+  <button type="button" data-corpo="a" aria-pressed="false" title="Cartões"><span class="so-leitor">Seções </span>A</button><button type="button" data-corpo="b" aria-pressed="false" title="Fotos"><span class="so-leitor">Seções </span>B</button><button type="button" data-corpo="c" aria-pressed="false" title="Guia"><span class="so-leitor">Seções </span>C</button></div>
   <div class="eb-cor-linha"><span class="eb-cor-rotulo">Cor</span>
   <button type="button" data-cor="1" aria-pressed="false" title="Branco e azul: Fundo branco, o azul da logo nos detalhes e o marinho só na entrada e no fim"><span class="so-leitor">Cor </span>1</button><button type="button" data-cor="2" aria-pressed="false" title="Estampa do uniforme: A 1, com a estampa do uniforme em dois blocos"><span class="so-leitor">Cor </span>2</button><button type="button" data-cor="3" aria-pressed="false" title="Marinho e branco: Blocos marinho e branco se alternando, como o uniforme"><span class="so-leitor">Cor </span>3</button></div>
   <a class="eb-cor-responder" href="#" data-vinicius="5541997128458" target="_blank" rel="noopener">Escolher</a>
 </div>
-<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Estampa do uniforme"},{"n":3,"nome":"Marinho e branco"}]; window.EB_HOMES = [{"id":"a","nome":"Painel de serviços"},{"id":"b","nome":"Vidraça"},{"id":"c","nome":"Foto e ícones"}];</script>
+<script>window.EB_CORES = [{"n":1,"nome":"Branco e azul"},{"n":2,"nome":"Estampa do uniforme"},{"n":3,"nome":"Marinho e branco"}]; window.EB_HOMES = [{"id":"a","nome":"Painel de serviços"},{"id":"b","nome":"Vidraça"},{"id":"c","nome":"Foto e ícones"}]; window.EB_CORPOS = [{"id":"a","nome":"Cartões"},{"id":"b","nome":"Fotos"},{"id":"c","nome":"Guia"}];</script>
 
 <script src="assets/blindagem.js" defer></script>
 <script src="assets/script.js" defer></script>

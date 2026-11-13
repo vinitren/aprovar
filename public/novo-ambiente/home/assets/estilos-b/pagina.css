@@ -158,6 +158,8 @@ html.eb { scrollbar-color: var(--destaque) var(--pg-2); }
 .eb-cor-abrir { display: none; }
 @media (max-width: 47.99rem) {
   .eb-cor { top: 5.25rem; bottom: auto; }
+  /* aberto, desce pra cima da barra: no alto ele ficaria embaixo da logo grande */
+  .eb-cor.aberto { top: auto; bottom: calc(5.05rem + env(safe-area-inset-bottom)); }
   .eb-cor:not(.aberto) { left: auto; display: block; padding: 0; border-radius: 999px; }
   .eb-cor:not(.aberto) > :not(.eb-cor-abrir) { display: none; }
   .eb-cor:not(.aberto) .eb-cor-abrir { display: inline-flex; align-items: center; gap: .3rem; width: auto; height: 2.75rem; padding-inline: 1.1rem; border: 0; border-radius: 999px;
