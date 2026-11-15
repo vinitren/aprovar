@@ -8,14 +8,20 @@
 .sv .entrada { min-height: min(100svh, 58rem); }
 .sv .entrada-foto img { object-position: var(--pos, 50% 50%); }
 @media (min-width: 62rem) {
+  /* 15/11, pedido do Vinicius: o painel cobria a foto quase inteira. Agora título e painel moram na metade da
+     estampa, um embaixo do outro, e a foto do serviço fica inteira na outra metade */
+  .sv .entrada { align-items: center; min-height: 100svh; }
   .sv .entrada::before { content: ""; position: absolute; inset: 0 50% 0 0; z-index: -1; background: var(--estampa); }
   .sv .entrada-foto { left: 50%; }
   .sv .entrada-veu { display: none; }
-  .sv .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(3rem, 6vw, 6rem); align-items: center; }
-  .sv .eb-titulo { padding-right: 1rem; }
-  .sv .eb-titulo h1 { font-size: clamp(2.75rem, 1.6rem + 2.6vw, 4.25rem); }
-  .sv .eb-painel { justify-self: end; width: min(100%, 27rem); }
+  .sv .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2rem; column-gap: clamp(3rem, 6vw, 6rem); align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .sv .eb-titulo, .sv .eb-painel { grid-column: 1; }
+  .sv .eb-titulo { padding-right: 1.5rem; }
+  .sv .eb-titulo h1 { font-size: clamp(2.5rem, 1.5rem + 2vw, 3.625rem); }
+  .sv .eb-titulo p { margin-top: 1rem; }
+  .sv .eb-painel { justify-self: start; width: min(100%, 30rem); }
 }
+
 @media (max-width: 61.99rem) {
   .sv .entrada { display: block; min-height: 0; }
   .sv .entrada-foto, .sv .entrada-veu { bottom: auto; height: 100svh; }
