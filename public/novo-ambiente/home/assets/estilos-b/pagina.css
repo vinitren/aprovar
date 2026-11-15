@@ -42,6 +42,13 @@ html.eb { scrollbar-color: var(--destaque) var(--pg-2); }
   .eb .eb-titulo h1 { max-width: none; }
   .eb .b-quem { margin-top: 0; }
 }
+/* no celular (15/11): a primeira tela é só a foto do rapel inteira com o título, como na "Foto e ícones" que ela gostou;
+   o painel começa logo abaixo e aparece na borda, em cima da barra do WhatsApp, pra chamar a rolagem */
+@media (max-width: 61.99rem) {
+  .eb-painel-home .entrada { display: block; min-height: 0; }
+  .eb-painel-home .entrada-foto, .eb-painel-home .entrada-veu { bottom: auto; height: 100svh; }
+  .eb-painel-home .eb-titulo { min-height: calc(100svh - var(--logo-grande, 6rem) - 2.5rem - 10rem); display: flex; flex-direction: column; justify-content: flex-end; }
+}
 .eb-painel { color: var(--texto); background: #fff; border-radius: 16px; padding: 1.5rem 1.25rem 1.25rem;
   box-shadow: 0 34px 60px -30px rgba(2, 11, 20, .7), 0 2px 8px -2px rgba(2, 11, 20, .18); animation: sobe 1s var(--sai) .3s both; }
 @media (min-width: 30rem) { .eb-painel { padding: 1.75rem 1.5rem 1.4rem; } }
