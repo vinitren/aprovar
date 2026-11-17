@@ -85,18 +85,29 @@ window.DADOS = {
     },
     {
      "id": "1-3",
-     "titulo": "Não é qualquer um que expõe no Encontro",
-     "etiqueta": "Curadoria",
+     "titulo": "Você atende com tarot, búzios, reiki ou florais?",
+     "etiqueta": "Carrossel",
      "ordem": "3 de 4",
+     "nota": "Novo, no lugar do anúncio de curadoria. São 4 cards: arraste a imagem pro lado pra ver a sequência.",
      "slides": [
       {
        "src": "img/1-3-1.webp",
-       "label": "Feed",
+       "label": "Card 1",
        "ia": false
       },
       {
        "src": "img/1-3-2.webp",
-       "label": "Stories",
+       "label": "Card 2",
+       "ia": false
+      },
+      {
+       "src": "img/1-3-3.webp",
+       "label": "Card 3",
+       "ia": false
+      },
+      {
+       "src": "img/1-3-4.webp",
+       "label": "Card 4",
        "ia": false
       }
      ],
@@ -106,11 +117,7 @@ window.DADOS = {
        "partes": [
         {
          "rotulo": "Texto principal",
-         "texto": "O Encontro Holístico é feito de gente que atende com cuidado.\n\nDois dias reunindo terapeutas e oraculistas, com um público que vem procurando consulta, terapia e acolhimento.\n\nQuer estar com a gente? Chame no WhatsApp, conte o seu trabalho e a gente te explica como funciona o stand.\n\n06 e 07 de março de 2027, Clube Dom Pedro II, Curitiba. Stand a partir de R$ 450, com 1 mesa e 2 cadeiras."
-        },
-        {
-         "rotulo": "Título",
-         "texto": "Curadoria aberta para o Encontro"
+         "texto": "Você atende com tarot, búzios, reiki, florais ou constelação?\n\nNo 5º Encontro Holístico são dois dias de gente passando na frente do seu stand, procurando consulta e terapia. Gente que dificilmente ia te achar pela internet.\n\nE quem gosta do atendimento leva o seu contato e volta depois do evento. Todo expositor confirmado ainda ganha post com o seu @ no perfil do Encontro, que tem 5,3 mil seguidores.\n\nChame no WhatsApp, conte o que você atende e a gente te explica como funciona o stand.\n\n06 e 07 de março de 2027, Clube Dom Pedro II, Curitiba. Stand a partir de R$ 450, com 1 mesa e 2 cadeiras."
         },
         {
          "rotulo": "Botão",
