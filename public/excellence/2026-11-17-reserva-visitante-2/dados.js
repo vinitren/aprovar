@@ -91,7 +91,7 @@ window.DADOS = {
      "titulo": "Comece o ano cuidando de você",
      "etiqueta": "Ter 22/12",
      "ordem": "7 de 7",
-     "nota": "O que mudou: foto nova, com uma terapeuta atendendo.",
+     "nota": "O que mudou: a foto agora mostra o atendimento, com as mãos dela sobre a cliente na maca.",
      "slides": [
       {
        "src": "img/1-3-1.webp",
