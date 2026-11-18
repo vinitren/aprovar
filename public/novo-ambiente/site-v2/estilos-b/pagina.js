@@ -165,6 +165,26 @@
     });
   });
 
+  /* avaliações (18/11): as setas andam um cartão e apagam na ponta. Sem script, a faixa corre com o dedo ou a roda */
+  document.querySelectorAll('.sv-elogios').forEach(function (s) {
+    var lista = s.querySelector('.gg-lista'), setas = s.querySelector('.gg-setas');
+    if (!lista || !setas) return;
+    var ant = setas.querySelector('.gg-ant'), prox = setas.querySelector('.gg-prox');
+    var suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    function passo() { var c = lista.querySelector('.gg-cartao'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(lista).columnGap || 0) : 300; }
+    function confere() {
+      var fim = lista.scrollWidth - lista.clientWidth;
+      ant.disabled = lista.scrollLeft <= 2;
+      prox.disabled = lista.scrollLeft >= fim - 2;
+      setas.hidden = fim <= 2;
+    }
+    ant.addEventListener('click', function () { lista.scrollBy({ left: -passo(), behavior: suave }); });
+    prox.addEventListener('click', function () { lista.scrollBy({ left: passo(), behavior: suave }); });
+    lista.addEventListener('scroll', confere, { passive: true });
+    window.addEventListener('resize', confere);
+    confere();
+  });
+
   /* listas que se desenham quando aparecem: uma vez só */
   var alvos = document.querySelectorAll('[data-anima]');
   if (!('IntersectionObserver' in window)) { alvos.forEach(function (a) { a.classList.add('visto'); }); return; }
