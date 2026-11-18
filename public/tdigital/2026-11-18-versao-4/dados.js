@@ -17,7 +17,7 @@ window.DADOS = {
     {
      "id": "1-1",
      "titulo": "O perfil do @tdigital.tech",
-     "nota": "Bio A, a que você escolheu. O link leva direto pro WhatsApp com a mensagem pronta \"Vim pelo Instagram da T Digital\". A foto do perfil é o T com a base, nas cores da logo, sobre o fundo tinta. A grade agora tem os 11 posts. Nenhum número de seguidor é inventado: a simulação mostra o perfil zerado.",
+     "nota": "Bio A, a que você escolheu. O link leva direto para o WhatsApp com a mensagem pronta \"Vim pelo Instagram da T Digital\". A foto do perfil é o T com a base, nas cores da logo, sobre o fundo tinta. A grade agora tem os 11 posts. Nenhum número de seguidor é inventado: a simulação mostra o perfil zerado.",
      "livre": true,
      "slides": [
       {
@@ -42,7 +42,7 @@ window.DADOS = {
       ],
       [
        "Bio",
-       "Ecossistema T Digital: mais cliente chegando, atendido na hora e virando venda.\nCaptação, processo comercial e IA, montados pro seu negócio."
+       "Ecossistema T Digital: mais cliente chegando, atendido na hora e virando venda.\nCaptação, processo comercial e IA, montados para o seu negócio."
       ],
       [
        "Link",
@@ -60,7 +60,7 @@ window.DADOS = {
    "id": "posts",
    "nome": "Posts",
    "titulo": "Os 11 posts do lançamento",
-   "sub": "Publique do 11 pro 01, o último da lista primeiro. Assim o 01 fica no topo da grade. Os 3 primeiros ficam fixados. Novos nesta versão: 08, 09, 10 e o reels 11.",
+   "sub": "Publique do 11 para o 01, o último da lista primeiro. Assim o 01 fica no topo da grade. Os 3 primeiros ficam fixados. Novos nesta versão: 08, 09, 10 e o reels 11.",
    "itens": [
     {
      "id": "2-1",
@@ -110,7 +110,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "O anúncio traz a conversa. O que acontece depois é o que decide se vira venda.\n\nO Ecossistema T Digital junta as três partes que costumam ficar separadas: captação com pesquisa, processo comercial escrito e IA no atendimento. Tudo medido toda semana.\n\nArraste pro lado e veja como cada parte funciona.\n\nQuer ver como fica no seu negócio? O link do WhatsApp está na bio.\n\n#marketingdigital #vendas #whatsappbusiness #inteligenciaartificial"
+         "texto": "O anúncio traz a conversa. O que acontece depois é o que decide se vira venda.\n\nO Ecossistema T Digital junta as três partes que costumam ficar separadas: captação com pesquisa, processo comercial escrito e IA no atendimento. Tudo medido toda semana.\n\nArraste para o lado e veja como cada parte funciona.\n\nQuer ver como fica no seu negócio? O link do WhatsApp está na bio.\n\n#marketingdigital #vendas #whatsappbusiness #inteligenciaartificial"
         }
        ]
       }
@@ -164,7 +164,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "Quase 9 vezes a verba de volta em estande.\n\nFestival em Curitiba, 15ª edição. 51 dias antes, 40 de 120 estandes vendidos, sem site e sem medição. Separamos os dois públicos: expositor direto pro WhatsApp da venda de estande, visitante pra página com cadastro VIP. A verba mudou de lado conforme a data chegava.\n\nO anúncio de expositor fechou R$ 7.350 em estandes com R$ 833 de verba. E ficaram 632 cadastros VIP pra próxima edição.\n\nTem evento com data marcada? Chame no WhatsApp, o link está na bio.\n\n#eventos #marketingdeeventos #trafegopago #curitiba"
+         "texto": "Quase 9 vezes a verba de volta em estande.\n\nFestival em Curitiba, 15ª edição. 51 dias antes, 40 de 120 estandes vendidos, sem site e sem medição. Separamos os dois públicos: expositor direto para o WhatsApp da venda de estande, visitante para a página com cadastro VIP. A verba mudou de lado conforme a data chegava.\n\nO anúncio de expositor fechou R$ 7.350 em estandes com R$ 833 de verba. E ficaram 632 cadastros VIP para a próxima edição.\n\nTem evento com data marcada? Chame no WhatsApp, o link está na bio.\n\n#eventos #marketingdeeventos #trafegopago #curitiba"
         }
        ]
       }
@@ -319,7 +319,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "A IA que atende do jeito que você já vende. Só que 24 horas.\n\nTreinada nas conversas que já viraram venda no seu WhatsApp, responde na hora, sem cansaço e sem dia ruim, e volta em quem parou de responder. Você controla as respostas, e uma pessoa assume sempre que precisar.\n\nNão substitui ninguém: dá eficiência e autonomia pra quem cuida do comercial.\n\nChame no WhatsApp pra ver como funciona.\n\n#inteligenciaartificial #atendimento #whatsappbusiness"
+         "texto": "A IA que atende do jeito que você já vende. Só que 24 horas.\n\nTreinada nas conversas que já viraram venda no seu WhatsApp, responde na hora, sem cansaço e sem dia ruim, e volta a falar com quem parou de responder. Você controla as respostas, e uma pessoa assume sempre que precisar.\n\nNão substitui ninguém: dá eficiência e autonomia para quem cuida do comercial.\n\nChame no WhatsApp para ver como funciona.\n\n#inteligenciaartificial #atendimento #whatsappbusiness"
         }
        ]
       }
@@ -417,7 +417,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "Exemplo de como montaríamos a captação de quem vende por orçamento.\n\nAnúncio direto pro WhatsApp, perguntas que filtram, retorno em quem não respondeu e a conta de quantos orçamentos cada anúncio trouxe. O plano de verdade sai do seu negócio.\n\nVende por orçamento? Chame no WhatsApp.\n\n#orcamento #prestadordeservico #vendas"
+         "texto": "Exemplo de como montaríamos a captação de quem vende por orçamento.\n\nAnúncio direto para o WhatsApp, perguntas que filtram, retorno a quem não respondeu e a conta de quantos orçamentos cada anúncio trouxe. O plano de verdade sai do seu negócio.\n\nVende por orçamento? Chame no WhatsApp.\n\n#orcamento #prestadordeservico #vendas"
         }
        ]
       }
@@ -428,7 +428,7 @@ window.DADOS = {
      "titulo": "Prova real",
      "etiqueta": "Novo",
      "ordem": "8 de 11",
-     "nota": "No lugar da vitrine de sites. Tudo real: a foto da mesa de alimentos, o print do grupo dos expositores (só os nomes borrados), a lista do cadastro VIP na porta e quatro falas da Valerya, com o trecho cortado marcado com [...]. O nome dela não aparece.",
+     "nota": "No lugar da vitrine de sites. Capa com fundo liso. Tudo real: o print do grupo da organização (só os nomes borrados), a lista do cadastro VIP na porta e quatro falas da Valerya, com o trecho cortado marcado com [...]. O nome dela não aparece.",
      "escolhas": [
       {
        "pergunta": "Nas falas, quem assina?",
@@ -485,7 +485,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "O que o cliente fala quando ninguém pediu.\n\nO print do grupo dos expositores no primeiro dia do festival, a lista do cadastro VIP na porta e o que a organizadora mandou em áudio. Tudo de verdade, só os nomes borrados.\n\nO próximo print pode ser do seu negócio. Chame no WhatsApp, o link está na bio.\n\n#marketingdeeventos #depoimento #resultado"
+         "texto": "O que o cliente fala quando ninguém pediu.\n\nO print do grupo da organização no primeiro dia do festival, a lista do cadastro VIP na porta e o que a organizadora mandou em áudio. Tudo de verdade, só os nomes borrados.\n\nO próximo print pode ser do seu negócio. Chame no WhatsApp, o link está na bio.\n\n#marketingdeeventos #depoimento #resultado"
         }
        ]
       }
@@ -544,7 +544,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "Quem chega no seu perfil decide em segundos se fala com você.\n\nO Instagram estratégico arruma o que essa pessoa vê: nome que a busca acha, bio que diz o que você faz, link direto pro WhatsApp, posts com legenda, destaques com capa e a lista do que sai da grade. Você aprova peça por peça no celular e publica no seu tempo.\n\nEste perfil foi montado exatamente assim.\n\nChame no WhatsApp, o link está na bio.\n\n#instagramparanegocios #marketingdigital #pequenosnegocios"
+         "texto": "Quem chega no seu perfil decide em segundos se fala com você.\n\nO Instagram estratégico arruma o que essa pessoa vê: nome que a busca acha, bio que diz o que você faz, link direto para o WhatsApp, posts com legenda, destaques com capa e a lista do que sai da grade. Você aprova peça por peça no celular e publica no seu tempo.\n\nEste perfil foi montado exatamente assim.\n\nChame no WhatsApp, o link está na bio.\n\n#instagramparanegocios #marketingdigital #pequenosnegocios"
         }
        ]
       }
@@ -628,7 +628,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "Três sites feitos por nós, na versão de celular: uma produtora de casamento e 15 anos, um escritório de advocacia e uma empresa de limpeza de vidros e fachadas.\n\nTodos feitos pra abrir rápido no celular e levar pro WhatsApp com a mensagem pronta.\n\nPágina e site também saem avulsos. Chame no WhatsApp, o link está na bio.\n\n#sites #landingpage #webdesign"
+         "texto": "Três sites feitos por nós, na versão de celular: uma produtora de casamento e 15 anos, um escritório de advocacia e uma empresa de limpeza de vidros e fachadas.\n\nTodos feitos para abrir rápido no celular e levar para o WhatsApp com a mensagem pronta.\n\nPágina e site também saem avulsos. Chame no WhatsApp, o link está na bio.\n\n#sites #landingpage #webdesign"
         }
        ]
       }
@@ -677,7 +677,7 @@ window.DADOS = {
     {
      "id": "3-2",
      "titulo": "Destaque Cases",
-     "nota": "Entraram três stories de prova real: o print do grupo dos expositores e duas falas da Valerya, sem o nome.",
+     "nota": "Entraram três stories de prova real: o print do grupo da organização e duas falas da Valerya, sem o nome.",
      "slides": [
       {
        "src": "img/3-2-1.webp",
