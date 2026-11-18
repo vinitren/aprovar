@@ -1,0 +1,20 @@
+{
+  "nome": "Dínamo Kickers",
+  "marca": "Dínamo Kickers F.C.",
+  "assinatura": "T Digital",
+  "fontes": "family=Big+Shoulders+Display:wght@800;900&family=Atkinson+Hyperlegible:wght@400;700",
+  "estilo": {
+    "--fundo": "#eef1ea",
+    "--cartao": "#ffffff",
+    "--moldura": "#f6f8f3",
+    "--tinta": "#0f1410",
+    "--corpo": "#2c3a31",
+    "--suave": "#46564c",
+    "--linha": "#d3dacd",
+    "--acento": "#1f5a3a",
+    "--acento-escuro": "#143d27",
+    "--serif": "\"Big Shoulders Display\", \"Arial Narrow\", sans-serif",
+    "--sans": "\"Atkinson Hyperlegible\", system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif",
+    "--raio": "6px"
+  }
+}
