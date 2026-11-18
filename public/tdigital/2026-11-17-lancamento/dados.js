@@ -11,17 +11,22 @@ window.DADOS = {
    "id": "perfil",
    "nome": "Perfil",
    "titulo": "O perfil",
-   "sub": "Nome, bio e link, e como a grade fica com os 9 posts publicados.",
+   "sub": "Nome, bio e link, e como a grade fica com os 8 posts publicados.",
    "itens": [
     {
      "id": "1-1",
      "titulo": "O perfil do @tdigital.tech",
-     "nota": "Bio A, a que você escolheu. O link leva direto pro WhatsApp com a mensagem pronta \"Vim pelo Instagram da T Digital\". A foto do perfil é o símbolo T, em branco sobre azul. Nenhum número de seguidor é inventado: a simulação mostra o perfil zerado.",
+     "nota": "Bio A, a que você escolheu. O link leva direto pro WhatsApp com a mensagem pronta \"Vim pelo Instagram da T Digital\". A foto do perfil é o T com a base, nas cores da logo, sobre o fundo tinta. Nenhum número de seguidor é inventado: a simulação mostra o perfil zerado.",
      "livre": true,
      "slides": [
       {
        "src": "img/1-1-1.webp",
        "label": "Simulação do perfil",
+       "ia": false
+      },
+      {
+       "src": "img/1-1-2.webp",
+       "label": "Foto do perfil",
        "ia": false
       }
      ],
@@ -53,14 +58,14 @@ window.DADOS = {
   {
    "id": "posts",
    "nome": "Posts",
-   "titulo": "Os 9 posts do lançamento",
-   "sub": "Publique do 09 pro 01, o último da lista primeiro. Assim o 01 fica no topo da grade. Os 3 primeiros ficam fixados.",
+   "titulo": "Os 8 posts do lançamento",
+   "sub": "Publique do 08 pro 01, o último da lista primeiro. Assim o 01 fica no topo da grade. Os 3 primeiros ficam fixados.",
    "itens": [
     {
      "id": "2-1",
      "titulo": "O Ecossistema T Digital",
      "etiqueta": "Post fixado",
-     "ordem": "1 de 9",
+     "ordem": "1 de 8",
      "slides": [
       {
        "src": "img/2-1-1.webp",
@@ -113,7 +118,7 @@ window.DADOS = {
      "id": "2-2",
      "titulo": "Case: festival em Curitiba",
      "etiqueta": "Post fixado",
-     "ordem": "2 de 9",
+     "ordem": "2 de 8",
      "escolhas": [
       {
        "pergunta": "Case em carrossel ou no reels de 20/10?",
@@ -175,7 +180,7 @@ window.DADOS = {
      "id": "2-3",
      "titulo": "Como começa",
      "etiqueta": "Post fixado",
-     "ordem": "3 de 9",
+     "ordem": "3 de 8",
      "escolhas": [
       {
        "pergunta": "O post leva o preço dos avulsos?",
@@ -231,7 +236,7 @@ window.DADOS = {
     {
      "id": "2-4",
      "titulo": "Onde a venda escapa",
-     "ordem": "4 de 9",
+     "ordem": "4 de 8",
      "slides": [
       {
        "src": "img/2-4-1.webp",
@@ -278,7 +283,7 @@ window.DADOS = {
     {
      "id": "2-5",
      "titulo": "IA no atendimento, do jeito certo",
-     "ordem": "5 de 9",
+     "ordem": "5 de 8",
      "slides": [
       {
        "src": "img/2-5-1.webp",
@@ -326,7 +331,7 @@ window.DADOS = {
      "id": "2-6",
      "titulo": "Como faríamos: curso online",
      "etiqueta": "Exemplo",
-     "ordem": "6 de 9",
+     "ordem": "6 de 8",
      "nota": "Exemplo ilustrativo de como montaríamos o plano. Não usa número de cliente.",
      "slides": [
       {
@@ -375,7 +380,7 @@ window.DADOS = {
      "id": "2-7",
      "titulo": "Como faríamos: serviço por orçamento",
      "etiqueta": "Exemplo",
-     "ordem": "7 de 9",
+     "ordem": "7 de 8",
      "nota": "Exemplo ilustrativo de como montaríamos o plano. Não usa número de cliente.",
      "slides": [
       {
@@ -423,7 +428,7 @@ window.DADOS = {
     {
      "id": "2-8",
      "titulo": "Página feita pra vender",
-     "ordem": "8 de 9",
+     "ordem": "8 de 8",
      "nota": "O print do festival mostra as datas da 15ª edição (17 e 18 de outubro). Serve de vitrine da página. Se preferir, troco por um print da 16ª quando a página dela estiver no ar.",
      "escolhas": [
       {
@@ -471,29 +476,6 @@ window.DADOS = {
        ]
       }
      ]
-    },
-    {
-     "id": "2-9",
-     "titulo": "Quem faz",
-     "ordem": "9 de 9",
-     "pergunta": "Tem uma foto sua pra entrar neste post? E o texto sobre a sua história (uniforme esportivo e evento personalizado) está certo?",
-     "slides": [
-      {
-       "src": "img/2-9-1.webp",
-       "label": "Peça",
-       "ia": false
-      }
-     ],
-     "textos": [
-      {
-       "resumo": "Ver a legenda",
-       "partes": [
-        {
-         "texto": "Antes da T Digital, anos vendendo uniforme e evento personalizado pra comércio e time da região, quase tudo por conversa no WhatsApp. É de lá que vem o processo comercial que montamos pros nossos clientes.\n\nChame no WhatsApp, o link está na bio."
-        }
-       ]
-      }
-     ]
     }
    ]
   },
@@ -501,7 +483,7 @@ window.DADOS = {
    "id": "destaques",
    "nome": "Destaques",
    "titulo": "Os 5 destaques",
-   "sub": "Capa em azul com o T, e os stories de cada um. Ecossistema, Cases, Como começa, Páginas e Contato.",
+   "sub": "Capa com ícone próprio, e os stories de cada um. Ecossistema, Cases, Como começa, Páginas e Contato.",
    "itens": [
     {
      "id": "3-1",
