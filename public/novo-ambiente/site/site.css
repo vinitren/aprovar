@@ -711,6 +711,7 @@ linear-gradient(0deg, rgba(8, 25, 42, .95) 0%, rgba(8, 25, 42, .78) 40%, rgba(8,
 .sv-completa { margin-top: clamp(1.25rem, 1rem + 1vw, 1.5rem); }
 .sv-completa .botao { margin-top: 1.5rem; }
 @media (min-width: 62rem) { .sv-completa img { min-height: 22rem; } .sv-completa figure { flex-basis: 40%; } .sv-completa .b-servico-texto { flex-basis: 60%; } }
+.b-fecho-painel img[src*="entrada-janela"] { object-position: 85% 50%; }
 .sv-seguranca { background: var(--pg-2); }
 .sv-seguranca .b-cartoes-3, .sv-elogios .b-cartoes-3 { list-style: none; margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
 .sv-elogios .b-cartao figure { display: flex; flex-direction: column; height: 100%; }
