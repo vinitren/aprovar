@@ -18,53 +18,54 @@ window.DADOS = {
    "id": "perfil",
    "nome": "Perfil",
    "titulo": "O perfil",
-   "sub": "O que o pai vê nos primeiros segundos.",
+   "sub": "O que o pai vê nos primeiros segundos, antes e depois.",
    "itens": [
     {
      "id": "1-1",
-     "titulo": "O perfil arrumado",
-     "nota": "Hoje a categoria do perfil é \"Vestuário (marca)\", e quem chega lê loja de roupa, não escolinha. Aqui ela vira clube esportivo, o nome ganha \"Futsal Infantil\" (é o que os pais buscam) e o WhatsApp sai do texto da bio e vira botão, num toque.",
+     "titulo": "O perfil, antes e depois",
+     "nota": "Hoje o perfil não tem página: o link é um atalho do Google, o WhatsApp está só em texto (não dá pra tocar) e a categoria é \"Vestuário (marca)\", então quem chega lê loja de roupa. No depois, a categoria vira clube esportivo, o nome ganha \"Futsal Infantil\" (o que os pais buscam), o WhatsApp vira botão e o link da bio leva à página, com turmas, valores e o botão de agendar. O \"antes\" foi recriado do que vimos no perfil em 13/11.",
      "livre": true,
      "slides": [
       {
        "src": "img/1-1-1.webp",
-       "label": "Simulação do perfil",
+       "label": "Antes · como está hoje, sem página",
        "ia": false
       },
       {
        "src": "img/1-1-2.webp",
-       "label": "Foto do perfil",
+       "label": "Depois · com a página no link da bio",
+       "ia": false
+      },
+      {
+       "src": "img/1-1-3.webp",
+       "label": "Depois · a página que o link abre",
        "ia": false
       }
      ],
      "campos": [
       [
-       "Nome",
-       "Dínamo Kickers · Futsal Infantil"
-      ],
-      [
-       "Usuário",
-       "@dinamokickersf.c (continua o mesmo)"
-      ],
-      [
        "Categoria",
-       "Clube esportivo (no lugar de \"Vestuário (marca)\")"
+       "Vestuário (marca) → Clube esportivo"
+      ],
+      [
+       "Nome",
+       "Dínamo Kickers F.C. → Dínamo Kickers · Futsal Infantil"
       ],
       [
        "Bio",
-       "Futsal pra meninas e meninos de 5 a 15 anos 🐺⚽ / Iniciantes e neurodivergentes são bem-vindos / Abranches, Curitiba / Agende a aula experimental 👇"
+       "texto com idades, endereço e WhatsApp sem clique → Futsal pra meninas e meninos de 5 a 15 anos 🐺⚽ / Iniciantes e neurodivergentes são bem-vindos / Abranches, Curitiba / Agende a aula experimental 👇"
       ],
       [
-       "Link",
-       "wa.me/5541998676435 (com a página no ar, o link passa a ser ela)"
+       "Link da bio",
+       "atalho do Google (g.co/kgs) e mais 1 → a página (aprovar.tdigital.tech/dinamo-kickers/previa-1); com a página no ar, o endereço passa a ser o dela"
       ],
       [
-       "Título do link",
-       "Agendar aula experimental"
+       "WhatsApp",
+       "só em texto, sem clique → botão de WhatsApp no perfil e na página"
       ],
       [
-       "Botão de contato",
-       "WhatsApp"
+       "Fixados",
+       "\"Novo polo de captação\", escudo e certificado → como marcar a aula, turmas e valores, \"Seu filho pode vir\""
       ]
      ]
     }
