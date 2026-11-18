@@ -59,7 +59,7 @@
   function vai(p) {
     passo = p;
     mostra();
-    /* no passo do meio da página, desce até ele; no da entrada, volta pro topo */
+    /* no passo do meio da página, desce até ele; no da entrada, volta para o topo */
     if (p === 1) window.scrollTo({ top: 0, behavior: 'smooth' });
     if (p === 3) { var c = document.querySelector('.eb-corpo'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   }
@@ -92,7 +92,7 @@
   guarda('na-home', html.dataset.home);
   guarda('na-corpo', html.dataset.corpo);
   mostra();
-  /* trocou o meio da página: volta direto pra ele, não pro topo */
+  /* trocou o meio da página: volta direto para ele, não para o topo */
   if (q.get('ver') === 'meio') {
     var u0 = endereco(); u0.searchParams.delete('ver'); history.replaceState(null, '', u0.toString());
     var c0 = document.querySelector('.eb-corpo'); if (c0) c0.scrollIntoView({ block: 'start' });
@@ -163,6 +163,26 @@
         s.querySelectorAll('.g-troca button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
       });
     });
+  });
+
+  /* avaliações (18/11): as setas andam um cartão e apagam na ponta. Sem script, a faixa corre com o dedo ou a roda */
+  document.querySelectorAll('.sv-elogios').forEach(function (s) {
+    var lista = s.querySelector('.gg-lista'), setas = s.querySelector('.gg-setas');
+    if (!lista || !setas) return;
+    var ant = setas.querySelector('.gg-ant'), prox = setas.querySelector('.gg-prox');
+    var suave = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    function passo() { var c = lista.querySelector('.gg-cartao'); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(lista).columnGap || 0) : 300; }
+    function confere() {
+      var fim = lista.scrollWidth - lista.clientWidth;
+      ant.disabled = lista.scrollLeft <= 2;
+      prox.disabled = lista.scrollLeft >= fim - 2;
+      setas.hidden = fim <= 2;
+    }
+    ant.addEventListener('click', function () { lista.scrollBy({ left: -passo(), behavior: suave }); });
+    prox.addEventListener('click', function () { lista.scrollBy({ left: passo(), behavior: suave }); });
+    lista.addEventListener('scroll', confere, { passive: true });
+    window.addEventListener('resize', confere);
+    confere();
   });
 
   /* listas que se desenham quando aparecem: uma vez só */

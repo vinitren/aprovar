@@ -712,10 +712,52 @@ linear-gradient(0deg, rgba(8, 25, 42, .95) 0%, rgba(8, 25, 42, .78) 40%, rgba(8,
 .sv-completa .botao { margin-top: 1.5rem; }
 @media (min-width: 62rem) { .sv-completa img { min-height: 22rem; } .sv-completa figure { flex-basis: 40%; } .sv-completa .b-servico-texto { flex-basis: 60%; } }
 .b-fecho-painel img[src*="entrada-janela"] { object-position: 85% 50%; }
+.sv-sinais { background: var(--pg-2); }
+.sv-sinais-lista { list-style: none; padding: 0; margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0; display: grid; gap: 0 2.5rem; counter-reset: sinal; }
+.sv-sinais-lista li { counter-increment: sinal; padding: 1.5rem 0; border-top: 1px solid var(--linha); display: grid; grid-template-columns: 3rem 1fr; column-gap: 1rem; }
+.sv-sinais-lista li::before { content: counter(sinal, decimal-leading-zero); grid-row: 1 / 3; font: 400 1.75rem/1 var(--serif); color: var(--azul-texto); }
+.sv-sinais-lista h3 { font-size: 1.25rem; }
+.sv-sinais-lista p { margin-top: .4rem; color: var(--texto-2); }
+@media (min-width: 48rem) { .sv-sinais-lista { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .sv-sinais-3 { grid-template-columns: repeat(3, 1fr); } }
+.sv-sozinho { margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); border-radius: 16px; background: var(--marinho); color: var(--off); }
+.sv-sozinho h3 { font-size: clamp(1.375rem, 1.2rem + .6vw, 1.75rem); color: var(--off); }
+.sv-sozinho p { margin-top: .6rem; max-width: 44rem; color: var(--claro-2); }
+.sv-sozinho .botao { margin-top: 1.5rem; }
+@media (max-width: 29.99rem) { .sv-sozinho .botao { width: 100%; } }
 .sv-seguranca { background: var(--pg-2); }
 .sv-seguranca .b-cartoes-3, .sv-elogios .b-cartoes-3 { list-style: none; margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
-.sv-elogios .b-cartao figure { display: flex; flex-direction: column; height: 100%; }
-.sv-estrelas { color: #f5b301; font-size: 1.125rem; letter-spacing: .15em; }
-.sv-elogios blockquote { margin: 1rem 0 0; flex: 1; }
-.sv-elogios blockquote p { margin: 0; font: 400 1.25rem/1.4 var(--serif, Georgia, serif); color: var(--marinho); }
-.sv-elogios figcaption { margin-top: 1.25rem; font-size: .875rem; color: var(--texto-2); }
+.gg-barra { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: clamp(1.75rem, 1.5rem + 1vw, 2.5rem); }
+.gg-setas { display: flex; gap: .5rem; }
+.gg-setas[hidden] { display: none; }
+.gg-seta { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid rgba(8, 25, 42, .18); background: #fff; color: var(--marinho); cursor: pointer; transition: background .2s, color .2s, border-color .2s, opacity .2s; }
+.gg-seta svg { width: 1.1rem; height: 1.1rem; }
+.gg-ant svg { transform: scaleX(-1); }
+.gg-seta:hover:not(:disabled) { background: var(--marinho); border-color: var(--marinho); color: #fff; }
+.gg-seta:disabled { opacity: .35; cursor: default; }
+.gg-seta:focus-visible { outline: 2px solid var(--azul-texto); outline-offset: 3px; }
+.gg-resumo { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem .75rem; width: fit-content; padding: .85rem 1.25rem; border-radius: 999px; background: #fff; color: var(--marinho); text-decoration: none; box-shadow: 0 1px 2px rgba(8, 25, 42, .08), 0 8px 24px -12px rgba(8, 25, 42, .25); }
+.gg-resumo .gg-g { width: 1.5rem; height: 1.5rem; }
+.gg-nota { font: 500 1.375rem/1 var(--sans); }
+.gg-total { font-size: .9375rem; color: var(--texto-2); }
+.gg-ver { display: inline-flex; align-items: center; gap: .35rem; font-size: .9375rem; color: var(--azul-texto); text-decoration: underline; text-underline-offset: 3px; }
+.gg-ver svg { width: .85rem; height: .85rem; }
+.gg-resumo:hover .gg-ver { color: var(--marinho); }
+.gg-estrelas { color: #fbbc04; font-size: 1rem; letter-spacing: .1em; line-height: 1; }
+.gg-lista { list-style: none; display: flex; gap: clamp(.875rem, .5rem + 1vw, 1.5rem); margin: 1.5rem calc(-1 * var(--margem)) 0; padding: .25rem var(--margem) 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--margem); overscroll-behavior-x: contain; scrollbar-width: none; }
+.gg-lista::-webkit-scrollbar { display: none; }
+.gg-lista:focus-visible { outline: 2px solid var(--azul-texto); outline-offset: -2px; }
+.gg-cartao { flex: 0 0 min(30rem, 86%); scroll-snap-align: start; display: flex; flex-direction: column; min-height: clamp(17rem, 15rem + 5vw, 20rem); padding: clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem); border-radius: 16px; background: #fff; border: 1px solid rgba(8, 25, 42, .08); box-shadow: 0 1px 2px rgba(8, 25, 42, .04), 0 18px 40px -28px rgba(8, 25, 42, .35); }
+.gg-alto { display: flex; align-items: center; justify-content: space-between; }
+.gg-alto .gg-estrelas { font-size: 1.125rem; }
+.gg-alto .gg-g { width: 1.5rem; height: 1.5rem; }
+.gg-cartao blockquote { margin: 1.25rem 0 1.75rem; }
+.gg-cartao blockquote p { margin: 0; font: 400 clamp(1.1875rem, 1.05rem + .55vw, 1.5rem)/1.45 var(--sans); color: var(--marinho); text-wrap: pretty; }
+.gg-quem { display: flex; align-items: center; gap: .875rem; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid rgba(8, 25, 42, .08); }
+.gg-avatar { flex: none; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--c); color: #fff; font: 500 1.125rem/1 var(--sans); }
+.gg-nome { display: flex; flex-direction: column; font: 500 1rem/1.3 var(--sans); color: var(--marinho); }
+.gg-nome small { font-weight: 400; font-size: .8125rem; color: var(--texto-2); }
+@media (max-width: 47.99rem) { .gg-barra { justify-content: center; } .gg-setas { display: none; } }
+.eb .b-cartao .b-bolinha:not(.b-bolinha-grande) { display: block; width: fit-content; height: auto; margin-bottom: 0; border-radius: 0; background: none; box-shadow: none; color: var(--destaque); }
+.eb .b-cartao .b-bolinha:not(.b-bolinha-grande) .ico { width: 2.75rem; height: 2.75rem; }
+.sv .b-tambem .b-cartao-link .b-bolinha .ico { width: 2.25rem; height: 2.25rem; }
