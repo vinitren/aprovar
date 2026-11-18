@@ -130,6 +130,8 @@
 
 /* placa solar: dois cartões do mesmo tamanho, lado a lado */
 @media (min-width: 62rem) { .sv-tipos .b-servicos:has(> li:nth-child(2):last-child) { grid-template-columns: repeat(2, 1fr); } }
+.sv-tipos .b-servicos:has(> li:nth-child(2):last-child) .botao { width: 100%; justify-content: center; text-align: center; }
+.sv-tipos .b-servicos:has(> li:nth-child(2):last-child) .b-servico-texto { align-items: stretch; }
 
 /* fachada: "Pra quem limpamos" com a indústria, em 4 */
 @media (min-width: 48rem) { .b-cartoes-3.sv-quem-4 { grid-template-columns: repeat(2, 1fr); } }
