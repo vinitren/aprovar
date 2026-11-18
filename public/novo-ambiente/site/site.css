@@ -665,7 +665,7 @@ transform: translateX(-160%) skewX(-14deg); }
 @media (min-width: 62rem) {
 .sv .entrada::after { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 50%; height: 13rem; background: linear-gradient(rgba(2, 11, 20, .88), rgba(2, 11, 20, .45) 45%, rgba(2, 11, 20, 0)); pointer-events: none; }
 .sv .topo:not(.solido) nav a, .sv .topo:not(.solido) .botao-topo { text-shadow: 0 1px 10px rgba(2, 11, 20, .7); }
-.sv .topo:not(.solido) .botao-topo { background: rgba(2, 11, 20, .35); }
+.sv .topo:not(.solido) .botao-topo:not(:hover) { background: rgba(2, 11, 20, .62); } 
 }
 @media (min-width: 62rem) { .rodape .wrap { grid-template-columns: auto 1fr auto auto; } }
 .ct-area { display: inline-flex; align-items: center; gap: .6rem; color: var(--texto-2); }
