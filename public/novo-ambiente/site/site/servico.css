@@ -104,23 +104,22 @@
 .ct-dados .b-cartoes-3 { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
 
 /* ---------- 17/11: o retorno do site ---------- */
-/* home: a vitrine é foto em pé. No computador, a entrada fica como a das páginas de serviço (estampa com título e painel
-   à esquerda, foto à direita) e a foto não espelha, porque tem a logo nas costas. No celular, igual às páginas de serviço */
+/* home (17/11): no celular, a vitrine em pé; no computador, a mesma cena estendida pra 16:9 em tela inteira.
+   O técnico fica no terço direito, então título e painel sobem empilhados na esquerda, sobre o corredor da loja,
+   e a foto não espelha (tem a logo nas costas) */
 .sv-home .entrada-foto img { object-position: var(--pos, 45% 30%); }
 @media (min-width: 62rem) {
-  .eb-painel-home.sv-home .entrada-foto { transform: none; left: 50%; }
+  .eb-painel-home.sv-home .entrada-foto { transform: none; }
+  .sv-home .entrada-foto img { object-position: 72% 40%; }
   .sv-home .entrada { align-items: center; min-height: 100svh; }
-  .sv-home .entrada::before { content: ""; position: absolute; inset: 0 50% 0 0; z-index: -1; background: var(--estampa); }
-  .sv-home .entrada::after { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 50%; height: 13rem; background: linear-gradient(rgba(2, 11, 20, .88), rgba(2, 11, 20, .45) 45%, rgba(2, 11, 20, 0)); pointer-events: none; }
-  .sv-home .entrada-veu { display: none; }
-  .sv-home .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2rem; column-gap: clamp(3rem, 6vw, 6rem); align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .sv-home .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .7) 0%, rgba(8, 25, 42, 0) 18%),
+    linear-gradient(90deg, rgba(8, 25, 42, .9) 0%, rgba(8, 25, 42, .72) 30%, rgba(8, 25, 42, .2) 52%, rgba(8, 25, 42, 0) 62%); }
+  .sv-home .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 32rem) 1fr; row-gap: 2rem; align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
   .sv-home .eb-titulo, .sv-home .eb-painel { grid-column: 1; }
-  .sv-home .eb-titulo { padding-right: 1.5rem; }
   .sv-home .eb-titulo h1 { font-size: clamp(2.75rem, 1.6rem + 2.4vw, 4rem); }
   .sv-home .eb-titulo p { margin-top: 1rem; }
   .sv-home .eb-painel { justify-self: start; width: min(100%, 30rem); }
-  .sv-home .topo:not(.solido) nav a, .sv-home .topo:not(.solido) .botao-topo { text-shadow: 0 1px 10px rgba(2, 11, 20, .7); }
-  .sv-home .topo:not(.solido) .botao-topo { background: rgba(2, 11, 20, .35); }
 }
 /* a vitrine é clara (luz de loja): no celular o véu sobe mais, como nas páginas de serviço */
 @media (max-width: 47.99rem) {
