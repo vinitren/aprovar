@@ -1,0 +1,20 @@
+{
+  "nome": "T Digital",
+  "marca": "T Digital",
+  "assinatura": "T Digital",
+  "fontes": "family=Bricolage+Grotesque:wght@700;800&family=Inter:wght@400;500;600",
+  "estilo": {
+    "--fundo": "#E6EEF4",
+    "--cartao": "#ffffff",
+    "--moldura": "#F1F6FA",
+    "--tinta": "#091e2d",
+    "--corpo": "#3C4C57",
+    "--suave": "#5A6A75",
+    "--linha": "#CFDCE6",
+    "--acento": "#2C82B5",
+    "--acento-escuro": "#035897",
+    "--serif": "\"Bricolage Grotesque\", Georgia, sans-serif",
+    "--sans": "\"Inter\", system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif",
+    "--raio": "4px"
+  }
+}
