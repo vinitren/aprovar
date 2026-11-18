@@ -59,7 +59,7 @@
   function vai(p) {
     passo = p;
     mostra();
-    /* no passo do meio da página, desce até ele; no da entrada, volta pro topo */
+    /* no passo do meio da página, desce até ele; no da entrada, volta para o topo */
     if (p === 1) window.scrollTo({ top: 0, behavior: 'smooth' });
     if (p === 3) { var c = document.querySelector('.eb-corpo'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   }
@@ -92,7 +92,7 @@
   guarda('na-home', html.dataset.home);
   guarda('na-corpo', html.dataset.corpo);
   mostra();
-  /* trocou o meio da página: volta direto pra ele, não pro topo */
+  /* trocou o meio da página: volta direto para ele, não para o topo */
   if (q.get('ver') === 'meio') {
     var u0 = endereco(); u0.searchParams.delete('ver'); history.replaceState(null, '', u0.toString());
     var c0 = document.querySelector('.eb-corpo'); if (c0) c0.scrollIntoView({ block: 'start' });
