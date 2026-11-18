@@ -168,3 +168,9 @@ dl.campos dd { margin: 0; color: var(--tinta); white-space: pre-line; }
 /* modo: final (rodada.txt): só a versão final, sem resposta */
 body.final .progresso, body.final .fim, body.final .status { display: none; }
 body.final .chips small { display: none; }
+
+/* modo: previa (rodada.txt): convite no fim, no lugar do envio das respostas */
+.convite { max-width: 600px; margin: 48px auto 0; padding: 24px 16px 8px; border-top: 1px solid var(--linha); }
+.convite h2 { margin: 0 0 10px; font: 600 30px/1.1 var(--serif); color: var(--tinta); }
+.convite p { margin: 0 0 10px; color: var(--corpo); line-height: 1.5; }
+.convite .btn-zap { text-decoration: none; margin-top: 18px; }

@@ -13,6 +13,19 @@
     $(".olho").firstChild.textContent = "Versão final · ";
     $(".como").innerHTML = "<li>Arraste a imagem pro lado pra ver todas as telas. Toque nela pra ampliar.</li><li>Toque em <b>Ver a legenda</b> pra ler o texto que vai com cada post.</li>";
   }
+  // modo: previa (rodada.txt): vitrine pra prospect, sem resposta, com convite pro WhatsApp no fim
+  if (D.previa) {
+    document.title = document.title.replace("Versão final", "Prévia");
+    $(".olho").firstChild.textContent = "Prévia · ";
+    const c = D.convite || {};
+    const sec = document.createElement("section");
+    sec.className = "convite"; sec.id = "convite";
+    const e = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    sec.innerHTML = `<h2>${e(c.titulo)}</h2>${(c.texto || "").split(/\n/).map(p => `<p>${e(p)}</p>`).join("")}
+      <a class="btn-zap" target="_blank" rel="noopener" href="https://wa.me/${D.zap}?text=${encodeURIComponent(c.mensagem || "")}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>${e(c.botao)}</a>`;
+    $("#conteudo").after(sec);
+  }
   const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   const link = (texto, url) => url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(texto)}</a>` : esc(texto);
 

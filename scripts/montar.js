@@ -7,7 +7,7 @@
 // aprovar.tdigital.tech/<cliente>/<nome-da-pasta>/
 //
 // O formato da pasta está no README. Em resumo:
-//   rodada.txt                 titulo, intro, data
+//   rodada.txt                 titulo, intro, data, modo (final | previa); na previa: convite, texto, botao, mensagem
 //   01 Seção/secao.txt         nome (o botão da barra), titulo, sub
 //   01 Seção/01 Peça/info.txt  titulo, etiqueta, grupo, ordem, nota, pergunta,
 //                              aprovado, formato, escolha (pode repetir)
@@ -165,8 +165,10 @@ function peca(dir, nomePasta, id) {
 }
 
 // ---------- rodada ----------
-const r = chaves(path.join(origem, "rodada.txt"), ["titulo", "título", "intro", "data", "modo"]);
-const FINAL = /final/i.test(r.modo || "");
+const r = chaves(path.join(origem, "rodada.txt"), ["titulo", "título", "intro", "data", "modo", "convite", "texto", "botao", "botão", "mensagem"]);
+// modo: previa = vitrine pra prospect: sem resposta, rótulo "Prévia" e convite no fim (convite, texto, botao, mensagem)
+const PREVIA = /pr[eé]via/i.test(r.modo || "");
+const FINAL = /final/i.test(r.modo || "") || PREVIA;
 const dataPasta = rodada.match(/^(\d{4})-(\d{2})-(\d{2})/);
 const DADOS = {
   cliente: slug,
@@ -175,6 +177,8 @@ const DADOS = {
   zap: cliente.whatsapp || config.whatsapp,
   data: r.data || (dataPasta ? `${dataPasta[3]}/${dataPasta[2]}/${dataPasta[1]}` : ""),
   final: FINAL,
+  previa: PREVIA,
+  convite: PREVIA ? { titulo: r.convite || "Gostou?", texto: r.texto || "", botao: r.botao || r["botão"] || "Falar no WhatsApp", mensagem: r.mensagem || "" } : undefined,
   secoes: subpastas(origem).map((nomeSec, s) => {
     const dir = path.join(origem, nomeSec);
     const sx = chaves(path.join(dir, "secao.txt"), ["nome", "titulo", "título", "sub"]);
@@ -194,8 +198,8 @@ const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").re
 const negrito = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
 const estilo = cliente.estilo || {};
 const html = ler(path.join(RAIZ, "motor/index.html"))
-  .replace("· Aprovação do material", FINAL ? "· Versão final" : "· Aprovação do material")
-  .replace("Material para aprovação · ", FINAL ? "Versão final · " : "Material para aprovação · ")
+  .replace("· Aprovação do material", PREVIA ? "· Prévia" : FINAL ? "· Versão final" : "· Aprovação do material")
+  .replace("Material para aprovação · ", PREVIA ? "Prévia · " : FINAL ? "Versão final · " : "Material para aprovação · ")
   .replaceAll("{{nome}}", esc(cliente.nome))
   .replaceAll("{{fundo}}", esc(estilo["--fundo"] || "#faf8f5"))
   .replaceAll("{{fontes}}", cliente.fontes || "family=Inter:wght@400;500;600")

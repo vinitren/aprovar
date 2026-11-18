@@ -5,28 +5,26 @@ window.DADOS = {
  "marca": "Dínamo Kickers F.C.",
  "zap": "5541997128458",
  "data": "18/11/2026",
- "final": false,
+ "final": true,
+ "previa": true,
+ "convite": {
+  "titulo": "Gostaram?",
+  "texto": "Isso pode estar no perfil de vocês junto com a página, falando a mesma língua: quem vê o post chega na página, e quem chega na página marca a aula experimental pelo WhatsApp.\nAntes de publicar, confirmamos com vocês os horários, os valores e qual WhatsApp usar.",
+  "botao": "Quero conversar sobre isso",
+  "mensagem": "Oi, Vinicius! Vimos a prévia do Instagram da Dínamo e queremos conversar."
+ },
  "secoes": [
   {
    "id": "perfil",
    "nome": "Perfil",
    "titulo": "O perfil",
-   "sub": "Nome, categoria, bio e o WhatsApp num toque.",
+   "sub": "O que o pai vê nos primeiros segundos.",
    "itens": [
     {
      "id": "1-1",
      "titulo": "O perfil arrumado",
-     "nota": "Hoje a categoria é \"Vestuário (marca)\", e quem cai no perfil lê loja de roupa. Passa a ser escolinha de futsal. O WhatsApp sai do texto da bio e vira botão e link, num toque.",
+     "nota": "Hoje a categoria do perfil é \"Vestuário (marca)\", e quem chega lê loja de roupa, não escolinha. Aqui ela vira clube esportivo, o nome ganha \"Futsal Infantil\" (é o que os pais buscam) e o WhatsApp sai do texto da bio e vira botão, num toque.",
      "livre": true,
-     "escolhas": [
-      {
-       "pergunta": "Qual WhatsApp vai no botão e no link da bio?",
-       "opcoes": [
-        "(41) 99867-6435",
-        "(41) 99618-0904"
-       ]
-      }
-     ],
      "slides": [
       {
        "src": "img/1-1-1.webp",
@@ -50,7 +48,7 @@ window.DADOS = {
       ],
       [
        "Categoria",
-       "Clube esportivo (sai \"Vestuário (marca)\")"
+       "Clube esportivo (no lugar de \"Vestuário (marca)\")"
       ],
       [
        "Bio",
@@ -58,7 +56,7 @@ window.DADOS = {
       ],
       [
        "Link",
-       "wa.me/5541998676435 (quando a página estiver no ar, o link passa a ser ela)"
+       "wa.me/5541998676435 (com a página no ar, o link passa a ser ela)"
       ],
       [
        "Título do link",
@@ -83,16 +81,7 @@ window.DADOS = {
      "titulo": "Como marcar a aula experimental",
      "etiqueta": "Post fixado",
      "ordem": "1 de 3",
-     "nota": "Lobo e loba de vocês na capa, fotos reais das aulas nos passos (só luz e cor ajustadas).",
-     "escolhas": [
-      {
-       "pergunta": "A aula experimental é gratuita?",
-       "opcoes": [
-        "Sim, pode escrever \"grátis\"",
-        "Não, fica como está"
-       ]
-      }
-     ],
+     "nota": "Hoje nenhum post fixado diz como marcar a aula. Este é o primeiro que o pai vê. Na capa, o lobo e a loba de vocês; nos passos, fotos reais das aulas, só com luz e cor ajustadas.",
      "slides": [
       {
        "src": "img/2-1-1.webp",
@@ -136,23 +125,7 @@ window.DADOS = {
      "titulo": "Turmas, horários e mensalidade",
      "etiqueta": "Post fixado",
      "ordem": "2 de 3",
-     "nota": "Horários da mensagem de 15/11. Os valores vieram do folder, com o texto de valor social.",
-     "escolhas": [
-      {
-       "pergunta": "Na sexta, 18h30, qual é a turma?",
-       "opcoes": [
-        "Sub 12+ (mensagem de 15/11)",
-        "Sub 09+ (folder)"
-       ]
-      },
-      {
-       "pergunta": "Os valores do folder (R$ 100, 130 e 140) ainda valem?",
-       "opcoes": [
-        "Valem",
-        "Mudaram (escrevo abaixo)"
-       ]
-      }
-     ],
+     "nota": "A primeira dúvida dos pais, respondida antes de perguntarem. Horários da mensagem de vocês de 15/11 e valores do folder, com o texto de valor social.",
      "slides": [
       {
        "src": "img/2-2-1.webp",
@@ -196,7 +169,7 @@ window.DADOS = {
      "titulo": "Seu filho pode vir",
      "etiqueta": "Post fixado",
      "ordem": "3 de 3",
-     "nota": "As quatro dúvidas dos pais, com a frase da Tati no fim. \"Aqui todos jogam\" é de vocês, da arte do dia do autismo.",
+     "nota": "As quatro dúvidas que mais aparecem antes da matrícula, com a frase da Tati no fim. \"Aqui todos jogam\" é de vocês, da arte do dia do autismo.",
      "slides": [
       {
        "src": "img/2-3-1.webp",

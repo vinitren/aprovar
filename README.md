@@ -62,6 +62,12 @@ intro: Texto curto do topo. **Negrito** assim.
 data: 14/10/2026            (sem isso, sai do nome da pasta)
 modo: final                 (opcional) página só pra mostrar a versão final: sem
                             Aprovado / Quero mudar, perguntas, escolhas nem WhatsApp
+modo: previa                (opcional) vitrine pra prospect: igual à final, com o rótulo
+                            "Prévia" e um convite no fim com botão de WhatsApp:
+convite: Gostaram?          título do convite
+texto: Uma ou mais linhas.  texto do convite
+botao: Quero conversar      o rótulo do botão
+mensagem: Oi! Vi a prévia   o texto que já vem escrito no WhatsApp
 ```
 
 **secao.txt** (opcional)
