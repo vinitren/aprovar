@@ -66,6 +66,7 @@ window.DADOS = {
      "titulo": "O Ecossistema T Digital",
      "etiqueta": "Post fixado",
      "ordem": "1 de 8",
+     "nota": "Sem o T de fundo. No slide da IA, saiu o \"sua equipe aprova antes\": agora é \"você controla as respostas\".",
      "slides": [
       {
        "src": "img/2-1-1.webp",
@@ -119,15 +120,7 @@ window.DADOS = {
      "titulo": "Case: festival em Curitiba",
      "etiqueta": "Post fixado",
      "ordem": "2 de 8",
-     "escolhas": [
-      {
-       "pergunta": "Case em carrossel ou no reels de 20/10?",
-       "opcoes": [
-        "Fica o carrossel",
-        "Quero o reels no lugar"
-       ]
-      }
-     ],
+     "nota": "Sem o número de conversas. Agora pela estratégia (dois públicos, verba que muda de lado) e pelo retorno: R$ 7.350 em estandes contra R$ 833 de anúncio, quase 9 vezes. Números do relatório final da 15ª edição.",
      "slides": [
       {
        "src": "img/2-2-1.webp",
@@ -170,7 +163,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "168 conversas de quem queria expor, a R$ 4,96 cada.\n\nFestival em Curitiba, 15ª edição. Montamos a página de quem expõe, o anúncio direto pro WhatsApp e a medição de onde veio cada conversa.\n\nArraste pro lado e veja o caminho.\n\nTem evento com data marcada? Chame no WhatsApp, o link está na bio.\n\n#eventos #marketingdeeventos #trafegopago #curitiba"
+         "texto": "Quase 9 vezes a verba de volta em estande.\n\nFestival em Curitiba, 15ª edição. 51 dias antes, 40 de 120 estandes vendidos, sem site e sem medição. Separamos os dois públicos: expositor direto pro WhatsApp da venda de estande, visitante pra página com cadastro VIP. A verba mudou de lado conforme a data chegava.\n\nO anúncio de expositor fechou R$ 7.350 em estandes com R$ 833 de verba. E ficaram 632 cadastros VIP pra próxima edição.\n\nTem evento com data marcada? Chame no WhatsApp, o link está na bio.\n\n#eventos #marketingdeeventos #trafegopago #curitiba"
         }
        ]
       }
@@ -237,6 +230,7 @@ window.DADOS = {
      "id": "2-4",
      "titulo": "Onde a venda escapa",
      "ordem": "4 de 8",
+     "nota": "Saiu a foto da casa. O slide 2 agora é o celular de perto, com a conversa que esfriou na demora, sobre um balcão desfocado. Sem o T de fundo.",
      "slides": [
       {
        "src": "img/2-4-1.webp",
@@ -284,6 +278,7 @@ window.DADOS = {
      "id": "2-5",
      "titulo": "IA no atendimento, do jeito certo",
      "ordem": "5 de 8",
+     "nota": "Reescrito com o seu argumento: treinada do jeito que você já vende, 24 horas sem limite, retoma quem parou de responder, controle total e uma pessoa assume quando precisar. Saiu o \"aprova antes\".",
      "slides": [
       {
        "src": "img/2-5-1.webp",
@@ -321,7 +316,7 @@ window.DADOS = {
        "resumo": "Ver a legenda",
        "partes": [
         {
-         "texto": "IA que responde qualquer coisa de qualquer jeito afasta cliente.\n\nA nossa aprende com as conversas que já viraram venda no seu WhatsApp, começa com a sua equipe aprovando cada resposta e passa pra uma pessoa quando o assunto pede.\n\nChame no WhatsApp pra ver como funciona.\n\n#inteligenciaartificial #atendimento #whatsappbusiness"
+         "texto": "A IA que atende do jeito que você já vende. Só que 24 horas.\n\nTreinada nas conversas que já viraram venda no seu WhatsApp, responde na hora, sem cansaço e sem dia ruim, e volta em quem parou de responder. Você controla as respostas, e uma pessoa assume sempre que precisar.\n\nNão substitui ninguém: dá eficiência e autonomia pra quem cuida do comercial.\n\nChame no WhatsApp pra ver como funciona.\n\n#inteligenciaartificial #atendimento #whatsappbusiness"
         }
        ]
       }
@@ -332,7 +327,7 @@ window.DADOS = {
      "titulo": "Como faríamos: curso online",
      "etiqueta": "Exemplo",
      "ordem": "6 de 8",
-     "nota": "Exemplo ilustrativo de como montaríamos o plano. Não usa número de cliente.",
+     "nota": "Sem o T de fundo e sem o selo na foto.",
      "slides": [
       {
        "src": "img/2-6-1.webp",
@@ -381,7 +376,7 @@ window.DADOS = {
      "titulo": "Como faríamos: serviço por orçamento",
      "etiqueta": "Exemplo",
      "ordem": "7 de 8",
-     "nota": "Exemplo ilustrativo de como montaríamos o plano. Não usa número de cliente.",
+     "nota": "Saiu a marcenaria. O slide 2 agora é o celular com a mensagem que chega do anúncio, já com a origem, sobre uma mesa desfocada.",
      "slides": [
       {
        "src": "img/2-7-1.webp",
@@ -429,40 +424,36 @@ window.DADOS = {
      "id": "2-8",
      "titulo": "Página feita pra vender",
      "ordem": "8 de 8",
-     "nota": "O print do festival mostra as datas da 15ª edição (17 e 18 de outubro). Serve de vitrine da página. Se preferir, troco por um print da 16ª quando a página dela estiver no ar.",
-     "escolhas": [
-      {
-       "pergunta": "Posso usar o site da produtora e a página do festival como vitrine?",
-       "opcoes": [
-        "Pode usar",
-        "Esperar a Novo Ambiente no ar"
-       ]
-      }
-     ],
+     "nota": "Três sites rolando de cima pra baixo, um por slide: a produtora, o escritório de advocacia e a escola de dança (prévia, mostrada sem o nome).",
      "slides": [
       {
        "src": "img/2-8-1.webp",
-       "label": "1 de 5",
+       "label": "1 de 6",
        "ia": false
       },
       {
        "src": "img/2-8-2.webp",
-       "label": "2 de 5",
+       "label": "2 de 6",
        "ia": false
       },
       {
        "src": "img/2-8-3.webp",
-       "label": "3 de 5",
+       "label": "3 de 6",
        "ia": false
       },
       {
        "src": "img/2-8-4.webp",
-       "label": "4 de 5",
+       "label": "4 de 6",
        "ia": false
       },
       {
        "src": "img/2-8-5.webp",
-       "label": "5 de 5",
+       "label": "5 de 6",
+       "ia": false
+      },
+      {
+       "src": "img/2-8-6.webp",
+       "label": "6 de 6",
        "ia": false
       }
      ],
@@ -570,6 +561,11 @@ window.DADOS = {
       {
        "src": "img/3-4-3.webp",
        "label": "Story 2",
+       "ia": false
+      },
+      {
+       "src": "img/3-4-4.webp",
+       "label": "Story 3",
        "ia": false
       }
      ]
