@@ -1,0 +1,193 @@
+/* As páginas de serviço e de contato (15/11/2026), no molde da home aprovada (Painel · Uniforme · Cartões).
+   Só o que a home não tem: a entrada dividida (estampa do uniforme + foto do serviço), a trilha "Início / Serviço",
+   os cartões de ícone em 4, as perguntas e a página de contato. O resto vem de estilo.css, b.css e pagina.css. */
+
+/* ---------- entrada do serviço ----------
+   Computador: a estampa do uniforme à esquerda com o título, a foto do serviço à direita com o painel por cima.
+   Celular: igual à home, a foto inteira na primeira tela e o painel logo abaixo. */
+.sv .entrada { min-height: min(100svh, 58rem); }
+.sv .entrada-foto img { object-position: var(--pos, 50% 50%); }
+@media (min-width: 62rem) {
+  /* 15/11, pedido do Vinicius: o painel cobria a foto quase inteira. Agora título e painel moram na metade da
+     estampa, um embaixo do outro, e a foto do serviço fica inteira na outra metade */
+  .sv .entrada { align-items: center; min-height: 100svh; }
+  .sv .entrada::before { content: ""; position: absolute; inset: 0 50% 0 0; z-index: -1; background: var(--estampa); }
+  .sv .entrada-foto { left: 50%; }
+  .sv .entrada-veu { display: none; }
+  .sv .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2rem; column-gap: clamp(3rem, 6vw, 6rem); align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .sv .eb-titulo, .sv .eb-painel { grid-column: 1; }
+  .sv .eb-titulo { padding-right: 1.5rem; }
+  .sv .eb-titulo h1 { font-size: clamp(2.5rem, 1.5rem + 2vw, 3.625rem); }
+  .sv .eb-titulo p { margin-top: 1rem; }
+  .sv .eb-painel { justify-self: start; width: min(100%, 30rem); }
+}
+
+@media (max-width: 61.99rem) {
+  .sv .entrada { display: block; min-height: 0; }
+  .sv .entrada-foto, .sv .entrada-veu { bottom: auto; height: 100svh; }
+  .sv .eb-titulo { min-height: calc(100svh - var(--logo-grande, 6rem) - 2.5rem - 10rem); display: flex; flex-direction: column; justify-content: flex-end; }
+  .sv .eb-titulo h1 { font-size: clamp(2.5rem, 1.6rem + 4.4vw, 3.5rem); max-width: none; }
+}
+.sv .eb-titulo h1 em { display: block; }
+
+/* a trilha: Início / Serviço (é o que o Google mostra em cima do resultado) */
+.sv-trilha { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; font: 500 .8125rem/1.2 var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--claro-2); animation: sobe 1.1s var(--sai) both; }
+.sv-trilha a { color: var(--off); text-decoration-color: var(--linha-clara); }
+.sv-trilha a:hover { text-decoration-color: currentColor; }
+
+/* linha do painel com ícone no lugar da foto (quando ainda não há foto do serviço) */
+.eb-mini-ico { display: grid; place-items: center; background: #e2eef6; color: var(--botao); }
+.eb-mini-ico svg { width: 1.6rem; height: 1.6rem; }
+.eb-linha-principal .eb-mini-ico { background: rgba(255, 255, 255, .16); color: #fff; }
+
+/* barra do celular nas páginas internas: a mesma da home */
+@media (max-width: 47.99rem) { .sv body { padding-bottom: calc(4.45rem + env(safe-area-inset-bottom)); } .sv .rodape { padding-bottom: 3.5rem; } }
+
+/* ---------- os tipos ---------- */
+.sv-tipos .b-cabeca p a { color: var(--botao); text-decoration-color: rgba(0, 149, 218, .4); }
+.sv-tipos .b-servico img.largo { aspect-ratio: 16 / 9; }
+.sv-cartoes-4 { list-style: none; padding: 0; margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); display: grid; gap: 1.25rem; }
+.sv-cartoes-4 .b-cartao { padding: 2rem 1.75rem; }
+.sv-cartoes-4 h3 { margin-top: 1.5rem; font-size: 1.375rem; }
+.sv-cartoes-4 p { margin-top: .75rem; color: var(--texto-2); font-size: 1rem; }
+@media (min-width: 40rem) { .sv-cartoes-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .sv-cartoes-4 { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; } }
+.sv-cta { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); }
+
+/* ---------- perguntas ---------- */
+.sv-faq { background: var(--pg); }
+.sv-faq .faq { max-width: 50rem; margin: clamp(2rem, 1.5rem + 2vw, 3.5rem) auto 0; }
+.sv-faq .faq summary { color: var(--marinho); }
+.sv-faq .faq summary svg { color: var(--botao); }
+.sv-faq .faq details p a { color: var(--botao); }
+
+/* ---------- contato ---------- */
+.ct .entrada { min-height: 0; background: var(--estampa); }
+.ct .entrada-texto.eb-entrada { padding-bottom: clamp(3rem, 8vh, 5.5rem); }
+@media (min-width: 62rem) {
+  .ct .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) 30rem; align-items: center; gap: 5rem; }
+  .ct .eb-titulo h1 { font-size: clamp(3rem, 1.7rem + 3.4vw, 4.75rem); }
+}
+.ct .eb-titulo h1 em { display: block; }
+.ct .eb-painel ul + ul { margin-top: .5rem; padding-top: .75rem; border-top: 1px solid var(--linha); }
+.ct-dados { background: var(--pg-2); }
+.ct-dados .b-cartao a { color: var(--botao); font-weight: 500; overflow-wrap: anywhere; }
+
+/* menu sobre a foto do serviço: no computador o véu da home some, então o alto da foto ganha uma sombra pro menu ler no céu claro */
+@media (min-width: 62rem) {
+  .sv .entrada::after { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 50%; height: 13rem; background: linear-gradient(rgba(2, 11, 20, .88), rgba(2, 11, 20, .45) 45%, rgba(2, 11, 20, 0)); pointer-events: none; }
+  .sv .topo:not(.solido) nav a, .sv .topo:not(.solido) .botao-topo { text-shadow: 0 1px 10px rgba(2, 11, 20, .7); }
+  .sv .topo:not(.solido) .botao-topo:not(:hover) { background: rgba(2, 11, 20, .62); } /* 18/11: .35 dava 2,7:1 sobre a vitrine */
+}
+
+/* rodapé do site: os serviços numa coluna e os contatos em outra */
+@media (min-width: 62rem) { .rodape .wrap { grid-template-columns: auto 1fr auto auto; } }
+.ct-area { display: inline-flex; align-items: center; gap: .6rem; color: var(--texto-2); }
+.ct-area svg { width: 1.25rem; height: 1.25rem; color: var(--botao); }
+
+/* revisão do celular (15/11) */
+@media (max-width: 47.99rem) {
+  /* o título e a trilha ficam no meio da foto: o véu sobe mais e escurece mais */
+  .sv .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .55) 0%, rgba(8, 25, 42, 0) 22%),
+    linear-gradient(0deg, rgba(8, 25, 42, .95) 0%, rgba(8, 25, 42, .75) 38%, rgba(8, 25, 42, 0) 72%); }
+  .sv .sv-trilha { color: var(--off); }
+  /* "Também limpamos": linhas compactas no lugar dos três cartões altos */
+  .sv .b-tambem .b-cartoes-3 { gap: .75rem; }
+  .sv .b-tambem .b-cartao-link a { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; align-items: center; padding: 1.1rem 1.25rem; }
+  .sv .b-tambem .b-cartao-link .b-bolinha { grid-row: 1 / 4; }
+  .sv .b-tambem .b-cartao-link h3 { margin-top: 0; font-size: 1.1875rem; }
+  .sv .b-tambem .b-cartao-link p { margin-top: .2rem; font-size: .9375rem; }
+  .sv .b-tambem .b-cartao-link .link-seta { margin-top: .4rem; }
+}
+/* contato: espaço entre o título e os cartões */
+.ct-dados .b-cartoes-3 { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+
+/* ---------- 17/11: o retorno do site ---------- */
+/* home (17/11): no celular, a vitrine em pé; no computador, a mesma cena estendida pra 16:9 em tela inteira.
+   O técnico fica no terço direito, então título e painel sobem empilhados na esquerda, sobre o corredor da loja,
+   e a foto não espelha (tem a logo nas costas) */
+.sv-home .entrada-foto img { object-position: var(--pos, 45% 30%); }
+@media (min-width: 62rem) {
+  .eb-painel-home.sv-home .entrada-foto { transform: none; }
+  .sv-home .entrada-foto img { object-position: 72% 40%; }
+  .sv-home .entrada { align-items: center; min-height: 100svh; }
+  .sv-home .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .7) 0%, rgba(8, 25, 42, 0) 18%),
+    linear-gradient(90deg, rgba(8, 25, 42, .9) 0%, rgba(8, 25, 42, .72) 30%, rgba(8, 25, 42, .2) 52%, rgba(8, 25, 42, 0) 62%); }
+  .sv-home .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 32rem) 1fr; row-gap: 2rem; align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .sv-home .eb-titulo, .sv-home .eb-painel { grid-column: 1; }
+  .sv-home .eb-titulo h1 { font-size: clamp(2.75rem, 1.6rem + 2.4vw, 4rem); }
+  .sv-home .eb-titulo p { margin-top: 1rem; }
+  .sv-home .eb-painel { justify-self: start; width: min(100%, 30rem); }
+}
+/* a vitrine é clara (luz de loja): no celular o véu sobe mais, como nas páginas de serviço */
+@media (max-width: 47.99rem) {
+  .sv-home .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .55) 0%, rgba(8, 25, 42, 0) 22%),
+    linear-gradient(0deg, rgba(8, 25, 42, .95) 0%, rgba(8, 25, 42, .78) 40%, rgba(8, 25, 42, 0) 74%); }
+}
+
+/* placa solar: dois cartões do mesmo tamanho, lado a lado */
+@media (min-width: 62rem) { .sv-tipos .b-servicos:has(> li:nth-child(2):last-child) { grid-template-columns: repeat(2, 1fr); } }
+.sv-tipos .b-servicos:has(> li:nth-child(2):last-child) .botao { width: 100%; justify-content: center; text-align: center; }
+.sv-tipos .b-servicos:has(> li:nth-child(2):last-child) .b-servico-texto { align-items: stretch; }
+/* 18/11: os termos encostavam no botão; o respiro fica fixo e o botão desce pro pé do cartão */
+.sv-tipos .b-servicos:has(> li:nth-child(2):last-child) .termos { margin-bottom: auto; padding-bottom: 1.5rem; }
+
+/* fachada: "Pra quem limpamos" com a indústria, em 4 */
+@media (min-width: 48rem) { .b-cartoes-3.sv-quem-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .b-cartoes-3.sv-quem-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* fachada: a fachada inteira (muro, grade, portão, calhas), um cartão largo com foto */
+.sv-completa { margin-top: clamp(1.25rem, 1rem + 1vw, 1.5rem); }
+.sv-completa .botao { margin-top: 1.5rem; }
+@media (min-width: 62rem) { .sv-completa img { min-height: 22rem; } .sv-completa figure { flex-basis: 40%; } .sv-completa .b-servico-texto { flex-basis: 60%; } }
+
+/* 18/11: no fechamento o técnico do rapel fica no canto direito da foto; em 30% ele saía cortado */
+.b-fecho-painel img[src*="entrada-janela"] { object-position: 85% 50%; }
+
+/* 18/11: sinais de que precisa limpar (placa solar e piso): lista numerada em filete + o "por que não sozinho" */
+.sv-sinais { background: var(--pg-2); }
+.sv-sinais-lista { list-style: none; padding: 0; margin: clamp(2rem, 1.5rem + 2vw, 3rem) 0 0; display: grid; gap: 0 2.5rem; counter-reset: sinal; }
+.sv-sinais-lista li { counter-increment: sinal; padding: 1.5rem 0; border-top: 1px solid var(--linha); display: grid; grid-template-columns: 3rem 1fr; column-gap: 1rem; }
+.sv-sinais-lista li::before { content: counter(sinal, decimal-leading-zero); grid-row: 1 / 3; font: 400 1.75rem/1 var(--serif); color: var(--azul-texto); }
+.sv-sinais-lista h3 { font-size: 1.25rem; }
+.sv-sinais-lista p { margin-top: .4rem; color: var(--texto-2); }
+@media (min-width: 48rem) { .sv-sinais-lista { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .sv-sinais-3 { grid-template-columns: repeat(3, 1fr); } }
+.sv-sozinho { margin-top: clamp(1.5rem, 1rem + 2vw, 2.5rem); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); border-radius: 16px; background: var(--marinho); color: var(--off); }
+.sv-sozinho h3 { font-size: clamp(1.375rem, 1.2rem + .6vw, 1.75rem); color: var(--off); }
+.sv-sozinho p { margin-top: .6rem; max-width: 44rem; color: var(--claro-2); }
+.sv-sozinho .botao { margin-top: 1.5rem; }
+@media (max-width: 29.99rem) { .sv-sozinho .botao { width: 100%; } }
+
+/* segurança no trabalho em altura */
+.sv-seguranca { background: var(--pg-2); }
+.sv-seguranca .b-cartoes-3, .sv-elogios .b-cartoes-3 { list-style: none; margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+
+/* o que dizem os clientes */
+/* 18/11: avaliações no formato do Google (resumo com a nota + cartões com inicial, nome, G e estrelas) */
+.gg-resumo { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem .75rem; width: fit-content; margin: clamp(1.75rem, 1.5rem + 1vw, 2.5rem) auto 0; padding: .85rem 1.25rem; border-radius: 999px; background: #fff; color: var(--marinho); text-decoration: none; box-shadow: 0 1px 2px rgba(8, 25, 42, .08), 0 8px 24px -12px rgba(8, 25, 42, .25); }
+.gg-resumo .gg-g { width: 1.5rem; height: 1.5rem; }
+.gg-nota { font: 500 1.375rem/1 var(--sans); }
+.gg-total { font-size: .9375rem; color: var(--texto-2); }
+.gg-ver { display: inline-flex; align-items: center; gap: .35rem; font-size: .9375rem; color: var(--azul-texto); text-decoration: underline; text-underline-offset: 3px; }
+.gg-ver svg { width: .85rem; height: .85rem; }
+.gg-resumo:hover .gg-ver { color: var(--marinho); }
+.gg-estrelas { color: #fbbc04; font-size: 1rem; letter-spacing: .1em; line-height: 1; }
+.gg-lista { list-style: none; padding: 0; margin: clamp(1.75rem, 1.5rem + 1vw, 2.5rem) 0 0; columns: 3 18rem; column-gap: 1.25rem; }
+.gg-cartao { break-inside: avoid; margin-bottom: 1.25rem; padding: 1.25rem 1.25rem 1.4rem; border-radius: 12px; background: #fff; border: 1px solid rgba(8, 25, 42, .08); }
+.gg-quem { display: flex; align-items: center; gap: .75rem; margin-bottom: .75rem; }
+.gg-avatar { flex: none; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--c); color: #fff; font: 500 1.125rem/1 var(--sans); }
+.gg-nome { flex: 1; display: flex; flex-direction: column; font: 500 .9375rem/1.3 var(--sans); color: var(--marinho); }
+.gg-nome small { font-weight: 400; font-size: .8125rem; color: var(--texto-2); }
+.gg-quem .gg-g { flex: none; width: 1.25rem; height: 1.25rem; }
+.gg-cartao blockquote { margin: .65rem 0 0; }
+.gg-cartao blockquote p { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--texto); }
+/* no celular, as avaliações correm de lado em vez de empilhar dez cartões */
+@media (max-width: 47.99rem) {
+  .gg-lista { columns: auto; display: flex; gap: .875rem; overflow-x: auto; scroll-snap-type: x mandatory; margin-inline: calc(-1 * var(--margem, 1.25rem)); padding: 0 var(--margem, 1.25rem) .75rem; scrollbar-width: none; }
+  .gg-lista::-webkit-scrollbar { display: none; }
+  .gg-cartao { flex: 0 0 82%; margin: 0; scroll-snap-align: center; }
+}

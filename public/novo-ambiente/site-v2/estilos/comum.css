@@ -1,0 +1,57 @@
+/* Prévia de estilos do corpo (11/11/2026). Vale pros três.
+   A cliente achou o marinho "carregado": o corpo sai do escuro. Fundo claro, azul da logo
+   nos botões e ícones, marinho só em detalhe (o texto e os riscos da régua dos planos).
+   A entrada e a régua dos planos são as mesmas da prévia 7. */
+:root {
+  --branco: #fff;
+  --gelo: #d8e6ef;
+  --gelo-2: #eaf2f7;
+  /* o azul da logo escurecido só o bastante pra letra branca passar no contraste (5,2:1) */
+  --azul-forte: #0a72ad;
+  --azul-forte-2: #085d8d;
+  --linha: rgba(8, 25, 42, .12);
+  --sombra: 0 22px 44px -28px rgba(8, 25, 42, .32), 0 2px 6px -2px rgba(8, 25, 42, .06);
+}
+html { scrollbar-color: var(--azul-forte) var(--gelo-2); }
+::selection { background: var(--gelo); color: var(--marinho); }
+body { background: var(--branco); }
+
+.cabeca p { color: var(--texto-2); }
+.secao h2 em { color: var(--azul-texto); }
+.secao h3 { color: var(--marinho); }
+.resolve { color: var(--texto); font-weight: 500; }
+.termos { font-size: .8125rem; line-height: 1.5; color: var(--azul-texto); }
+.link-seta { color: var(--azul-texto); text-decoration-color: rgba(0, 101, 150, .3); }
+/* a foto segue a proporção do CSS, não a altura escrita na tag */
+:where(.secao figure) img { height: auto; }
+.ico { width: 1.5rem; height: 1.5rem; flex: none; }
+.so-leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.botao-azul { background: var(--azul-forte); color: var(--branco); }
+.botao-azul:hover { background: var(--azul-forte-2); }
+@media (max-width: 29.99rem) { .secao .botao { width: 100%; } }
+
+/* menu: branco depois da entrada, botão no azul da logo */
+.topo.solido { background: rgba(255, 255, 255, .97); }
+.topo.solido .botao-topo { background: var(--azul-forte); color: var(--branco); }
+.topo.solido .botao-topo:hover { background: var(--azul-forte-2); }
+
+/* planos: a régua é a mesma; só o botão troca de marinho pra azul */
+.planos .wrap > .botao { margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); }
+
+/* rodapé claro */
+.rodape { background: var(--branco); color: var(--texto-2); border-top: 1px solid var(--linha); }
+.rodape strong { color: var(--texto); }
+.rodape a { color: var(--texto); text-decoration-color: var(--linha); }
+.rodape .previa { color: var(--texto-2); }
+.rodape .previa a { color: var(--azul-texto); }
+
+/* barra do WhatsApp no celular */
+.barra-wa { background: var(--branco); box-shadow: 0 -12px 30px -20px rgba(8, 25, 42, .4); }
+
+/* só nesta prévia: o selo do estilo, pra quem abre os três em abas */
+.selo-estilo { position: fixed; left: 1.25rem; bottom: 1.25rem; z-index: 30; display: none; align-items: center; gap: .6rem; padding: .5rem 1rem .5rem .5rem;
+  background: var(--branco); color: var(--texto); border-radius: 999px; box-shadow: var(--sombra); font-size: .875rem; text-decoration: none; }
+.selo-estilo b { display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: var(--azul-forte); color: var(--branco); font-weight: 600; }
+.selo-estilo span { color: var(--azul-texto); text-decoration: underline; text-underline-offset: .2em; }
+@media (min-width: 48rem) { .selo-estilo { display: inline-flex; } }
