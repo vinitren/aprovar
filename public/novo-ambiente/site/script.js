@@ -10,7 +10,8 @@
   var topo = document.querySelector('.topo');
   var marca = document.querySelector('.marca');
   var logo = marca && marca.querySelector('.marca-logo');
-  var titulo = document.querySelector('.entrada h1');
+  /* 17/11: nas páginas de serviço a trilha (Início / Serviço) vem antes do título: a logo termina de diminuir antes dela */
+  var titulo = document.querySelector('.entrada .sv-trilha') || document.querySelector('.entrada h1');
   if (calmo && temIO) {
     new IntersectionObserver(function (es) {
       topo.classList.toggle('solido', !es[0].isIntersecting);
