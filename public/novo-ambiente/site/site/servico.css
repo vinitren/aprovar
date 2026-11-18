@@ -102,3 +102,52 @@
 }
 /* contato: espaço entre o título e os cartões */
 .ct-dados .b-cartoes-3 { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+
+/* ---------- 17/11: o retorno do site ---------- */
+/* home: a vitrine é foto em pé. No computador, a entrada fica como a das páginas de serviço (estampa com título e painel
+   à esquerda, foto à direita) e a foto não espelha, porque tem a logo nas costas. No celular, igual às páginas de serviço */
+.sv-home .entrada-foto img { object-position: var(--pos, 45% 30%); }
+@media (min-width: 62rem) {
+  .eb-painel-home.sv-home .entrada-foto { transform: none; left: 50%; }
+  .sv-home .entrada { align-items: center; min-height: 100svh; }
+  .sv-home .entrada::before { content: ""; position: absolute; inset: 0 50% 0 0; z-index: -1; background: var(--estampa); }
+  .sv-home .entrada::after { content: ""; position: absolute; z-index: -1; inset: 0 0 auto 50%; height: 13rem; background: linear-gradient(rgba(2, 11, 20, .88), rgba(2, 11, 20, .45) 45%, rgba(2, 11, 20, 0)); pointer-events: none; }
+  .sv-home .entrada-veu { display: none; }
+  .sv-home .entrada-texto.eb-entrada { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); row-gap: 2rem; column-gap: clamp(3rem, 6vw, 6rem); align-items: start; padding-bottom: clamp(2.5rem, 6vh, 4rem); }
+  .sv-home .eb-titulo, .sv-home .eb-painel { grid-column: 1; }
+  .sv-home .eb-titulo { padding-right: 1.5rem; }
+  .sv-home .eb-titulo h1 { font-size: clamp(2.75rem, 1.6rem + 2.4vw, 4rem); }
+  .sv-home .eb-titulo p { margin-top: 1rem; }
+  .sv-home .eb-painel { justify-self: start; width: min(100%, 30rem); }
+  .sv-home .topo:not(.solido) nav a, .sv-home .topo:not(.solido) .botao-topo { text-shadow: 0 1px 10px rgba(2, 11, 20, .7); }
+  .sv-home .topo:not(.solido) .botao-topo { background: rgba(2, 11, 20, .35); }
+}
+/* a vitrine é clara (luz de loja): no celular o véu sobe mais, como nas páginas de serviço */
+@media (max-width: 47.99rem) {
+  .sv-home .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .55) 0%, rgba(8, 25, 42, 0) 22%),
+    linear-gradient(0deg, rgba(8, 25, 42, .95) 0%, rgba(8, 25, 42, .78) 40%, rgba(8, 25, 42, 0) 74%); }
+}
+
+/* placa solar: dois cartões do mesmo tamanho, lado a lado */
+@media (min-width: 62rem) { .sv-tipos .b-servicos:has(> li:nth-child(2):last-child) { grid-template-columns: repeat(2, 1fr); } }
+
+/* fachada: "Pra quem limpamos" com a indústria, em 4 */
+@media (min-width: 48rem) { .b-cartoes-3.sv-quem-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 75rem) { .b-cartoes-3.sv-quem-4 { grid-template-columns: repeat(4, 1fr); } }
+
+/* fachada: a fachada inteira (muro, grade, portão, calhas), um cartão largo com foto */
+.sv-completa { margin-top: clamp(1.25rem, 1rem + 1vw, 1.5rem); }
+.sv-completa .botao { margin-top: 1.5rem; }
+@media (min-width: 62rem) { .sv-completa img { min-height: 22rem; } .sv-completa figure { flex-basis: 40%; } .sv-completa .b-servico-texto { flex-basis: 60%; } }
+
+/* segurança no trabalho em altura */
+.sv-seguranca { background: var(--pg-2); }
+.sv-seguranca .b-cartoes-3, .sv-elogios .b-cartoes-3 { list-style: none; margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); }
+
+/* o que dizem os clientes */
+.sv-elogios .b-cartao figure { display: flex; flex-direction: column; height: 100%; }
+.sv-estrelas { color: #f5b301; font-size: 1.125rem; letter-spacing: .15em; }
+.sv-elogios blockquote { margin: 1rem 0 0; flex: 1; }
+.sv-elogios blockquote p { margin: 0; font: 400 1.25rem/1.4 var(--serif, Georgia, serif); color: var(--marinho); }
+.sv-elogios figcaption { margin-top: 1.25rem; font-size: .875rem; color: var(--texto-2); }

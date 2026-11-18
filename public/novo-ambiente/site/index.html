@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home cc" data-paleta="2" data-corpo="a">
+<html lang="pt-BR" class="sem-js estilo-b eb eb-painel-home sv-home cc" data-paleta="2" data-corpo="a">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,8 +17,7 @@
 <meta name="theme-color" content="#08192a">
 <link rel="icon" href="img/icone-48.png" type="image/png">
 <link rel="apple-touch-icon" href="img/icone-180.png">
-<link rel="preload" as="image" imagesrcset="img/entrada-rapel-1600.webp 1600w, img/entrada-rapel-2560.webp 2560w" imagesizes="100vw" media="(min-width: 48rem)" fetchpriority="high">
-<link rel="preload" as="image" imagesrcset="img/entrada-rapel-cel-750.webp 750w, img/entrada-rapel-cel-1080.webp 1080w" imagesizes="100vw" media="(max-width: 47.99rem)" fetchpriority="high">
+<link rel="preload" as="image" imagesrcset="img/entrada-vitrine-750.webp 750w, img/entrada-vitrine-1080.webp 1024w" imagesizes="(min-width: 62rem) 50vw, 100vw" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="fonts/instrument-sans-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/source-serif-4-latin.woff2" crossorigin>
 <link rel="stylesheet" href="estilo.css">
@@ -55,6 +54,9 @@
   <symbol id="i-pedra" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3 20.5h18M4.5 20.5l2-7 4-2.5 3.5 1.5 3 4 1.5 4"/><path d="m10.5 11-1-4.5 3.5-3 4 2.5-1 5.5-2.5 1"/></g></symbol>
   <symbol id="i-email" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3.5 5.5h17v13h-17z"/><path d="m3.5 6 8.5 7 8.5-7"/></g></symbol>
   <symbol id="i-insta" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></g></symbol>
+  <symbol id="i-portao" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 21h19M4 21V6.5M20 21V6.5M3 6.5h3M18 6.5h3"/><path d="M6.5 9h11M6.5 18h11M8.5 9v9M11 9v9M13.5 9v9M16 9v9"/></g></symbol>
+  <symbol id="i-industria" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 21h19M3.5 21V11l5 3v-3l5 3v-3l5 3V21"/><path d="M17 12.7V3.5h2.5V14"/><path d="M6.5 17.5h2M11 17.5h2M15.5 17.5h2"/></g></symbol>
+  <symbol id="i-corda" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M12 2.5v6"/><path d="M9.5 8.5h5l-.8 4h-3.4z"/><path d="M12 12.5c0 2-2.5 2.5-2.5 4.5s2.5 2.5 2.5 4.5"/><path d="M8 8.5a4 4 0 0 1 8 0"/></g></symbol>
   <symbol id="i-mapa" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
 </svg>
 <a class="pular" href="#conteudo">Pular para o conteúdo</a>
@@ -73,16 +75,15 @@
   </div>
 </header>
 <main id="conteudo">
-<section class="entrada" aria-labelledby="t-entrada">
+<section class="entrada" aria-labelledby="t-entrada" style="--pos: 45% 30%">
   <picture class="entrada-foto">
-    <source media="(max-width: 47.99rem)" srcset="img/entrada-rapel-cel-750.webp 750w, img/entrada-rapel-cel-1080.webp 1080w" sizes="100vw" width="1080" height="1920">
-    <img src="img/entrada-rapel-1600.webp" srcset="img/entrada-rapel-1600.webp 1600w, img/entrada-rapel-2560.webp 2560w" sizes="100vw" width="2560" height="1440" alt="Técnico em rapel limpando a fachada de vidro de um prédio, com araucárias refletidas no vidro" fetchpriority="high">
+    <img src="img/entrada-vitrine-1080.webp" srcset="img/entrada-vitrine-750.webp 750w, img/entrada-vitrine-1080.webp 1024w" sizes="(min-width: 62rem) 50vw, 100vw" width="1024" height="1536" alt="Técnico da Novo Ambiente, de costas, limpando com haste e rodo a vitrine de uma loja de roupas" fetchpriority="high">
   </picture>
   <div class="entrada-veu"></div>
   <div class="wrap entrada-texto eb-entrada">
     <div class="eb-titulo">
       <h1 id="t-entrada">Limpeza de vidros <em>em Curitiba</em></h1>
-      <p>Do térreo ao último andar: vidros em altura com rapel, fachadas de vidro, vitrines, casas e pós-obra.</p>
+      <p>Do térreo às grandes alturas: limpeza especializada de vidros residenciais, vitrines e fachadas de vidro.</p>
     </div>
     <nav class="eb-painel" aria-labelledby="t-painel">
       <h2 id="t-painel">O que você precisa limpar?</h2>
@@ -144,7 +145,7 @@
   <div class="wrap">
     <div class="b-cabeca">
       <h2 id="t-vidros">Limpeza de vidros: cada vidro pede <em>um jeito de chegar e um jeito de limpar</em></h2>
-      <p>Da sacada à pele de vidro de um prédio comercial, a Novo Ambiente limpa vidros em Curitiba e na Região Metropolitana. Orçamento por foto ou com visita técnica presencial.</p>
+      <p>Atendemos locais de difícil acesso com técnicas de rapel e extensores, além da remoção de resíduos de obra em superfícies de vidro. Da sacada à pele de vidro de um prédio comercial, em Curitiba e na Região Metropolitana, com orçamento por foto ou visita técnica presencial.</p>
       <a class="link-seta" href="limpeza-de-vidros/">Ver a página de limpeza de vidros<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
     </div>
     <ul class="b-servicos" data-anima>
@@ -167,7 +168,7 @@
         </div>
       </li>
       <li class="b-cartao b-servico" style="--i: 2">
-        <figure><img src="img/servico-vitrine.webp" alt="Rodo limpando a vitrine de uma loja de alto padrão em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 40% 50%"></figure>
+        <figure><img src="img/servico-vitrine.webp" alt="Técnico de uniforme numa escada limpando o vidro alto da fachada de uma loja" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 50%"></figure>
         <div class="b-servico-texto">
           <h3>Vitrines, lojas, clínicas e escritórios</h3>
           <p>Vitrine sem marca de dedo, no dia e no horário que não atrapalham o atendimento.</p>
@@ -176,11 +177,11 @@
         </div>
       </li>
       <li class="b-cartao b-servico" style="--i: 3">
-        <figure><img src="img/servico-sacada.webp" alt="Rodo limpando o envidraçamento de sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 45%"></figure>
+        <figure><img src="img/servico-sacada.webp" alt="Rodo limpando o vidro da sacada de um apartamento alto em Curitiba" width="1000" height="1250" loading="lazy" decoding="async" style="object-position: 50% 45%"></figure>
         <div class="b-servico-texto">
           <h3>Casas e sacadas</h3>
           <p>Vidro alto e de sacada transparente de novo, sem ninguém da família subir em escada.</p>
-          <p class="termos">Vidros residenciais · janelas e esquadrias · envidraçamento de sacada · guarda-corpos</p>
+          <p class="termos">Vidros residenciais · janelas e esquadrias · sacada de vidro · vidros de varanda · guarda-corpos</p>
           <a class="link-seta" href="https://wa.me/5541997799646?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento%20de%20limpeza%20de%20vidros%20pra%20minha%20casa." target="_blank" rel="noopener">Orçamento pra casa ou sacada<svg aria-hidden="true"><use href="#i-seta"/></svg></a>
         </div>
       </li>
@@ -212,6 +213,19 @@
   </div>
 </section>
 
+<section class="secao sv-elogios" aria-labelledby="t-elogios">
+  <div class="wrap">
+    <div class="b-cabeca">
+      <h2 id="t-elogios">O que dizem <em>os clientes</em></h2>
+      <p>Nota 4,8 no Google, com 16 avaliações. Capricho, pontualidade e atenção do técnico são o que os clientes mais elogiam.</p>
+    </div>
+    <ul class="b-cartoes-3">
+      <li class="b-cartao"><figure><span class="sv-estrelas" role="img" aria-label="5 estrelas">★★★★★</span><blockquote><p>Nossa, atendimento incrível! Meus vidros ficaram irreconhecíveis!</p></blockquote><figcaption>Avaliação no Google</figcaption></figure></li>
+      <li class="b-cartao"><figure><span class="sv-estrelas" role="img" aria-label="5 estrelas">★★★★★</span><blockquote><p>Excelente! Pontuais e eficientes.</p></blockquote><figcaption>Avaliação no Google</figcaption></figure></li>
+      <li class="b-cartao"><figure><span class="sv-estrelas" role="img" aria-label="5 estrelas">★★★★★</span><blockquote><p>Serviço 5 estrelas, os moços que vieram aqui são muito competentes e atenciosos.</p></blockquote><figcaption>Avaliação no Google</figcaption></figure></li>
+    </ul>
+  </div>
+</section>
 <section class="secao b-passos" aria-labelledby="t-passos">
   <div class="wrap">
     <div class="b-cabeca">
