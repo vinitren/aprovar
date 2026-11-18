@@ -55,7 +55,7 @@ p, dl, dd, ol, ul, figure { margin: 0; }
 /* ---------- botões e links ---------- */
 .botao {
   display: inline-flex; align-items: center; justify-content: center; gap: .75rem; min-height: 3.25rem; padding: .75rem 1.5rem;
-  border-radius: 8px; font: 500 .8125rem/1.2 var(--sans); letter-spacing: .05em; text-transform: uppercase; text-decoration: none;
+  border-radius: 8px; font: 500 .8125rem/1.3 var(--sans); letter-spacing: .05em; text-transform: uppercase; text-decoration: none; text-align: center; text-wrap: balance;
   transition: background-color .3s var(--sai), color .3s var(--sai);
 }
 .botao svg { width: 1.05rem; height: 1.05rem; flex: none; transition: transform .35s var(--sai); }
@@ -90,6 +90,8 @@ p, dl, dd, ol, ul, figure { margin: 0; }
 .botao-topo { min-height: 2.75rem; padding: .5rem 1rem; color: inherit; box-shadow: inset 0 0 0 1px currentColor; }
 .botao-topo svg { width: .95rem; height: .95rem; }
 .botao-topo:hover { background: var(--off); color: var(--marinho); box-shadow: inset 0 0 0 1px var(--off); }
+/* 18/11: sobre a foto clara (vitrine) o contorno sozinho dava 2,7:1; o véu marinho segura a leitura */
+.topo:not(.solido) .botao-topo:not(:hover) { background: rgba(8, 25, 42, .55); }
 @media (min-width: 62rem) { .topo nav { display: flex; } }
 .topo.solido { background: var(--off); color: var(--marinho); box-shadow: 0 1px 0 var(--linha); }
 .topo.solido .logo-clara { opacity: 0; }
