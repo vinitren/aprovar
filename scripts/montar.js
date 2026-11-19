@@ -205,7 +205,7 @@ const html = ler(path.join(RAIZ, "motor/index.html"))
   .replaceAll("{{fontes}}", cliente.fontes || "family=Inter:wght@400;500;600")
   .replaceAll("{{cores}}", Object.entries(estilo).map(([k, v]) => `${k}: ${v};`).join(" "))
   .replaceAll("{{titulo}}", esc(r.titulo || r["título"] || "Material para aprovação"))
-  .replaceAll("{{intro}}", r.intro ? `<p class="intro">${negrito(r.intro)}</p>` : "")
+  .replaceAll("{{intro}}", r.intro ? r.intro.split(String.fromCharCode(10)).map(l => `<p class="intro">${negrito(l)}</p>`).join("") : "") // uma linha, um parágrafo
   .replaceAll("{{assinatura}}", esc(cliente.assinatura || cliente.nome));
 fs.writeFileSync(path.join(SAIDA, "index.html"), html);
 for (const f of ["app.js", "style.css"]) fs.copyFileSync(path.join(RAIZ, "motor", f), path.join(SAIDA, f));

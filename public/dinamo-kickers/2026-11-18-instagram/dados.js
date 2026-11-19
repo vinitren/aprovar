@@ -48,11 +48,11 @@ window.DADOS = {
       ],
       [
        "Bio",
-       "texto com idades, endereço e WhatsApp sem clique → Futsal pra meninas e meninos de 5 a 15 anos 🐺⚽ / Iniciantes e neurodivergentes são bem-vindos / Abranches, Curitiba / Agende a aula experimental 👇"
+       "texto com idades, endereço e WhatsApp sem clique → Seja um(a) Alfa! Venha fazer parte da Matilha! 🐺 / 5 a 15 anos ⚽ Abranches, Curitiba / Iniciantes e neurodivergentes bem-vindos / Aula experimental 👇"
       ],
       [
        "Link da bio",
-       "atalho do Google (g.co/kgs) e mais 1 → a página (aprovar.tdigital.tech/dinamo-kickers/previa-1); com a página no ar, o endereço passa a ser o dela"
+       "atalho do Google (g.co/kgs) e mais 1 → a página (dinamokickers.com.br, endereço de exemplo; o definitivo escolhemos com vocês)"
       ],
       [
        "WhatsApp",
