@@ -206,3 +206,46 @@
 .eb .b-cartao .b-bolinha:not(.b-bolinha-grande) { display: block; width: fit-content; height: auto; margin-bottom: 0; border-radius: 0; background: none; box-shadow: none; color: var(--destaque); }
 .eb .b-cartao .b-bolinha:not(.b-bolinha-grande) .ico { width: 2.75rem; height: 2.75rem; }
 .sv .b-tambem .b-cartao-link .b-bolinha .ico { width: 2.25rem; height: 2.25rem; }
+
+/* 27/11, pedido do Lucas: nos cartões a ferramenta ficava fora do recorte (4:3 numa foto em pé mostrava 60% dela).
+   Quadrado mostra 80% da foto, e o object-position de cada uma (paginas.mjs e conteudo.mjs) puxa pra onde está o rodo,
+   a haste ou o raspador. O cartão grande do computador continua com a altura do texto */
+.b-servico img:not(.largo) { aspect-ratio: 1; }
+@media (min-width: 62rem) { .b-servico-grande img:not(.largo) { aspect-ratio: auto; } }
+
+/* ---------- 27/11, pedido dela: menu no celular ----------
+   Abaixo de 62rem os links do topo somem; no lugar entra o botão "Menu", que abre a lista das páginas logo
+   abaixo do topo. Abaixo de 48rem o "Orçamento" do topo sai: lá a barra fixa do WhatsApp já faz esse papel e
+   não cabem logo, Orçamento e Menu lado a lado. Sem script o botão não aparece (o rodapé tem os links) */
+.menu-botao, .topo .menu-celular { display: none; } /* .topo nav vira flex no computador: aqui precisa ganhar dele */
+@media (max-width: 61.99rem) {
+  .js .menu-botao { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: .5rem 1rem; border: 0; border-radius: 8px; background: rgba(8, 25, 42, .55); color: inherit; box-shadow: inset 0 0 0 1px currentColor; font: 500 .8125rem/1 var(--sans); letter-spacing: .05em; text-transform: uppercase; cursor: pointer; }
+  .menu-botao svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; overflow: visible; }
+  .menu-botao path { transition: transform .3s var(--sai), opacity .2s var(--sai); transform-origin: 12px 12px; }
+  .menu-botao[aria-expanded="true"] .mb-1 { transform: translateY(5px) rotate(45deg); }
+  .menu-botao[aria-expanded="true"] .mb-2 { opacity: 0; }
+  .menu-botao[aria-expanded="true"] .mb-3 { transform: translateY(-5px) rotate(-45deg); }
+  .topo .wrap { gap: .5rem; }
+  .topo .botao-topo { margin-left: auto; }
+  .topo.solido .menu-botao, .topo.menu-aberto .menu-botao { background: transparent; box-shadow: inset 0 0 0 1px var(--marinho); }
+
+  .js .topo .menu-celular:not([hidden]) { display: block; position: absolute; inset: 100% 0 auto; max-height: calc(100svh - 4.75rem); overflow-y: auto; background: var(--off); color: var(--marinho);
+    box-shadow: 0 0 0 100vmax rgba(2, 11, 20, .45); clip-path: inset(0 0 -100vmax 0); animation: menu-desce .35s var(--sai); }
+  .menu-celular ul { width: min(100% - 2.5rem, 40rem); margin-inline: auto; padding: .5rem 0 1.25rem; list-style: none; }
+  .menu-celular li + li { border-top: 1px solid var(--linha); }
+  .menu-celular a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; padding-block: 0; background: none; font: 400 1.375rem/1.2 var(--serif); letter-spacing: -.005em; text-decoration: none; }
+  .menu-celular a svg { flex: none; width: 1rem; height: 1rem; color: var(--botao); }
+  .menu-celular a[aria-current="page"] { color: var(--botao); }
+  .menu-celular a[aria-current="page"]::after { content: "você está aqui"; margin-left: auto; font: 500 .75rem/1 var(--sans); letter-spacing: .05em; text-transform: uppercase; color: var(--texto-2); }
+  .menu-celular a[aria-current="page"] svg { display: none; }
+
+  /* menu aberto: o topo fica sólido e a logo já no tamanho pequeno, mesmo no alto da página */
+  .topo.menu-aberto { background: var(--off); color: var(--marinho); box-shadow: 0 1px 0 var(--linha); }
+  .topo.menu-aberto .logo-clara { opacity: 0; }
+  .topo.menu-aberto .logo-escura { opacity: 1; }
+  .js .topo.menu-aberto .marca-logo { height: var(--logo-menu); transform: none !important; }
+  .topo.menu-aberto .botao-topo:not(:hover) { background: var(--marinho); color: var(--off); box-shadow: none; }
+}
+@media (max-width: 47.99rem) { .topo .botao-topo { display: none; } .js .menu-botao { margin-left: auto; } }
+@keyframes menu-desce { from { opacity: 0; transform: translateY(-.5rem); } }
+@media (prefers-reduced-motion: reduce) { .menu-celular { animation: none !important; } .menu-botao path { transition: none; } }

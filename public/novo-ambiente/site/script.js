@@ -85,3 +85,27 @@
     document.querySelectorAll('[data-esconde-barra]').forEach(function (a) { ob.observe(a); });
   }
 })();
+
+/* 27/11: menu do celular. O botão "Menu" abre a lista das páginas; fecha no X, no Esc, tocando fora
+   ou quando a tela passa a ter o menu de computador */
+(function () {
+  var botao = document.querySelector('.menu-botao');
+  var lista = document.getElementById('menu-celular');
+  var topo = document.querySelector('.topo');
+  if (!botao || !lista || !topo) return;
+  function abrir(sim) {
+    botao.setAttribute('aria-expanded', sim ? 'true' : 'false');
+    botao.querySelector('span').textContent = sim ? 'Fechar' : 'Menu';
+    lista.hidden = !sim;
+    topo.classList.toggle('menu-aberto', sim);
+  }
+  botao.addEventListener('click', function () { abrir(lista.hidden); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lista.hidden) { abrir(false); botao.focus(); }
+  });
+  document.addEventListener('click', function (e) {
+    if (!lista.hidden && !topo.contains(e.target)) abrir(false);
+  });
+  lista.addEventListener('click', function (e) { if (e.target.closest('a')) abrir(false); });
+  window.matchMedia('(min-width: 62rem)').addEventListener('change', function (m) { if (m.matches) abrir(false); });
+})();
