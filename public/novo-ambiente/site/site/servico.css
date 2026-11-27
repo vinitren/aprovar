@@ -249,3 +249,15 @@
 @media (max-width: 47.99rem) { .topo .botao-topo { display: none; } .js .menu-botao { margin-left: auto; } }
 @keyframes menu-desce { from { opacity: 0; transform: translateY(-.5rem); } }
 @media (prefers-reduced-motion: reduce) { .menu-celular { animation: none !important; } .menu-botao path { transition: none; } }
+
+/* 27/11, revisão das ferramentas: no celular a foto do topo enchia a tela e o título cobria a metade de baixo,
+   justo onde ficam a máquina do piso, a haste da placa solar e o jato da fachada. Agora a foto aparece inteira
+   (4:5, a largura da tela) e o título entra logo abaixo, sobre o marinho, com o véu fazendo a passagem */
+@media (max-width: 47.99rem) {
+  .sv .entrada-foto, .sv .entrada-veu { height: auto; aspect-ratio: 4 / 5; }
+  .sv .entrada-foto img { object-position: 50% 50%; }
+  .sv .entrada-foto { clip-path: inset(0 0 2px 0); } /* sem a fresta de 1px da foto por baixo do véu (arredondamento) */
+  .sv .entrada-veu { background:
+    linear-gradient(180deg, rgba(8, 25, 42, .55) 0%, rgba(8, 25, 42, 0) 20%),
+    linear-gradient(0deg, var(--marinho) 0%, rgba(8, 25, 42, .7) 14%, rgba(8, 25, 42, 0) 36%); }
+}
